@@ -8,6 +8,7 @@
   <title>agendaNi • Read the latest articles from agendaNi</title>
 
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./control-panel.css">
 
   <style type="text/css">
   @font-face {
@@ -1199,6 +1200,29 @@
   </center>
 
   </div>
+
+  <form id="control-panel">
+    <fieldset class="form__publications">
+      <legend>Publication style</legend>
+      <label for="agendaNi">agendaNi</label>
+      <input id="agendaNi" type="radio" name="publications" value="agendaNi">
+      <label for="eolasMagazine">eolas Magazine</label>
+      <input id="eolasMagazine" type="radio" name="publications" value="eolas Magazine">
+      <label for="housingMagazine">Ireland’s Housing Magazine</label>
+      <input id="housingMagazine" type="radio" name="publications" value="Ireland’s Housing Magazine">
+    </fieldset>
+    <fieldset>
+      <label for="webAddress">Web address</label>
+      <input id="webAddress" type="text" name="url" value="https://www.agendani.com">
+    </fieldset>
+    <fieldset>
+      <label for="postCount">Number of posts</label>
+      <input id="postCount" type="number" name="postcount" value="20" min="05" max="50">
+      <span></span>
+    </fieldset>
+
+    <button id="action" type="submit">Apply</button>
+  </form>
 
   <script src="./scripts.js" charset="utf-8"></script>
 </body>

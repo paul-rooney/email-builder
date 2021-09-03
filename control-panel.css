@@ -1,0 +1,50 @@
+#control-panel {
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  min-width: 300px;
+  min-height: 200px;
+  box-shadow: 0 20px 40px 0 hsla(0, 0%, 0%, .2),
+              0 10px 20px 0 hsla(0, 0%, 0%, .14),
+              0 05px 10px 0 hsla(0, 0%, 0%, .12);
+  border-radius: 1ex;
+  display: grid;
+  grid-template-columns: 1rem 1fr 1rem;
+  place-items: center;
+  background-color: white;
+}
+
+  #control-panel > * {
+    box-sizing: inherit;
+    grid-column: 2;
+  }
+
+  fieldset {
+    width: 100%;
+  }
+
+  label {
+    display: block;
+  }
+
+  input[type="radio"] {
+    /* float: left; */
+  }
+
+.form__publications {
+  display: grid;
+  grid-template-columns: min-content auto;
+}
+
+  .form__publications legend {
+    grid-column: 1 / -1;
+  }
+
+  .form__publications input {
+    grid-column: 1;
+  }
+
+  .form__publications label {
+    grid-column: 2;
+  }

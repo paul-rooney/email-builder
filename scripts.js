@@ -1,8 +1,8 @@
-const NUMBER_OF_POSTS = 15; // How many posts to include
-const DOMAIN = 'https://www.agendani.com'; // The domain to collect posts from
+let NUMBER_OF_POSTS = 15; // How many posts to include
+let DOMAIN = 'https://www.agendani.com'; // The domain to collect posts from
 const REPEATER = document.querySelector('#repeater');
 
-fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_POSTS}`)
+function getPosts() { fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_POSTS}`, { credentials: 'same-origin' })
   .then(response => {
     return response.json();
   })
@@ -250,6 +250,7 @@ fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_POSTS}`)
   .catch(err => {
 	  console.warn(err);
   });
+}
 
 function truncate(str, word_count) {
   return str
@@ -259,5 +260,39 @@ function truncate(str, word_count) {
           .concat('', '…');
 }
 
+
+
+// ALL OTHER STUFF
+
+
+
+
 let x = document.documentElement;
 let y = x.cloneNode(true);
+
+
+let form = document.querySelector('form');
+
+
+
+const ACTION_BUTTON = document.querySelector('#action');
+
+ACTION_BUTTON.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  // CACHE WHAT NEEDS CACHING
+  let script = document.querySelector('script');
+  let controlPanel = document.querySelector('#control-panel');
+
+  let webAddress = form.url.value;
+  DOMAIN = webAddress;
+
+  let postCount = form.postcount.value;
+  NUMBER_OF_POSTS = postCount;
+
+  getPosts();
+
+  // FINALLY, REMOVE THE SCRIPT ELEMENT AND BUTTON BEFORE OUTPUT
+  // controlPanel.remove();
+  // script.remove();
+}, { once: false });
