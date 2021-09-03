@@ -1,24 +1,17 @@
-let NUMBER_OF_POSTS = 15; // How many posts to include
-let DOMAIN = 'https://www.agendani.com'; // The domain to collect posts from
-const REPEATER = document.querySelector('#repeater');
-
-function getPosts() { fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_POSTS}`, { credentials: 'same-origin' })
-  .then(response => {
-    return response.json();
-  })
+function getPosts(domain, numberOfPosts) {
+  fetch(`${domain}/wp-json/wp/v2/posts?per_page=${numberOfPosts}`, { credentials: 'same-origin' })
+  .then(response => response.json())
   .then(data => {
-    data.forEach((post, index) => {
+    data.forEach(post => {
 
-      fetch(`${DOMAIN}/wp-json/wp/v2/media/${post.featured_media}`)
-        .then(response => {
-          return response.json();
-        })
+      fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)
+        .then(response => response.json())
         .then(data => {
           post.img_url = data.source_url;
         })
         .then(data => {;
 
-          fetch(`${DOMAIN}/wp-json/wp/v2/categories/${post.categories[0]}`)
+          fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
             .then(response => response.json())
             .then(data => {
               post.category = data.name;
@@ -26,7 +19,11 @@ function getPosts() { fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_
             .then(data => {
               let element = document.createElement('layout');
 
-              element.setAttribute('label', `${post.title.rendered}`); // LABELS MUST BE UNIQUE WITHIN A SINGLE REPEATER
+              element.setAttribute('label', `${post.title.rendered}`);
+
+              let excerptTrimStart = post.excerpt.rendered.replace('<p>', '');
+              let excerptTrimEnd = excerptTrimStart.replace('</p>', '');
+              let excerptTruncated = truncate(excerptTrimEnd, 20);
 
               let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                                   <tr>
@@ -60,7 +57,7 @@ function getPosts() { fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_
                                             <tr>
                                               <td align="left" valign="top">
                                                 <h2 class="article__title"><a href="${post.link}"><singleline label="Story title">${post.title.rendered}</singleline></a></h2>
-                                                <p class="article__body"><singleline>${truncate(post.excerpt.rendered, 20)}</singleline></p>
+                                                <p class="article__body"><singleline>${excerptTruncated}</singleline></p>
                                               </td>
                                             </tr>
                                           </table>
@@ -124,7 +121,7 @@ function getPosts() { fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_
                                           &nbsp;
                                         </td>
                                         <td width="285" class="mobile" align="left" valign="top">
-                                          <p class="article__body"><singleline label="Cover story excerpt. Use the first twenty words from the story, and add an ellipsis at the end if truncated (ALT + ;)">${truncate(post.excerpt.rendered, 20)}</singleline></p>
+                                          <p class="article__body"><singleline label="Cover story excerpt. Use the first twenty words from the story, and add an ellipsis at the end if truncated (ALT + ;)">${excerptTruncated}</singleline></p>
                                         </td>
                                       </tr>
                                     </table>
@@ -213,7 +210,7 @@ function getPosts() { fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_
                                               &nbsp;
                                             </td>
                                             <td width="285" class="mobile" align="left" valign="top">
-                                              <p class="article__body"><singleline label="Story excerpt">${truncate(post.excerpt.rendered, 20)}</singleline></p>
+                                              <p class="article__body"><singleline label="Story excerpt">${excerptTruncated}</singleline></p>
                                             </td>
                                           </tr>
                                         </table>
@@ -224,32 +221,26 @@ function getPosts() { fetch(`${DOMAIN}/wp-json/wp/v2/posts?per_page=${NUMBER_OF_
                                       <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                                     </tr>`;
 
-              // if (post.tags.indexOf(62) !== -1 || post.tags.indexOf(82) !== -1) { // The ID for the 'Cover story' tag is 62 for agendaNi, 82 for eolas
-              //   element.innerHTML = cover_post;
-              // } else if (post.tags.indexOf(345) !== -1 || post.tags.indexOf(330) !== -1) { // The ID for the 'Sponsored' tag is 345 for agendaNi, 330 for eolas
-              //   element.innerHTML = sponsored_post;
-              // } else {
-              //   element.innerHTML = basic_post;
-              // }
+              // The ID for the 'Cover story' tag is 62 for agendaNi, 82 for eolas
+              if (post.tags.indexOf(62) !== -1 || post.tags.indexOf(82) !== -1) {
+                element.innerHTML = cover_post;
+              // The ID for the 'Sponsored' tag is 345 for agendaNi, 330 for eolas
+              } else if (post.tags.indexOf(345) !== -1 || post.tags.indexOf(330) !== -1) {
+                element.innerHTML = sponsored_post;
+              } else {
+                element.innerHTML = basic_post;
+              }
 
-              element.innerHTML = basic_post; // Add all stories as a basic post type for now
-
-              REPEATER.appendChild(element);
+              repeater.appendChild(element);
             })
-            .catch(err => {
-              console.warn(err);
-            });
+            .catch(err => console.warn(err));
 
         })
-        .catch(err => {
-          console.warn(err);
-        });
+        .catch(err => console.warn(err));
 
     });
   })
-  .catch(err => {
-	  console.warn(err);
-  });
+  .catch(err => console.warn(err));
 }
 
 function truncate(str, word_count) {
@@ -262,37 +253,41 @@ function truncate(str, word_count) {
 
 
 
-// ALL OTHER STUFF
 
 
 
-
+// GET THIS INSIDE THE CLICK HANDLER
 let x = document.documentElement;
 let y = x.cloneNode(true);
 
 
-let form = document.querySelector('form');
+const form = document.querySelector('form');
+const repeater = document.querySelector('#repeater');
+const getPostsButton = document.querySelector('#getPosts');
 
-
-
-const ACTION_BUTTON = document.querySelector('#action');
-
-ACTION_BUTTON.addEventListener('click', function(e) {
+getPostsButton.addEventListener('click', (e) => {
   e.preventDefault();
 
-  // CACHE WHAT NEEDS CACHING
-  let script = document.querySelector('script');
-  let controlPanel = document.querySelector('#control-panel');
+  const numberOfPosts = form.postcount.value;
+  const publication = form.publications.value;
+  let domain;
 
-  let webAddress = form.url.value;
-  DOMAIN = webAddress;
+  switch (publication) {
+    case 'eolas Magazine':
+      domain = 'https://www.eolasmagazine.ie';
+      break;
+    case 'Ireland’s Housing Magazine':
+      domain = 'https://www.housing.eolasmagazine.ie';
+      break;
+    case 'Energy Ireland Yearbook':
+      domain = 'https://www.energyireland.ie';
+      break;
+    default:
+      domain = 'https://www.agendani.com';
+  }
 
-  let postCount = form.postcount.value;
-  NUMBER_OF_POSTS = postCount;
+  getPosts(domain, numberOfPosts);
 
-  getPosts();
-
-  // FINALLY, REMOVE THE SCRIPT ELEMENT AND BUTTON BEFORE OUTPUT
-  // controlPanel.remove();
-  // script.remove();
-}, { once: false });
+  document.querySelector('#script').remove();
+  document.querySelector('#control-panel').remove();
+}, { once: true });

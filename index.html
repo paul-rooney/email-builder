@@ -1071,10 +1071,13 @@
                                   <tr>
                                     <td align="left" valign="top">
                                       <multiline>
+                                        <p>Basic <code>&lt;p&gt;</code> styles:</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+                                        <p>Basic <code>&lt;a&gt;</code> styles:</p>
                                         <a href="#" target="_blank" style="color:#72BF44; text-decoration:underline;">Link</a>
 
+                                        <p>Basic <code>&lt;img&gt;</code> styles:</p>
                                         <img class="img" src="https://via.placeholder.com/600x300" width="300" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
                                       </multiline>
                                     </td>
@@ -1203,27 +1206,34 @@
 
   <form id="control-panel">
     <fieldset class="form__publications">
-      <legend>Publication style</legend>
-      <label for="agendaNi">agendaNi</label>
-      <input id="agendaNi" type="radio" name="publications" value="agendaNi">
-      <label for="eolasMagazine">eolas Magazine</label>
-      <input id="eolasMagazine" type="radio" name="publications" value="eolas Magazine">
-      <label for="housingMagazine">Ireland’s Housing Magazine</label>
-      <input id="housingMagazine" type="radio" name="publications" value="Ireland’s Housing Magazine">
-    </fieldset>
-    <fieldset>
-      <label for="webAddress">Web address</label>
-      <input id="webAddress" type="text" name="url" value="https://www.agendani.com">
-    </fieldset>
-    <fieldset>
-      <label for="postCount">Number of posts</label>
-      <input id="postCount" type="number" name="postcount" value="20" min="05" max="50">
-      <span></span>
+      <legend>Publication</legend>
+
+      <label>agendaNi
+        <input type="radio" name="publications" value="agendaNi" checked >
+      </label>
+
+      <label>eolas Magazine
+        <input type="radio" name="publications" value="eolas Magazine">
+      </label>
+
+      <label>Ireland’s Housing Magazine
+        <input type="radio" name="publications" value="Ireland’s Housing Magazine">
+      </label>
+
+      <label>Energy Ireland Yearbook
+        <input type="radio" name="publications" value="Energy Ireland Yearbook">
+      </label>
     </fieldset>
 
-    <button id="action" type="submit">Apply</button>
+    <fieldset>
+      <label>Number of posts (0&ndash;100)
+        <input id="postCount" type="number" name="postcount" value="15" min="0" max="50">
+      </label>
+    </fieldset>
+
+    <button id="getPosts" type="submit">Apply</button>
   </form>
 
-  <script src="./scripts.js" charset="utf-8"></script>
+  <script id="script" src="./scripts.js" charset="utf-8"></script>
 </body>
 </html>

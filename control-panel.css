@@ -13,6 +13,7 @@
   grid-template-columns: 1rem 1fr 1rem;
   place-items: center;
   background-color: white;
+  padding: 1rem 0;
 }
 
   #control-panel > * {
@@ -22,6 +23,7 @@
 
   fieldset {
     width: 100%;
+    margin-bottom: .5rem;
   }
 
   label {
@@ -32,19 +34,31 @@
     /* float: left; */
   }
 
-.form__publications {
-  display: grid;
-  grid-template-columns: min-content auto;
-}
+.form__publications {}
 
-  .form__publications legend {
-    grid-column: 1 / -1;
+  label {
+    display: flex;
+    align-items: center;
   }
 
-  .form__publications input {
-    grid-column: 1;
+  label input {
+    margin-left: auto;
   }
 
-  .form__publications label {
-    grid-column: 2;
+  .form__publications label input {
+    order: -1;
+    margin-left: 0;
+  }
+
+  button {
+    margin-left: auto;
+    padding: 2px 12px;
+    text-transform: uppercase;
+    letter-spacing: .0375em;
+    font-size: .75rem;
+  }
+
+  input[type="text"],
+  inpiut[type="number"] {
+    padding: 2px 4px;
   }
