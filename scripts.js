@@ -1,3 +1,14 @@
+// DOM CACHING
+const form = document.querySelector('form');
+const repeater = document.querySelector('#repeater');
+const getPostsButton = document.querySelector('#getPosts');
+const downloadButton = document.querySelector('#downloadHTML');
+
+
+
+
+
+// FUNCTIONS
 function getPosts(domain, numberOfPosts) {
   fetch(`${domain}/wp-json/wp/v2/posts?per_page=${numberOfPosts}`, { credentials: 'same-origin' })
   .then(response => response.json())
@@ -8,8 +19,6 @@ function getPosts(domain, numberOfPosts) {
         .then(response => response.json())
         .then(data => {
           post.img_url = data.source_url;
-        })
-        .then(data => {;
 
           fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
             .then(response => response.json())
@@ -255,16 +264,7 @@ function truncate(str, word_count) {
 
 
 
-
-// GET THIS INSIDE THE CLICK HANDLER
-let x = document.documentElement;
-let y = x.cloneNode(true);
-
-
-const form = document.querySelector('form');
-const repeater = document.querySelector('#repeater');
-const getPostsButton = document.querySelector('#getPosts');
-
+// EVENT LISTENERS
 getPostsButton.addEventListener('click', (e) => {
   e.preventDefault();
 
@@ -282,12 +282,52 @@ getPostsButton.addEventListener('click', (e) => {
     case 'Energy Ireland Yearbook':
       domain = 'https://www.energyireland.ie';
       break;
+    case 'Irish Renewable Energy Magazine':
+      domain = 'https://www.irishrenewableenergy.energyireland.ie';
+      break;
     default:
       domain = 'https://www.agendani.com';
   }
 
   getPosts(domain, numberOfPosts);
 
+  updateTitle(publication);
+  updateBlocks(publication);
+
+  getPostsButton.setAttribute('disabled', '');
+  document.querySelectorAll('fieldset').forEach(fieldset => fieldset.setAttribute('disabled', ''));
+}, { once: true });
+
+downloadButton.addEventListener('click', () => {
   document.querySelector('#script').remove();
   document.querySelector('#control-panel').remove();
+
+  const hiddenLink = document.createElement('a');
+
+  hiddenLink.href = `data:text/html;charset=UTF-8,${encodeURIComponent(document.documentElement.outerHTML)}`;
+  hiddenLink.target = '_blank';
+  hiddenLink.download = 'newsletter.html';
+  hiddenLink.click();
 }, { once: true });
+
+
+
+
+
+function updateTitle(publication) {
+  document.querySelector('title').innerHTML = `${publication} • Read the latest articles from ${publication === 'Energy Ireland Yearbook' ? 'the ' + publication : publication}`;
+}
+
+function updateBlocks(publication) {
+  const blocks = document.querySelectorAll('[data-publication]');
+
+  blocks.forEach(block => {
+    if (block.dataset.publication !== publication) {
+      block.remove();
+    }
+  });
+}
+
+function disableThings() {
+  downloadButton.removeAttribute('disabled');
+}
