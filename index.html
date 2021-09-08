@@ -1454,15 +1454,15 @@
         <input type="radio" name="publications" value="eolas Magazine">
       </label>
 
-      <label>Ireland’s Housing Magazine
+      <label class="disabled">Ireland’s Housing Magazine
         <input type="radio" name="publications" value="Ireland’s Housing Magazine" disabled >
       </label>
 
-      <label>Energy Ireland Yearbook
+      <label class="disabled">Energy Ireland Yearbook
         <input type="radio" name="publications" value="Energy Ireland Yearbook" disabled >
       </label>
 
-      <label>Irish Renewable Energy Magazine
+      <label class="disabled">Irish Renewable Energy Magazine
         <input type="radio" name="publications" value="Irish Renewable Energy Magazine" disabled >
       </label>
     </fieldset>
@@ -1474,11 +1474,14 @@
     </fieldset>
 
     <div class="button-group">
+      <button type="button" name="reset" onclick="location.reload()" style="margin-right: auto;">
+        Reset
+      </button>
       <button id="getPosts" type="submit" name="apply">
         Apply
       </button>
       <button id="downloadHTML" type="button" name="download" disabled >
-        Download HTML
+        Download
       </button>
     </div>
   </form>

@@ -4,7 +4,7 @@
   bottom: 2rem;
   left: 2rem;
   min-width: 300px;
-  min-height: 200px;
+
   box-shadow: 0 20px 40px 0 hsla(0, 0%, 0%, .2),
               0 10px 20px 0 hsla(0, 0%, 0%, .14),
               0 05px 10px 0 hsla(0, 0%, 0%, .12);
@@ -31,7 +31,12 @@
   }
 
   input[type="radio"] {
-    /* float: left; */
+    margin-right: .5rem;
+  }
+
+  .disabled {
+    text-decoration: line-through;
+    opacity: .8;
   }
 
 .form__publications {}
@@ -55,11 +60,17 @@
   }
 
   .button-group {
-    margin-left: auto;
+    /* margin-left: auto; */
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: .25rem;
   }
 
   button {
-    padding: 2px 12px;
+    font-family: inherit;
+    line-height: 21px;
+    padding: 1px 6px;
     /* text-transform: uppercase; */
     /* letter-spacing: .0375em; */
     /* font-size: .75rem; */

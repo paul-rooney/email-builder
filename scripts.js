@@ -13,6 +13,8 @@ function getPosts(domain, numberOfPosts) {
   fetch(`${domain}/wp-json/wp/v2/posts?per_page=${numberOfPosts}`, { credentials: 'same-origin' })
   .then(response => response.json())
   .then(data => {
+    console.log(data);
+
     data.forEach((post, index) => {
 
       Promise.all([
@@ -31,10 +33,7 @@ function getPosts(domain, numberOfPosts) {
           let element = document.createElement('layout');
           element.setAttribute('label', `${post.title.rendered}`);
 
-          // PULL OUT INTO ITS OWN FUNCTION
-          let excerptTrimStart = post.excerpt.rendered.replace('<p>', '');
-          let excerptTrimEnd = excerptTrimStart.replace('</p>', '');
-          let excerptTruncated = truncate(excerptTrimEnd, 20);
+          let excerptTruncated = truncateExcerpt(post.excerpt.rendered);
 
           let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                               <tr>
@@ -248,7 +247,7 @@ function getPosts(domain, numberOfPosts) {
 
           repeater.appendChild(element);
 
-          if (index === numberOfPosts - 1) disableThings();
+          if (index === numberOfPosts - 1) enableDownloadButton();
         })
         .catch(err => console.warn(err));
 
@@ -279,8 +278,14 @@ function updateBlocks(publication) {
   });
 }
 
-function disableThings() {
+function enableDownloadButton() {
   downloadButton.removeAttribute('disabled');
+}
+
+function truncateExcerpt(excerpt) {
+  let excerptTrimStart = excerpt.replace('<p>', '');
+  let excerptTrimEnd = excerptTrimStart.replace('</p>', '');
+  return excerptTruncated = truncate(excerptTrimEnd, 20);
 }
 
 
