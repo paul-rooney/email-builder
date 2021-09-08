@@ -9,12 +9,26 @@ const downloadButton = document.querySelector('#downloadHTML');
 
 
 // FUNCTIONS
+function listPosts(url) {
+  fetch(url)
+  .then(response => {
+    return response.json();
+  })
+  .then(json => {
+    console.log(json);
+    return json.map(item => {
+      return `${truncate(item.title.rendered, 5)}: Published on ${item.date}`;
+    });
+  })
+  .then(dates => {
+    console.log(dates);
+  })
+}
+
 function getPosts(domain, numberOfPosts) {
   fetch(`${domain}/wp-json/wp/v2/posts?per_page=${numberOfPosts}`, { credentials: 'same-origin' })
   .then(response => response.json())
   .then(data => {
-    console.log(data);
-
     data.forEach((post, index) => {
 
       Promise.all([
@@ -29,11 +43,12 @@ function getPosts(domain, numberOfPosts) {
         .then(data => {
           post.img_url = data[0].source_url;
           post.category = data[1].name;
+          post.title = post.title.rendered;
+          post.excerpt = truncateExcerpt(post.excerpt.rendered);
 
           let element = document.createElement('layout');
-          element.setAttribute('label', `${post.title.rendered}`);
+          element.setAttribute('label', `${post.title}`);
 
-          let excerptTruncated = truncateExcerpt(post.excerpt.rendered);
 
           let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                               <tr>
@@ -45,7 +60,7 @@ function getPosts(domain, numberOfPosts) {
                                   <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                     <tr>
                                     <td width="225" class="mobile" align="center" valign="top">
-                                      <a href="${post.link}"><img src="${post.img_url}" alt="" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" editable /></a>
+                                      <a href="${post.link}"><img src="${post.img_url}" alt="" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" /></a>
                                     </td>
                                     <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                       &nbsp;
@@ -66,8 +81,8 @@ function getPosts(domain, numberOfPosts) {
 
                                         <tr>
                                           <td align="left" valign="top">
-                                            <h2 class="article__title"><a href="${post.link}"><singleline label="Story title">${post.title.rendered}</singleline></a></h2>
-                                            <p class="article__body"><singleline>${excerptTruncated}</singleline></p>
+                                            <h2 class="article__title"><a href="${post.link}"><singleline label="Story title">${post.title}</singleline></a></h2>
+                                            <p class="article__body"><singleline>${post.excerpt}</singleline></p>
                                           </td>
                                         </tr>
                                       </table>
@@ -88,7 +103,7 @@ function getPosts(domain, numberOfPosts) {
                                   <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper">
                                     <tr>
                                       <td width="640" class="wrapper">
-                                        <a href="${post.link}"><img src="${post.img_url}" width="640" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." editable /></a>
+                                        <a href="${post.link}"><img src="${post.img_url}" width="640" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." /></a>
                                       </td>
                                     </tr>
                                   </table>
@@ -126,13 +141,13 @@ function getPosts(domain, numberOfPosts) {
                                   <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                     <tr>
                                       <td width="285" class="mobile" align="left" valign="top">
-                                        <h2 class="article__title"><a href="${post.link}}"><singleline label="Cover story title">${post.title.rendered}</singleline></a></h2>
+                                        <h2 class="article__title"><a href="${post.link}}"><singleline label="Cover story title">${post.title}</singleline></a></h2>
                                       </td>
                                       <td width="30" class="mobileOff" align="center" valign="top">
                                         &nbsp;
                                       </td>
                                       <td width="285" class="mobile" align="left" valign="top">
-                                        <p class="article__body"><singleline label="Cover story excerpt. Use the first twenty words from the story, and add an ellipsis at the end if truncated (ALT + ;)">${excerptTruncated}</singleline></p>
+                                        <p class="article__body"><singleline label="Cover story excerpt. Use the first twenty words from the story, and add an ellipsis at the end if truncated (ALT + ;)">${post.excerpt}</singleline></p>
                                       </td>
                                     </tr>
                                   </table>
@@ -170,7 +185,7 @@ function getPosts(domain, numberOfPosts) {
                                       <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                         <tr>
                                           <td align="center" valign="top">
-                                            <a href="${post.link}"><img src="${post.img_url}" width="600" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" editable /></a>
+                                            <a href="${post.link}"><img src="${post.img_url}" width="600" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" /></a>
                                           </td>
                                         </tr>
                                       </table>
@@ -217,13 +232,13 @@ function getPosts(domain, numberOfPosts) {
                                       <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                         <tr>
                                           <td width="285" class="mobile" align="left" valign="top">
-                                            <h2 class="article__title"><a href="${post.link}"><singleline label="Story title">${post.title.rendered}</singleline></a></h2>
+                                            <h2 class="article__title"><a href="${post.link}"><singleline label="Story title">${post.title}</singleline></a></h2>
                                           </td>
                                           <td width="30" class="mobileOff" align="center" valign="top">
                                             &nbsp;
                                           </td>
                                           <td width="285" class="mobile" align="left" valign="top">
-                                            <p class="article__body"><singleline label="Story excerpt">${excerptTruncated}</singleline></p>
+                                            <p class="article__body"><singleline label="Story excerpt">${post.excerpt}</singleline></p>
                                           </td>
                                         </tr>
                                       </table>
