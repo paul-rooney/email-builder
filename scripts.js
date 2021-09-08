@@ -13,28 +13,34 @@ function getPosts(domain, numberOfPosts) {
   fetch(`${domain}/wp-json/wp/v2/posts?per_page=${numberOfPosts}`, { credentials: 'same-origin' })
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    // data.forEach((post, index) => {
+    const posts = data.map(post => {
 
-    data.forEach((post, index) => {
-
-      Promise.all([
+      return Promise.all([
         fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`),
         fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
       ])
         .then(responses => {
-          return Promise.all(responses.map(response => {
-            return response.json();
-          }))
+          return Promise.all(
+            responses.map(response => response.json())
+          )
         })
         .then(data => {
+          // console.log(data);
           post.img_url = data[0].source_url;
           post.category = data[1].name;
+          post.excerpt = truncateExcerpt(post.excerpt.rendered);
 
+          console.log(data);
+          return post;
+        })
+        .catch(err => console.warn(err));
+
+        console.log('Posts: ', posts);
+
+        posts.forEach((post, i) => {
           let element = document.createElement('layout');
-          element.setAttribute('label', `${post.title.rendered}`);
-
-          let excerptTruncated = truncateExcerpt(post.excerpt.rendered);
-
+              element.setAttribute('label', `${post.title.rendered}`);
           let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                               <tr>
                                 <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
@@ -67,7 +73,7 @@ function getPosts(domain, numberOfPosts) {
                                         <tr>
                                           <td align="left" valign="top">
                                             <h2 class="article__title"><a href="${post.link}"><singleline label="Story title">${post.title.rendered}</singleline></a></h2>
-                                            <p class="article__body"><singleline>${excerptTruncated}</singleline></p>
+                                            <p class="article__body"><singleline>${post.excerpt}</singleline></p>
                                           </td>
                                         </tr>
                                       </table>
@@ -132,7 +138,7 @@ function getPosts(domain, numberOfPosts) {
                                         &nbsp;
                                       </td>
                                       <td width="285" class="mobile" align="left" valign="top">
-                                        <p class="article__body"><singleline label="Cover story excerpt. Use the first twenty words from the story, and add an ellipsis at the end if truncated (ALT + ;)">${excerptTruncated}</singleline></p>
+                                        <p class="article__body"><singleline label="Cover story excerpt. Use the first twenty words from the story, and add an ellipsis at the end if truncated (ALT + ;)">${post.excerpt}</singleline></p>
                                       </td>
                                     </tr>
                                   </table>
@@ -223,7 +229,7 @@ function getPosts(domain, numberOfPosts) {
                                             &nbsp;
                                           </td>
                                           <td width="285" class="mobile" align="left" valign="top">
-                                            <p class="article__body"><singleline label="Story excerpt">${excerptTruncated}</singleline></p>
+                                            <p class="article__body"><singleline label="Story excerpt">${post.excerpt}</singleline></p>
                                           </td>
                                         </tr>
                                       </table>
@@ -235,11 +241,9 @@ function getPosts(domain, numberOfPosts) {
                                   </tr>
                                 </table>`;
 
-          // The ID for the 'Cover story' tag is 62 for agendaNi, 82 for eolas
-          if (post.tags.indexOf(62) !== -1 || post.tags.indexOf(82) !== -1) {
+          if (post.tags.indexOf(62) !== -1 || post.tags.indexOf(82) !== -1) { // The ID for the 'Cover story' tag is 62 for agendaNi, 82 for eolas
             element.innerHTML = cover_post;
-          // The ID for the 'Sponsored' tag is 345 for agendaNi, 330 for eolas
-          } else if (post.tags.indexOf(345) !== -1 || post.tags.indexOf(330) !== -1) {
+          } else if (post.tags.indexOf(345) !== -1 || post.tags.indexOf(330) !== -1) { // The ID for the 'Sponsored' tag is 345 for agendaNi, 330 for eolas
             element.innerHTML = sponsored_post;
           } else {
             element.innerHTML = basic_post;
@@ -248,10 +252,12 @@ function getPosts(domain, numberOfPosts) {
           repeater.appendChild(element);
 
           if (index === numberOfPosts - 1) enableDownloadButton();
-        })
-        .catch(err => console.warn(err));
+    });
+  })
+  .then(posts => {
 
     });
+
   })
   .catch(err => console.warn(err));
 }
