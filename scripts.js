@@ -25,6 +25,15 @@ function listPosts(url) {
   })
 }
 
+function getReportCategories(domain) {
+  fetch(`${domain}/wp-json/wp/v2/categories?parent=285`)
+  .then(response => response.json())
+  .then(categories => {
+    categories.forEach(category => console.log(category.name));
+  })
+  .catch(err => console.warn(err));
+}
+
 function getPosts(domain, numberOfPosts) {
   fetch(`${domain}/wp-json/wp/v2/posts?per_page=${numberOfPosts}`, { credentials: 'same-origin' })
   .then(response => response.json())
@@ -33,7 +42,7 @@ function getPosts(domain, numberOfPosts) {
 
       Promise.all([
         fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`),
-        fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
+        fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`),
       ])
         .then(responses => {
           return Promise.all(responses.map(response => {
@@ -41,6 +50,8 @@ function getPosts(domain, numberOfPosts) {
           }))
         })
         .then(data => {
+          console.log(data[2]);
+
           post.img_url = data[0].source_url;
           post.category = data[1].name;
           post.title = post.title.rendered;
@@ -308,6 +319,12 @@ function truncateExcerpt(excerpt) {
 
 
 // EVENT LISTENERS
+document.addEventListener('DOMContentLoaded', () => {
+  let domain = 'https://www.agendani.com';
+
+  getReportCategories(domain);
+});
+
 getPostsButton.addEventListener('click', (e) => {
   e.preventDefault();
 
