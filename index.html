@@ -817,7 +817,7 @@
                                 <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                   <tr>
                                       <td width="225" class="mobile" align="center" valign="top">
-                                        <img src="https://via.placeholder.com/225x127" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
                                       </td>
                                       <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                         &nbsp;
@@ -860,7 +860,7 @@
                                 <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                   <tr>
                                       <td width="225" class="mobile" align="center" valign="top">
-                                        <img src="https://via.placeholder.com/225x127" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
                                       </td>
                                       <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                         &nbsp;
@@ -903,7 +903,7 @@
                                 <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                   <tr>
                                       <td width="225" class="mobile" align="center" valign="top">
-                                        <img src="https://via.placeholder.com/225x127" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
                                       </td>
                                       <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                         &nbsp;
@@ -997,7 +997,7 @@
                                 <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                   <tr>
                                       <td width="225" class="mobile" align="center" valign="top">
-                                        <img src="https://via.placeholder.com/225x127" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
                                       </td>
                                       <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                         &nbsp;
@@ -1040,7 +1040,7 @@
                                 <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                   <tr>
                                       <td width="225" class="mobile" align="center" valign="top">
-                                        <img src="https://via.placeholder.com/225x127" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
                                       </td>
                                       <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                         &nbsp;
@@ -1083,7 +1083,7 @@
                                 <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                   <tr>
                                       <td width="225" class="mobile" align="center" valign="top">
-                                        <img src="https://via.placeholder.com/225x127" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
                                       </td>
                                       <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                         &nbsp;
@@ -1286,7 +1286,7 @@
                                 <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                   <tr>
                                   <td width="225" class="mobile" align="center" valign="top">
-                                    <img src="https://via.placeholder.com/225x127" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
+                                    <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
                                   </td>
                                   <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                     &nbsp;
@@ -1525,31 +1525,32 @@
       </label>
     </fieldset>
 
-    <fieldset>
-      <label>Choose a browser from this list:
-        <input list="reports" id="" name="" />
-        <datalist id="reports">
-          <option value="Economy report">
-          <option value="Education report">
-          <option value="Energy report">
-        </datalist>
+    <fieldset class="form__reports">
+      <label>Report-specific newsletter
+        <input type="checkbox" name="checkbox">
+      </label>
+
+      <label>Choose a report:
+        <select name="reports" disabled >
+          <option value="">--</option>
+        </select>
       </label>
     </fieldset>
 
     <fieldset class="form__post-count">
       <label>Number of posts (1&ndash;100)
-        <input id="postCount" type="number" name="postcount" value="25" min="1" max="100">
+        <input type="number" name="postCount" value="25" min="1" max="100">
       </label>
     </fieldset>
 
-    <div class="button-group">
-      <button type="button" name="reset" onclick="location.reload()" style="margin-right: auto;">
+    <div class="form__buttons">
+      <button type="button" name="reset" onclick="location.reload()">
         Reset
       </button>
-      <button id="getPosts" type="submit" name="apply">
+      <button type="button" name="apply">
         Apply
       </button>
-      <button id="downloadHTML" type="button" name="download" disabled >
+      <button type="button" name="download" disabled >
         Download
       </button>
     </div>

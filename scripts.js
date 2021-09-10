@@ -1,41 +1,51 @@
 // DOM CACHING
 const form = document.querySelector('form');
+const apply_button = form.apply;
+const download_button = form.download;
+const reports_checkbox = form.checkbox;
+const reports_dropdown = form.reports;
 const repeater = document.querySelector('#repeater');
-const getPostsButton = document.querySelector('#getPosts');
-const downloadButton = document.querySelector('#downloadHTML');
 
 
 
 
 
 // FUNCTIONS
-function listPosts(url) {
-  fetch(url)
-  .then(response => {
-    return response.json();
-  })
-  .then(json => {
-    console.log(json);
-    return json.map(item => {
-      return `${truncate(item.title.rendered, 5)}: Published on ${item.date}`;
-    });
-  })
-  .then(dates => {
-    console.log(dates);
-  })
-}
-
-function getReportCategories(domain) {
-  fetch(`${domain}/wp-json/wp/v2/categories?parent=285`)
+function getReportCategories(domain, id) {
+  fetch(`${domain}/wp-json/wp/v2/categories?parent=${id}`)
   .then(response => response.json())
   .then(categories => {
-    categories.forEach(category => console.log(category.name));
+    reports_dropdown.innerHTML = '';
+
+    categories.forEach((category, index) => {
+      reports_dropdown.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+    });
+
+    // let blank_option = document.createElement('option');
+    //
+    // blank_option.setAttribute('selected', '');
+    // blank_option.textContent = '--';
+    // blank_option.value = '';
+    //
+    // reports_dropdown.insertAdjacentElement('afterbegin', blank_option);
   })
   .catch(err => console.warn(err));
 }
 
-function getPosts(domain, numberOfPosts) {
-  fetch(`${domain}/wp-json/wp/v2/posts?per_page=${numberOfPosts}`, { credentials: 'same-origin' })
+function getPosts(domain, number_of_posts, report) {
+  console.log(arguments);
+
+  let str;
+
+  if (report === '') {
+    str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
+  } else {
+    str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
+  }
+
+  console.log(str);
+
+  fetch(str, { credentials: 'same-origin' })
   .then(response => response.json())
   .then(data => {
     data.forEach((post, index) => {
@@ -50,8 +60,6 @@ function getPosts(domain, numberOfPosts) {
           }))
         })
         .then(data => {
-          console.log(data[2]);
-
           post.img_url = data[0].source_url;
           post.category = data[1].name;
           post.title = post.title.rendered;
@@ -59,7 +67,6 @@ function getPosts(domain, numberOfPosts) {
 
           let element = document.createElement('layout');
           element.setAttribute('label', `${post.title}`);
-
 
           let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                               <tr>
@@ -261,11 +268,9 @@ function getPosts(domain, numberOfPosts) {
                                   </tr>
                                 </table>`;
 
-          // The ID for the 'Cover story' tag is 62 for agendaNi, 82 for eolas
-          if (post.tags.indexOf(62) !== -1 || post.tags.indexOf(82) !== -1) {
+          if (post.tags.indexOf(62) !== -1 || post.tags.indexOf(82) !== -1) { // The ID for the 'Cover story' tag is 62 for agendaNi, 82 for eolas
             element.innerHTML = cover_post;
-          // The ID for the 'Sponsored' tag is 345 for agendaNi, 330 for eolas
-          } else if (post.tags.indexOf(345) !== -1 || post.tags.indexOf(330) !== -1) {
+          } else if (post.tags.indexOf(345) !== -1 || post.tags.indexOf(330) !== -1) { // The ID for the 'Sponsored' tag is 345 for agendaNi, 330 for eolas
             element.innerHTML = sponsored_post;
           } else {
             element.innerHTML = basic_post;
@@ -273,7 +278,11 @@ function getPosts(domain, numberOfPosts) {
 
           repeater.appendChild(element);
 
-          if (index === numberOfPosts - 1) enableDownloadButton();
+          if (report && index === data.length - 1) {
+            enableDownloadButton();
+          } else if (!report && index === number_of_posts - 1) {
+            enableDownloadButton();
+          }
         })
         .catch(err => console.warn(err));
 
@@ -291,10 +300,10 @@ function truncate(str, word_count) {
 }
 
 function updateTitle(publication) {
-  document.querySelector('title').innerHTML = `${publication} • Read the latest articles from ${publication === 'Energy Ireland Yearbook' ? 'the ' + publication : publication}`;
+  document.querySelector('title').innerHTML = `${publication} • Read the latest articles from ${publication !== 'Energy Ireland Yearbook' ? publication : 'the ' + publication}`;
 }
 
-function updateBlocks(publication) {
+function updateDOM(publication) {
   const blocks = document.querySelectorAll('[data-publication]');
 
   blocks.forEach(block => {
@@ -305,68 +314,100 @@ function updateBlocks(publication) {
 }
 
 function enableDownloadButton() {
-  downloadButton.removeAttribute('disabled');
+  download_button.removeAttribute('disabled');
 }
 
 function truncateExcerpt(excerpt) {
-  let excerptTrimStart = excerpt.replace('<p>', '');
-  let excerptTrimEnd = excerptTrimStart.replace('</p>', '');
-  return excerptTruncated = truncate(excerptTrimEnd, 20);
+  let excerpt_trim_start = excerpt.replace('<p>', '');
+  let excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
+  return excerpt_truncated = truncate(excerpt_trim_end, 20);
 }
 
-
-
-
-
-// EVENT LISTENERS
-document.addEventListener('DOMContentLoaded', () => {
-  let domain = 'https://www.agendani.com';
-
-  getReportCategories(domain);
-});
-
-getPostsButton.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  const numberOfPosts = form.postcount.value;
+function setParameters() {
+  const number_of_posts = form.postCount.value;
   const publication = form.publications.value;
-  let domain;
+  let domain, id, report;
 
   switch (publication) {
     case 'eolas Magazine':
       domain = 'https://www.eolasmagazine.ie';
-      break;
-    case 'Ireland’s Housing Magazine':
-      domain = 'https://www.housing.eolasmagazine.ie';
-      break;
-    case 'Energy Ireland Yearbook':
-      domain = 'https://www.energyireland.ie';
-      break;
-    case 'Irish Renewable Energy Magazine':
-      domain = 'https://www.irishrenewableenergy.energyireland.ie';
+      id = 273;
       break;
     default:
       domain = 'https://www.agendani.com';
+      id = 285;
   }
 
-  getPosts(domain, numberOfPosts);
+  if (reports_checkbox.checked) {
+    report = reports_dropdown.value;
+  } else {
+    report = '';
+  }
 
-  updateTitle(publication);
-  updateBlocks(publication);
+  return { number_of_posts, publication, domain, id, report };
+}
 
-  getPostsButton.setAttribute('disabled', '');
+
+
+// EVENT LISTENERS
+apply_button.addEventListener('click', () => {
+  let settings = setParameters();
+
+  // getReportCategories(settings.domain, settings.id);
+  getPosts(settings.domain, settings.number_of_posts, settings.report);
+
+  updateTitle(settings.publication);
+  updateDOM(settings.publication);
+
+  apply_button.setAttribute('disabled', '');
   document.querySelectorAll('fieldset').forEach(fieldset => fieldset.setAttribute('disabled', ''));
 }, { once: true });
 
-downloadButton.addEventListener('click', () => {
+
+
+download_button.addEventListener('click', () => {
   document.querySelector('#script').remove();
   document.querySelector('#control-panel').remove();
   document.querySelector('link[href="./control-panel.css"]').remove();
 
-  const hiddenLink = document.createElement('a');
+  const hidden_link = document.createElement('a');
 
-  hiddenLink.href = `data:text/html;charset=UTF-8,${encodeURIComponent(document.documentElement.outerHTML)}`;
-  hiddenLink.target = '_blank';
-  hiddenLink.download = 'newsletter.html';
-  hiddenLink.click();
+  hidden_link.href = `data:text/html;charset=UTF-8,${encodeURIComponent(document.documentElement.outerHTML)}`;
+  hidden_link.target = '_blank';
+  hidden_link.download = 'newsletter.html';
+  hidden_link.click();
 }, { once: true });
+
+
+
+reports_checkbox.addEventListener('change', (e) => {
+  if (reports_checkbox.checked) {
+    form.classList.add('show-reports');
+  } else {
+    form.classList.remove('show-reports');
+    reports_dropdown.value = '';
+  }
+
+  // console.log(reports_dropdown.value);
+
+  if (reports_dropdown.disabled) {
+    reports_dropdown.disabled = false;
+  } else {
+    reports_dropdown.disabled = true;
+  }
+
+  let settings = setParameters();
+
+  getReportCategories(settings.domain, settings.id);
+});
+
+
+
+document.querySelectorAll('input[type="radio"]').forEach(
+  input => {
+    input.addEventListener('change', () => {
+      reports_checkbox.checked = false;
+      reports_dropdown.disabled = true;
+    });
+  }
+)
