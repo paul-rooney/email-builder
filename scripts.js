@@ -12,7 +12,7 @@ const repeater = document.querySelector('#repeater');
 
 // FUNCTIONS
 function getReportCategories(domain, id) {
-  fetch(`${domain}/wp-json/wp/v2/categories?parent=${id}`)
+  fetch(`${domain}/wp-json/wp/v2/categories?parent=${id}`, { credentials: 'same-origin' })
   .then(response => response.json())
   .then(categories => {
     reports_dropdown.innerHTML = '';
@@ -21,29 +21,18 @@ function getReportCategories(domain, id) {
       reports_dropdown.innerHTML += `<option value="${category.id}">${category.name}</option>`;
     });
 
-    // let blank_option = document.createElement('option');
-    //
-    // blank_option.setAttribute('selected', '');
-    // blank_option.textContent = '--';
-    // blank_option.value = '';
-    //
-    // reports_dropdown.insertAdjacentElement('afterbegin', blank_option);
   })
   .catch(err => console.warn(err));
 }
 
 function getPosts(domain, number_of_posts, report) {
-  console.log(arguments);
-
   let str;
 
   if (report === '') {
-    str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
-  } else {
     str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
+  } else {
+    str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
   }
-
-  console.log(str);
 
   fetch(str, { credentials: 'same-origin' })
   .then(response => response.json())
@@ -323,9 +312,9 @@ function truncateExcerpt(excerpt) {
   return excerpt_truncated = truncate(excerpt_trim_end, 20);
 }
 
-function setParameters() {
-  const number_of_posts = form.postCount.value;
+function getSettings() {
   const publication = form.publications.value;
+  const number_of_posts = form.postCount.value;
   let domain, id, report;
 
   switch (publication) {
@@ -344,16 +333,15 @@ function setParameters() {
     report = '';
   }
 
-  return { number_of_posts, publication, domain, id, report };
+  return { publication, number_of_posts, domain, id, report };
 }
 
 
 
 // EVENT LISTENERS
 apply_button.addEventListener('click', () => {
-  let settings = setParameters();
+  let settings = getSettings();
 
-  // getReportCategories(settings.domain, settings.id);
   getPosts(settings.domain, settings.number_of_posts, settings.report);
 
   updateTitle(settings.publication);
@@ -361,6 +349,7 @@ apply_button.addEventListener('click', () => {
 
   apply_button.setAttribute('disabled', '');
   document.querySelectorAll('fieldset').forEach(fieldset => fieldset.setAttribute('disabled', ''));
+
 }, { once: true });
 
 
@@ -388,15 +377,13 @@ reports_checkbox.addEventListener('change', (e) => {
     reports_dropdown.value = '';
   }
 
-  // console.log(reports_dropdown.value);
-
   if (reports_dropdown.disabled) {
     reports_dropdown.disabled = false;
   } else {
     reports_dropdown.disabled = true;
   }
 
-  let settings = setParameters();
+  let settings = getSettings();
 
   getReportCategories(settings.domain, settings.id);
 });
@@ -408,6 +395,7 @@ document.querySelectorAll('input[type="radio"]').forEach(
     input.addEventListener('change', () => {
       reports_checkbox.checked = false;
       reports_dropdown.disabled = true;
+      reports_dropdown.value = '';
     });
   }
 )
