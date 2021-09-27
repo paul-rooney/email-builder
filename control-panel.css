@@ -76,9 +76,16 @@ form {
   }
 
   button {
+    display: flex;
+    align-items: center;
+    gap: .375rem;
     font-family: inherit;
     line-height: 21px;
     padding: 1px 6px;
+  }
+
+  button[disabled] svg > * {
+    stroke: -internal-light-dark;
   }
 
   button[name="reset"] {
