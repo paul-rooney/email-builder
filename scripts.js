@@ -322,6 +322,15 @@ function getSettings() {
       domain = 'https://www.eolasmagazine.ie';
       id = 273;
       break;
+    case 'Irish Renewable Energy Magazine':
+      domain = 'https://www.energyireland.ie';
+      break;
+    case 'Energy Ireland Yearbook':
+      domain = 'https://www.energyireland.ie';
+      break;
+    case 'Ireland’s Housing Magazine':
+      domain = 'https://www.housing.eolasmagazine.ie';
+      break;
     default:
       domain = 'https://www.agendani.com';
       id = 285;
@@ -396,6 +405,20 @@ document.querySelectorAll('input[type="radio"]').forEach(
       reports_checkbox.checked = false;
       reports_dropdown.disabled = true;
       reports_dropdown.value = '';
+
+      if (input.value === 'Irish Renewable Energy Magazine' || input.value === 'Ireland’s Housing Magazine' || input.value === 'Energy Ireland Yearbook') {
+        if (!reports_checkbox.parentNode.classList.contains('disabled')) {
+          reports_checkbox.parentNode.classList.add('disabled');
+        }
+
+        reports_checkbox.disabled = true;
+      } else {
+        if (reports_checkbox.parentNode.classList.contains('disabled')) {
+          reports_checkbox.parentNode.classList.remove('disabled');
+        }
+
+        reports_checkbox.disabled = false;
+      }
     });
   }
 )
