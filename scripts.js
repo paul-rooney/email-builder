@@ -25,7 +25,7 @@ function getReportCategories(domain, id) {
   .catch(err => console.warn(err));
 }
 
-function getPosts(domain, number_of_posts, report) {
+function getPosts(domain, number_of_posts, report, publication) {
   let str;
 
   if (report === '') {
@@ -76,12 +76,12 @@ function getPosts(domain, number_of_posts, report) {
                                       <table width="100%" cellpadding="0" cellspacing="0" border="0">
 
 
-                                      <tr>
+                                      <tr class="js-category">
                                         <td align="left" valign="top">
                                           <p class="article__category"><singleline label="Category label">${post.category}</singleline></p>
                                         </td>
                                       </tr>
-                                      <tr>
+                                      <tr class="js-category">
                                         <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                                       </tr>
 
@@ -267,10 +267,11 @@ function getPosts(domain, number_of_posts, report) {
 
           repeater.appendChild(element);
 
-          if (report && index === data.length - 1) {
+          if (report && index === data.length - 1 || !report && index === number_of_posts - 1) {
             enableDownloadButton();
-          } else if (!report && index === number_of_posts - 1) {
-            enableDownloadButton();
+
+            updateTitle(publication);
+            updateDOM(publication);
           }
         })
         .catch(err => console.warn(err));
@@ -296,10 +297,29 @@ function updateDOM(publication) {
   const blocks = document.querySelectorAll('[data-publication]');
 
   blocks.forEach(block => {
-    if (block.dataset.publication !== publication) {
+    const publications = block.dataset.publication.split(' • ');
+
+    if (publications.indexOf(publication) === -1) {
       block.remove();
     }
   });
+
+  if (publication === 'Renewable Energy Magazine') {
+    // document.querySelector('center > table').setAttribute('bgColor', '#E3E8EA'); // main background
+    document.querySelector('.outer-wrapper').setAttribute('bgColor', '#48A6FE'); // top and bottom borders
+
+    // document.querySelectorAll('table[bgcolor="#E8E8E8"]').forEach(table => {
+    //   table.setAttribute('bgColor', '#FFFFFF');
+    // });
+    //
+    // document.querySelectorAll('[bgcolor="#F2F2F2"]').forEach(table => {
+    //   table.setAttribute('bgColor', '#EEF1F2');
+    // });
+
+    document.querySelectorAll('.js-category').forEach(node => {
+      node.remove();
+    });
+  }
 }
 
 function enableDownloadButton() {
@@ -322,14 +342,14 @@ function getSettings() {
       domain = 'https://www.eolasmagazine.ie';
       id = 273;
       break;
-    case 'Irish Renewable Energy Magazine':
-      domain = 'https://www.energyireland.ie';
-      break;
     case 'Energy Ireland Yearbook':
       domain = 'https://www.energyireland.ie';
       break;
     case 'Ireland’s Housing Magazine':
       domain = 'https://www.housing.eolasmagazine.ie';
+      break;
+    case 'Renewable Energy Magazine':
+      domain = 'https://www.energyireland.ie';
       break;
     default:
       domain = 'https://www.agendani.com';
@@ -351,10 +371,10 @@ function getSettings() {
 apply_button.addEventListener('click', () => {
   let settings = getSettings();
 
-  getPosts(settings.domain, settings.number_of_posts, settings.report);
+  getPosts(settings.domain, settings.number_of_posts, settings.report, settings.publication);
 
-  updateTitle(settings.publication);
-  updateDOM(settings.publication);
+  // updateTitle(settings.publication);
+  // updateDOM(settings.publication);
 
   apply_button.setAttribute('disabled', '');
   document.querySelectorAll('fieldset').forEach(fieldset => fieldset.setAttribute('disabled', ''));
@@ -406,7 +426,7 @@ document.querySelectorAll('input[type="radio"]').forEach(
       reports_dropdown.disabled = true;
       reports_dropdown.value = '';
 
-      if (input.value === 'Irish Renewable Energy Magazine' || input.value === 'Ireland’s Housing Magazine' || input.value === 'Energy Ireland Yearbook') {
+      if (input.value === 'Renewable Energy Magazine' || input.value === 'Ireland’s Housing Magazine' || input.value === 'Energy Ireland Yearbook') {
         if (!reports_checkbox.parentNode.classList.contains('disabled')) {
           reports_checkbox.parentNode.classList.add('disabled');
         }

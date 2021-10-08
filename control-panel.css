@@ -5,6 +5,7 @@ form {
               0 10px 20px 0 hsla(0, 0%, 0%, .14),
               0 05px 10px 0 hsla(0, 0%, 0%, .12);
   box-sizing: border-box;
+  color: black !important;
   display: grid;
     grid-template-columns: 1rem 1fr 1rem;
     place-items: center;
