@@ -304,19 +304,14 @@ function updateDOM(publication) {
     }
   });
 
-  if (publication === 'Renewable Energy Magazine') {
-    // document.querySelector('center > table').setAttribute('bgColor', '#E3E8EA'); // main background
+  if (publication === 'Renewable Energy Magazine' || publication === 'Energy Ireland Yearbook') {
     document.querySelector('.outer-wrapper').setAttribute('bgColor', '#48A6FE'); // top and bottom borders
 
     // document.querySelectorAll('table[bgcolor="#E8E8E8"]').forEach(table => {
     //   table.setAttribute('bgColor', '#FFFFFF');
     // });
-    //
-    // document.querySelectorAll('[bgcolor="#F2F2F2"]').forEach(table => {
-    //   table.setAttribute('bgColor', '#EEF1F2');
-    // });
 
-    document.querySelectorAll('.js-category').forEach(node => {
+    document.querySelectorAll('.js-category').forEach(node => { // remove the category label <table>s or <tr>s
       node.remove();
     });
   }
