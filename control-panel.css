@@ -9,6 +9,7 @@ form {
   display: grid;
     grid-template-columns: 1rem 1fr 1rem;
     place-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
   padding: 1rem 0;
   position: fixed;
     bottom: 2rem;
@@ -93,6 +94,23 @@ form {
     margin-right: auto;
   }
 
+  button #icon--loading {
+    display: none;
+  }
+
+  button.loading #icon--loading {
+    display: block;
+
+    animation-duration: 1000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: spin;
+  }
+
+  button.loading #icon--loaded {
+    display: none;
+  }
+
 .form__reports label:nth-of-type(2) {
   align-items: baseline;
   flex-direction: column;
@@ -102,4 +120,14 @@ form {
 
 form.show-reports .form__reports label:nth-of-type(2) {
   opacity: 1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
