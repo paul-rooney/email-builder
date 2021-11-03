@@ -24,32 +24,29 @@ function getReportCategories(domain, id) {
     .catch((err) => console.warn(err));
 }
 
-function getPosts(domain, number_of_posts, report, publication) {
+function getPosts(domain, number_of_posts, publication, report) {
   let str;
-  let arr = [];
 
-  if (report === '') {
-    str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
-  } else {
+  if (report) {
     str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
+  } else {
+    str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
   }
 
   fetch(str, { credentials: 'same-origin' })
-    .then((response) => response.json())
-    .then((posts) => {
+    .then(response => response.json())
+    .then(posts => {
       posts.forEach((post, index) => {
         Promise.all([
           fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`),
           fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`),
         ])
-          .then((responses) => {
+          .then(responses => {
             return Promise.all(
-              responses.map((response) => {
-                return response.json();
-              })
+              responses.map(response => response.json())
             );
           })
-          .then((response) => {
+          .then(response => {
             let postObject = {
               category: response[1].name,
               excerpt: truncateExcerpt(post.excerpt.rendered),
@@ -61,16 +58,17 @@ function getPosts(domain, number_of_posts, report, publication) {
 
             buildDOM(postObject);
 
-            if ((report && index === response.length - 1) || (!report && index === number_of_posts - 1)) {
+            if (report && index === response.length - 1 ||
+               !report && index === number_of_posts - 1) {
               enableDownloadButton();
               updateDocumentTitle(publication);
               updateDOM(publication);
             }
           })
-          .catch((err) => console.warn(err));
+          .catch(err => console.warn(err));
       });
     })
-    .catch((err) => console.warn(err));
+    .catch(err => console.warn(err));
 }
 
 function buildDOM(obj) {
@@ -400,7 +398,7 @@ apply_button.addEventListener(
 
     let settings = getSettings();
 
-    getPosts(settings.domain, settings.number_of_posts, settings.report, settings.publication);
+    getPosts(settings.domain, settings.number_of_posts, settings.publication, settings.report);
 
     apply_button.setAttribute('disabled', '');
     document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
