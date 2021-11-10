@@ -442,24 +442,24 @@ reports_checkbox.addEventListener(
   }
 );
 
-radio_inputs.forEach(input => {
-  input.addEventListener('change', () => {
-    reports_checkbox.checked = false;
-    reports_dropdown.disabled = true;
-    reports_dropdown.value = '';
+const fn = () => {
+  reports_checkbox.checked = false;
+  reports_dropdown.disabled = true;
+  reports_dropdown.value = '';
 
-    if (input.value === 'energy_ireland_yearbook' || input.value === 'irelands_housing_magazine' || input.value === 'renewable_energy_magazine') {
-      reports_checkbox.disabled = true;
+  if (input.value === 'energy_ireland_yearbook' || input.value === 'irelands_housing_magazine' || input.value === 'renewable_energy_magazine') {
+    reports_checkbox.disabled = true;
 
-      if (!reports_checkbox.parentNode.classList.contains('disabled')) {
-        reports_checkbox.parentNode.classList.add('disabled');
-      }
-    } else {
-      reports_checkbox.disabled = false;
-
-      if (reports_checkbox.parentNode.classList.contains('disabled')) {
-        reports_checkbox.parentNode.classList.remove('disabled');
-      }
+    if (!reports_checkbox.parentNode.classList.contains('disabled')) {
+      reports_checkbox.parentNode.classList.add('disabled');
     }
-  });
-});
+  } else {
+    reports_checkbox.disabled = false;
+
+    if (reports_checkbox.parentNode.classList.contains('disabled')) {
+      reports_checkbox.parentNode.classList.remove('disabled');
+    }
+  }
+}
+
+radio_inputs.forEach(input => input.addEventListener('change', (input) => {fn}));
