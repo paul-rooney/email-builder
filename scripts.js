@@ -11,7 +11,7 @@ const repeater = document.querySelector('#repeater');
 //
 // FUNCTIONS
 //
-function getReportCategories(domain, id) {
+const getReportCategories = (domain, id) => {
   fetch(`${domain}/wp-json/wp/v2/categories?parent=${id}`, { credentials: 'same-origin' })
     .then((response) => response.json())
     .then((categories) => {
@@ -24,7 +24,7 @@ function getReportCategories(domain, id) {
     .catch((err) => console.warn(err));
 }
 
-function getPosts(domain, number_of_posts, publication, report) {
+const getPosts = (domain, number_of_posts, publication, report) => {
   let str;
 
   if (report) {
@@ -71,7 +71,7 @@ function getPosts(domain, number_of_posts, publication, report) {
     .catch(err => console.warn(err));
 }
 
-function buildDOM(obj) {
+const buildDOM = (obj) => {
   let layout = document.createElement('layout');
   layout.setAttribute('label', `${obj.title}`);
 
@@ -285,12 +285,12 @@ function buildDOM(obj) {
   repeater.appendChild(layout);
 }
 
-function enableDownloadButton() {
+const enableDownloadButton = () => {
   download_button.classList.remove('loading');
   download_button.removeAttribute('disabled');
 }
 
-function updateDocumentTitle(publication) {
+const updateDocumentTitle = (publication) => {
   let title;
 
   switch (publication) {
@@ -313,7 +313,7 @@ function updateDocumentTitle(publication) {
   document.title = `Read the latest articles from ${title}`;
 }
 
-function updateDOM(publication) {
+const updateDOM = (publication) => {
   const blocks = document.querySelectorAll('[data-publication]');
 
   blocks.forEach((block) => {
@@ -345,17 +345,20 @@ function updateDOM(publication) {
   }
 }
 
-function truncate(str, word_count) {
-  return str.split(' ').splice(0, word_count).join(' ').concat('', '…');
+const truncate = (str, word_count) => {
+  return str.split(' ')
+            .splice(0, word_count)
+            .join(' ')
+            .concat('', '…');
 }
 
-function truncateExcerpt(excerpt) {
+const truncateExcerpt = (excerpt) => {
   let excerpt_trim_start = excerpt.replace('<p>', '');
   let excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
   return (excerpt_truncated = truncate(excerpt_trim_end, 20));
 }
 
-function getSettings() {
+const getSettings = () => {
   const publication = form.publications.value;
   const number_of_posts = form.postCount.value;
   let domain, id, report;
@@ -388,41 +391,34 @@ function getSettings() {
   return { publication, number_of_posts, domain, id, report };
 }
 
+const applySettings = () => {
+  download_button.classList.add('loading');
+  apply_button.setAttribute('disabled', '');
+  document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
+
+  let settings = getSettings();
+
+  getPosts(settings.domain, settings.number_of_posts, settings.publication, settings.report);
+}
+
+const downloadHTML = () => {
+  document.querySelector('#script').remove();
+  document.querySelector('#control-panel').remove();
+  document.querySelector('link[href="./control-panel.css"]').remove();
+
+  const hidden_link = document.createElement('a');
+
+  hidden_link.href = `data:text/html;charset=UTF-8,${encodeURIComponent(document.documentElement.outerHTML)}`;
+  hidden_link.target = '_blank';
+  hidden_link.download = 'newsletter.html';
+  hidden_link.click();
+}
+
 //
 // EVENT LISTENERS
 //
-apply_button.addEventListener(
-  'click',
-  () => {
-    download_button.classList.add('loading');
-
-    let settings = getSettings();
-
-    getPosts(settings.domain, settings.number_of_posts, settings.publication, settings.report);
-
-    apply_button.setAttribute('disabled', '');
-    document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
-  },
-  { once: true }
-);
-
-download_button.addEventListener(
-  'click',
-  () => {
-    document.querySelector('#script').remove();
-    document.querySelector('#control-panel').remove();
-    document.querySelector('link[href="./control-panel.css"]').remove();
-
-    const hidden_link = document.createElement('a');
-
-    hidden_link.href = `data:text/html;charset=UTF-8,${encodeURIComponent(document.documentElement.outerHTML)}`;
-    hidden_link.target = '_blank';
-    hidden_link.download = 'newsletter.html';
-    hidden_link.click();
-  },
-  { once: true }
-);
-
+apply_button.addEventListener('click', applySettings, { once: true });
+download_button.addEventListener('click', downloadHTML, { once: true });
 reports_checkbox.addEventListener(
   'change',
   () => {
