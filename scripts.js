@@ -7,6 +7,7 @@ const download_button = form.download;
 const reports_checkbox = form.checkbox;
 const reports_dropdown = form.reports;
 const repeater = document.querySelector('#repeater');
+const radio_inputs = document.querySelectorAll('input[type="radio"]');
 
 //
 // FUNCTIONS
@@ -441,28 +442,24 @@ reports_checkbox.addEventListener(
   }
 );
 
-document.querySelectorAll('input[type="radio"]').forEach((input) => {
+radio_inputs.forEach(input => {
   input.addEventListener('change', () => {
     reports_checkbox.checked = false;
     reports_dropdown.disabled = true;
     reports_dropdown.value = '';
 
-    if (
-      input.value === 'energy_ireland_yearbook' ||
-      input.value === 'irelands_housing_magazine' ||
-      input.value === 'renewable_energy_magazine'
-    ) {
+    if (input.value === 'energy_ireland_yearbook' || input.value === 'irelands_housing_magazine' || input.value === 'renewable_energy_magazine') {
+      reports_checkbox.disabled = true;
+
       if (!reports_checkbox.parentNode.classList.contains('disabled')) {
         reports_checkbox.parentNode.classList.add('disabled');
       }
-
-      reports_checkbox.disabled = true;
     } else {
+      reports_checkbox.disabled = false;
+
       if (reports_checkbox.parentNode.classList.contains('disabled')) {
         reports_checkbox.parentNode.classList.remove('disabled');
       }
-
-      reports_checkbox.disabled = false;
     }
   });
 });
