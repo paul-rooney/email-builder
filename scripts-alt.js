@@ -37,11 +37,12 @@ const getPosts = async (domain, number_of_posts, publication, report) => {
 
   fetch(str, { credentials: 'same-origin' })
     .then(response => response.json())
-    .then(posts => {
-      posts.forEach((post, index) => {
+    // .then(response => arr = [ ...response ])
+    .then(response => {
+      response.map((post, index) => {
         Promise.all([
           fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`),
-          fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`),
+          fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
         ])
           .then(responses => {
             return Promise.all(
@@ -59,22 +60,21 @@ const getPosts = async (domain, number_of_posts, publication, report) => {
               title: post.title.rendered,
             };
 
+            // pushes postObject to array
             arr.push(postObject);
-            // buildDOM(postObject);
-
-            if (report && index === response.length - 1 ||
-               !report && index === number_of_posts - 1) {
-              enableDownloadButton();
-              updateDocumentTitle(publication);
-              updateDOM(publication);
-            }
           })
-          .catch(err => console.warn(err));
       });
-    })
-    .catch(err => console.warn(err));
 
-  return await arr;
+      console.log(arr);
+
+      return arr;
+    })
+    .then(x => console.log(x))
+    .catch(err => console.warn(err));
+}
+
+const sortPosts = (arr) => {
+  console.log('sorting');
 }
 
 const buildDOM = (obj) => {
@@ -424,22 +424,7 @@ const applySettings = () => {
 
   let settings = getSettings();
   let { domain, number_of_posts, publication, report } = settings;
-  let x = getPosts(domain, number_of_posts, publication, report)
-          .then(result => {
-            console.log(result[3]);
-            result.map(result => console.log(result));
-          })
-          .then(result => {
-            // let z = result.sort((a, b) => b.published - a.published);
-            // console.log(z);
-          });
-
-
-  // console.log(x);
-
-  // let y = x.slice().sort((a, b) => b.published - a.published);
-  //
-  // console.log(y);
+  getPosts(domain, number_of_posts, publication, report);
 }
 
 const downloadHTML = () => {
@@ -485,3 +470,8 @@ reports_checkbox.addEventListener(
 radio_inputs.forEach(
   input => input.addEventListener('change', () => disableCheckbox(event))
 );
+
+
+let x = getSettings();
+let { domain, number_of_posts, publication, report } = x;
+// getPosts(domain, number_of_posts, publication, report);
