@@ -25,9 +25,11 @@ const getReportCategories = (domain, id) => {
     .catch((err) => console.warn(err));
 }
 
-const getPosts = async (domain, number_of_posts, publication, report) => {
+const getPosts = (settings) => {
+  const { domain, number_of_posts, publication, report } = settings;
   let str = '';
-  let arr = [];
+
+  // console.log({domain}, {number_of_posts}, {publication}, {report});
 
   if (report) {
     str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
@@ -35,47 +37,27 @@ const getPosts = async (domain, number_of_posts, publication, report) => {
     str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
   }
 
-  fetch(str, { credentials: 'same-origin' })
+  fetch(str)
     .then(response => response.json())
-    // .then(response => arr = [ ...response ])
-    .then(response => {
-      response.map((post, index) => {
-        Promise.all([
-          fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`),
-          fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
-        ])
-          .then(responses => {
-            return Promise.all(
-              responses.map(response => response.json())
-            );
-          })
-          .then(response => {
-            let postObject = {
-              category: response[1].name,
-              excerpt: truncateExcerpt(post.excerpt.rendered),
-              img_url: response[0].source_url,
-              link: post.link,
-              published: Date.parse(post.date),
-              tags: post.tags,
-              title: post.title.rendered,
-            };
-
-            // pushes postObject to array
-            arr.push(postObject);
-          })
+    .then(posts => new Promise(function (resolve, reject) {
+      posts.forEach(post => {
+        fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
+          .then(response => response.json())
+          .then(post_category => post_category.name);
+          resolve(posts);
       });
-
-      console.log(arr);
-
-      return arr;
-    })
-    .then(x => console.log(x))
-    .catch(err => console.warn(err));
+    }))
+    // .then(posts => new Promise(function (resolve, reject) {
+    //   post.forEach(post => {
+    //     fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)
+    //     .then(response => response.json())
+    //     .then(post_media => post_media.source_url)
+    //   });
+    //   resolve();
+    // }))
+    .then(alert('All done!'));
 }
 
-const sortPosts = (arr) => {
-  console.log('sorting');
-}
 
 const buildDOM = (obj) => {
   let layout = document.createElement('layout');
@@ -288,7 +270,9 @@ const buildDOM = (obj) => {
     layout.innerHTML = basic_post;
   }
 
+
   repeater.appendChild(layout);
+  // console.log(obj);
 }
 
 const enableDownloadButton = () => {
@@ -423,8 +407,7 @@ const applySettings = () => {
   document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
 
   let settings = getSettings();
-  let { domain, number_of_posts, publication, report } = settings;
-  getPosts(domain, number_of_posts, publication, report);
+  getPosts(settings);
 }
 
 const downloadHTML = () => {
@@ -470,8 +453,3 @@ reports_checkbox.addEventListener(
 radio_inputs.forEach(
   input => input.addEventListener('change', () => disableCheckbox(event))
 );
-
-
-let x = getSettings();
-let { domain, number_of_posts, publication, report } = x;
-// getPosts(domain, number_of_posts, publication, report);
