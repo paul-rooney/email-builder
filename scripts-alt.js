@@ -43,9 +43,9 @@ const getPosts = (settings) => {
       posts.forEach(post => {
         fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
           .then(response => response.json())
-          .then(post_category => post_category.name);
-          resolve(posts);
+          .then(post_category => post_category.name)
       });
+      resolve(posts);
     }))
     // .then(posts => new Promise(function (resolve, reject) {
     //   post.forEach(post => {
