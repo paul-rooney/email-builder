@@ -9,6 +9,28 @@ const reports_dropdown = form.reports;
 const repeater = document.querySelector('#repeater');
 const radio_inputs = document.querySelectorAll('input[type="radio"]');
 
+let all_posts = [];
+
+let promise = new Promise(function(resolve, reject) {
+  let request = fetch('https://www.eolasmagazine.ie/wp-json/wp/v2/posts?per_page=10');
+
+  resolve(request);
+})
+  .then(
+    function(result) {
+      console.log(result);
+      return result.json();
+    }
+  )
+  .then(
+    function(result) {
+      console.log(result);
+    }
+  )
+
+
+
+
 //
 // FUNCTIONS
 //
@@ -25,11 +47,9 @@ const getReportCategories = (domain, id) => {
     .catch((err) => console.warn(err));
 }
 
-const getPosts = (settings) => {
+const getPosts = async (settings) => {
   const { domain, number_of_posts, publication, report } = settings;
   let str = '';
-
-  // console.log({domain}, {number_of_posts}, {publication}, {report});
 
   if (report) {
     str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
@@ -39,25 +59,30 @@ const getPosts = (settings) => {
 
   fetch(str)
     .then(response => response.json())
-    .then(posts => new Promise(function (resolve, reject) {
+    .then(postsList => {
+      var posts = postsList;
       posts.forEach(post => {
         fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
           .then(response => response.json())
-          .then(post_category => post_category.name)
-      });
-      resolve(posts);
-    }))
-    // .then(posts => new Promise(function (resolve, reject) {
-    //   post.forEach(post => {
-    //     fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)
-    //     .then(response => response.json())
-    //     .then(post_media => post_media.source_url)
-    //   });
-    //   resolve();
-    // }))
-    .then(alert('All done!'));
-}
+          .then(category => post.category = category.name)
+        fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)
+          .then(response => response.json())
+          .then(url => post.img_url = url.source_url)
+      })
 
+      return posts;
+    })
+    .then(posts => {
+      posts.map(post => {
+        post.published = Date.parse(post.date)
+        post.title = post.title.rendered;
+        post.excerpt = truncateExcerpt(post.excerpt.rendered);
+      });
+
+      return posts;
+    })
+    .then(posts => all_posts = [...posts])
+}
 
 const buildDOM = (obj) => {
   let layout = document.createElement('layout');
@@ -262,13 +287,13 @@ const buildDOM = (obj) => {
                           </tr>
                         </table>`;
 
-  if (obj.tags.indexOf(62) !== -1 || obj.tags.indexOf(82) !== -1) {
-    layout.innerHTML = cover_post;
-  } else if (obj.tags.indexOf(345) !== -1 || obj.tags.indexOf(330) !== -1) {
-    layout.innerHTML = sponsored_post;
-  } else {
+  // if (obj.tags.indexOf(62) !== -1 || obj.tags.indexOf(82) !== -1) {
+  //   layout.innerHTML = cover_post;
+  // } else if (obj.tags.indexOf(345) !== -1 || obj.tags.indexOf(330) !== -1) {
+  //   layout.innerHTML = sponsored_post;
+  // } else {
     layout.innerHTML = basic_post;
-  }
+  // }
 
 
   repeater.appendChild(layout);
@@ -401,13 +426,16 @@ const getSettings = () => {
   return { publication, number_of_posts, domain, id, report };
 }
 
-const applySettings = () => {
+const applySettings = async () => {
   download_button.classList.add('loading');
   apply_button.setAttribute('disabled', '');
   document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
 
   let settings = getSettings();
-  getPosts(settings);
+  // getPosts(settings);
+  const c = getPosts(settings);
+  console.log(c);
+  all_posts.forEach(post => buildDOM(post));
 }
 
 const downloadHTML = () => {
