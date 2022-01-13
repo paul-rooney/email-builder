@@ -8,6 +8,7 @@ const reports_checkbox = form.checkbox;
 const reports_dropdown = form.reports;
 const repeater = document.querySelector('#repeater');
 const radio_inputs = document.querySelectorAll('input[type="radio"]');
+let q;
 
 let all_posts = [];
 
@@ -47,8 +48,8 @@ const getReportCategories = (domain, id) => {
     .catch((err) => console.warn(err));
 }
 
-const getPosts = async (settings) => {
-  const { domain, number_of_posts, publication, report } = settings;
+
+const getPosts = (domain, number_of_posts, publication, report) => {
   let str = '';
 
   if (report) {
