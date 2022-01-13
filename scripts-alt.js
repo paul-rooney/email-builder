@@ -8,6 +8,7 @@ const reports_checkbox = form.checkbox;
 const reports_dropdown = form.reports;
 const repeater = document.querySelector('#repeater');
 const radio_inputs = document.querySelectorAll('input[type="radio"]');
+let q;
 
 //
 // FUNCTIONS
@@ -25,7 +26,7 @@ const getReportCategories = (domain, id) => {
     .catch((err) => console.warn(err));
 }
 
-const getPosts = async (domain, number_of_posts, publication, report) => {
+const getPosts = (domain, number_of_posts, publication, report) => {
   let str = '';
   let arr = [];
 
@@ -35,47 +36,46 @@ const getPosts = async (domain, number_of_posts, publication, report) => {
     str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
   }
 
-  fetch(str, { credentials: 'same-origin' })
-    .then(response => response.json())
-    // .then(response => arr = [ ...response ])
-    .then(response => {
-      response.map((post, index) => {
-        Promise.all([
-          fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`),
-          fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
-        ])
-          .then(responses => {
-            return Promise.all(
-              responses.map(response => response.json())
-            );
-          })
-          .then(response => {
-            let postObject = {
-              category: response[1].name,
-              excerpt: truncateExcerpt(post.excerpt.rendered),
-              img_url: response[0].source_url,
-              link: post.link,
-              published: Date.parse(post.date),
-              tags: post.tags,
-              title: post.title.rendered,
-            };
-
-            // pushes postObject to array
-            arr.push(postObject);
-          })
-      });
-
-      console.log(arr);
-
-      return arr;
-    })
-    .then(x => console.log(x))
-    .catch(err => console.warn(err));
 }
 
-const sortPosts = (arr) => {
-  console.log('sorting');
-}
+const initialSearch = fetch('https://www.agendani.com/wp-json/wp/v2/posts?per_page=5')
+                        .then(response => response.json())
+                        .then(user => {
+                          return user;
+                        });
+
+const printAddress = async () => {
+  const a = await initialSearch;
+  // console.log(a[0].featured_media);
+
+  const mediaSearch = fetch(`https://www.agendani.com/wp-json/wp/v2/media/${a[0].featured_media}`)
+                        .then(response => response.json())
+                        .then(user => {
+                          return user;
+                        });
+
+  const printMediaSearch = async () => {
+    const b = await mediaSearch;
+    console.log({b});
+  };
+
+  const categorySearch = fetch(`https://www.agendani.com/wp-json/wp/v2/categories/${a[0].categories[0]}`)
+                        .then(response => response.json())
+                        .then(user => {
+                          return user;
+                        });
+
+  const printCategorySearch = async () => {
+    const c = await categorySearch;
+    console.log({c});
+  };
+
+  printMediaSearch();
+  printCategorySearch();
+};
+
+printAddress();
+
 
 const buildDOM = (obj) => {
   let layout = document.createElement('layout');
