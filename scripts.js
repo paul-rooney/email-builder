@@ -25,7 +25,8 @@ const getReportCategories = (domain, id) => {
     .catch((err) => console.warn(err));
 }
 
-const getPosts = (domain, number_of_posts, publication, report) => {
+const getPosts = (settings) => {
+  const { domain, number_of_posts, publication, report } = settings;
   let str;
 
   if (report) {
@@ -399,7 +400,7 @@ const applySettings = () => {
 
   let settings = getSettings();
 
-  getPosts(settings.domain, settings.number_of_posts, settings.publication, settings.report);
+  getPosts(settings);
 }
 
 const downloadHTML = () => {
