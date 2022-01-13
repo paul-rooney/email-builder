@@ -8,29 +8,6 @@ const reports_checkbox = form.checkbox;
 const reports_dropdown = form.reports;
 const repeater = document.querySelector('#repeater');
 const radio_inputs = document.querySelectorAll('input[type="radio"]');
-let q;
-
-let all_posts = [];
-
-let promise = new Promise(function(resolve, reject) {
-  let request = fetch('https://www.eolasmagazine.ie/wp-json/wp/v2/posts?per_page=10');
-
-  resolve(request);
-})
-  .then(
-    function(result) {
-      console.log(result);
-      return result.json();
-    }
-  )
-  .then(
-    function(result) {
-      console.log(result);
-    }
-  )
-
-
-
 
 //
 // FUNCTIONS
@@ -45,49 +22,44 @@ const getReportCategories = (domain, id) => {
         reports_dropdown.innerHTML += `<option value="${category.id}">${category.name}</option>`;
       });
     })
-    .catch((err) => console.warn(err));
+    .catch((err) => console.error(err));
 }
 
+async function getPosts(settings) {
+  const { domain, number_of_posts, publication, report } = settings;
+  const str = report ? `${domain}/wp-json/wp/v2/posts?categories=${report}` : `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
 
-const getPosts = (domain, number_of_posts, publication, report) => {
-  let str = '';
+  // this…
+  // const query = await fetch(str);
+  // const posts = await query.json();
+  // is the same as…
+  const posts = await (await fetch(str)).json();
 
-  if (report) {
-    str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
-  } else {
-    str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
-  }
+  const post_info = Promise.all(
+    posts.map(async (post, index) => {
+      const url = await (await fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)).json();
+      const category = await (await fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)).json();
+      const post_obj = {
+        category: category.name,
+        excerpt: truncateExcerpt(post.excerpt.rendered),
+        img_url: url.source_url,
+        link: post.link,
+        tags: post.tags,
+        title: post.title.rendered,
+      }
 
-  fetch(str)
-    .then(response => response.json())
-    .then(postsList => {
-      var posts = postsList;
-      posts.forEach(post => {
-        fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)
-          .then(response => response.json())
-          .then(category => post.category = category.name)
-        fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)
-          .then(response => response.json())
-          .then(url => post.img_url = url.source_url)
-      })
-
-      return posts;
+      return post_obj;
     })
-    .then(posts => {
-      posts.map(post => {
-        post.published = Date.parse(post.date)
-        post.title = post.title.rendered;
-        post.excerpt = truncateExcerpt(post.excerpt.rendered);
-      });
+  );
 
-      return posts;
-    })
-    .then(posts => all_posts = [...posts])
+  return post_info;
 }
 
-const buildDOM = (obj) => {
+const buildDOM = (post) => {
+  const { category, excerpt, img_url, link, tags, title } = post;
   let layout = document.createElement('layout');
-  layout.setAttribute('label', `${obj.title}`);
+
+  layout.setAttribute('label', `${title}`);
 
   let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                       <tr>
@@ -99,7 +71,7 @@ const buildDOM = (obj) => {
                           <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                             <tr>
                               <td width="225" class="mobile" align="center" valign="top">
-                                <a href="${obj.link}"><img src="${obj.img_url}" alt="" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" /></a>
+                                <a href="${link}"><img src="${img_url}" alt="" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" /></a>
                               </td>
                               <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                 &nbsp;
@@ -109,7 +81,7 @@ const buildDOM = (obj) => {
 
                                   <tr class="js-category">
                                     <td align="left" valign="top">
-                                      <p class="article__category"><singleline label="Category label">${obj.category}</singleline></p>
+                                      <p class="article__category"><singleline label="Category label">${category}</singleline></p>
                                     </td>
                                   </tr>
                                   <tr class="js-category">
@@ -118,8 +90,8 @@ const buildDOM = (obj) => {
 
                                   <tr>
                                     <td align="left" valign="top">
-                                      <h2 class="article__title"><a href="${obj.link}"><singleline label="Story title">${obj.title}</singleline></a></h2>
-                                      <p class="article__body"><singleline>${obj.excerpt}</singleline></p>
+                                      <h2 class="article__title"><a href="${link}"><singleline label="Story title">${title}</singleline></a></h2>
+                                      <p class="article__body"><singleline>${excerpt}</singleline></p>
                                     </td>
                                   </tr>
 
@@ -141,7 +113,7 @@ const buildDOM = (obj) => {
                           <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper">
                             <tr>
                               <td width="640" class="wrapper">
-                                <a href="${obj.link}"><img src="${obj.img_url}" width="640" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." /></a>
+                                <a href="${link}"><img src="${img_url}" width="640" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." /></a>
                               </td>
                             </tr>
                           </table>
@@ -179,13 +151,13 @@ const buildDOM = (obj) => {
                           <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                             <tr>
                               <td width="285" class="mobile" align="left" valign="top">
-                                <h2 class="article__title"><a href="${obj.link}}"><singleline label="Cover story title">${obj.title}</singleline></a></h2>
+                                <h2 class="article__title"><a href="${link}}"><singleline label="Cover story title">${title}</singleline></a></h2>
                               </td>
                               <td width="30" class="mobileOff" align="center" valign="top">
                                 &nbsp;
                               </td>
                               <td width="285" class="mobile" align="left" valign="top">
-                                <p class="article__body"><singleline label="Cover story excerpt">${obj.excerpt}</singleline></p>
+                                <p class="article__body"><singleline label="Cover story excerpt">${excerpt}</singleline></p>
                               </td>
                             </tr>
                           </table>
@@ -223,7 +195,7 @@ const buildDOM = (obj) => {
                               <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                 <tr>
                                   <td align="center" valign="top">
-                                    <a href="${obj.link}"><img src="${obj.img_url}" width="600" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" /></a>
+                                    <a href="${link}"><img src="${img_url}" width="600" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" /></a>
                                   </td>
                                 </tr>
                               </table>
@@ -270,13 +242,13 @@ const buildDOM = (obj) => {
                               <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                 <tr>
                                   <td width="285" class="mobile" align="left" valign="top">
-                                    <h2 class="article__title"><a href="${obj.link}"><singleline label="Story title">${obj.title}</singleline></a></h2>
+                                    <h2 class="article__title"><a href="${link}"><singleline label="Story title">${title}</singleline></a></h2>
                                   </td>
                                   <td width="30" class="mobileOff" align="center" valign="top">
                                     &nbsp;
                                   </td>
                                   <td width="285" class="mobile" align="left" valign="top">
-                                    <p class="article__body"><singleline label="Story excerpt">${obj.excerpt}</singleline></p>
+                                    <p class="article__body"><singleline label="Story excerpt">${excerpt}</singleline></p>
                                   </td>
                                 </tr>
                               </table>
@@ -288,17 +260,15 @@ const buildDOM = (obj) => {
                           </tr>
                         </table>`;
 
-  // if (obj.tags.indexOf(62) !== -1 || obj.tags.indexOf(82) !== -1) {
-  //   layout.innerHTML = cover_post;
-  // } else if (obj.tags.indexOf(345) !== -1 || obj.tags.indexOf(330) !== -1) {
-  //   layout.innerHTML = sponsored_post;
-  // } else {
+  if (tags.indexOf(62) !== -1 || tags.indexOf(82) !== -1) {
+    layout.innerHTML = cover_post;
+  } else if (tags.indexOf(345) !== -1 || tags.indexOf(330) !== -1) {
+    layout.innerHTML = sponsored_post;
+  } else {
     layout.innerHTML = basic_post;
-  // }
-
+  }
 
   repeater.appendChild(layout);
-  // console.log(obj);
 }
 
 const enableDownloadButton = () => {
@@ -355,28 +325,18 @@ const updateDOM = (publication) => {
   blocks.forEach((block) => {
     const publications = block.dataset.publication.split(' ');
 
-    if (publications.indexOf(publication) === -1) {
-      block.remove();
-    }
+    if (publications.indexOf(publication) === -1) block.remove();
   });
 
   switch (publication) {
     case 'energy_ireland_yearbook':
     case 'renewable_energy_magazine':
       document.querySelector('.outer-wrapper').setAttribute('bgColor', '#48A6FE'); // top and bottom borders
-
-      document.querySelectorAll('.js-category').forEach((node) => {
-        node.remove(); // remove the category label <table> or <tr> elements
-      });
-
+      document.querySelectorAll('.js-category').forEach((node) => node.remove());
       break;
     case 'irelands_housing_magazine':
       document.querySelector('.outer-wrapper').setAttribute('bgColor', '#401665');
-
-      document.querySelectorAll('.js-category').forEach((node) => {
-        node.remove();
-      });
-
+      document.querySelectorAll('.js-category').forEach((node) => node.remove());
       break;
   }
 }
@@ -427,16 +387,21 @@ const getSettings = () => {
   return { publication, number_of_posts, domain, id, report };
 }
 
-const applySettings = async () => {
+const applySettings = () => {
   download_button.classList.add('loading');
   apply_button.setAttribute('disabled', '');
   document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
 
   let settings = getSettings();
-  // getPosts(settings);
-  const c = getPosts(settings);
-  console.log(c);
-  all_posts.forEach(post => buildDOM(post));
+  getPosts(settings)
+    .then(posts => {
+      posts.map(post => buildDOM(post));
+    })
+    .finally(() => {
+      enableDownloadButton();
+      updateDocumentTitle(settings.publication);
+      updateDOM(settings.publication);
+    })
 }
 
 const downloadHTML = () => {
