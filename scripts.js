@@ -12,7 +12,9 @@ const radio_inputs = document.querySelectorAll('input[type="radio"]');
 //
 // FUNCTIONS
 //
-const getReportCategories = (domain, id) => {
+const getReportCategories = (settings) => {
+  const { domain, id } = settings;
+
   fetch(`${domain}/wp-json/wp/v2/categories?parent=${id}`, { credentials: 'same-origin' })
     .then((response) => response.json())
     .then((categories) => {
@@ -22,62 +24,41 @@ const getReportCategories = (domain, id) => {
         reports_dropdown.innerHTML += `<option value="${category.id}">${category.name}</option>`;
       });
     })
-    .catch((err) => console.warn(err));
+    .catch(err => console.error(err));
 }
 
-const getPosts = (settings) => {
+const getPosts = async (settings) => {
   const { domain, number_of_posts, publication, report } = settings;
-  let str;
+  const str = report ? `${domain}/wp-json/wp/v2/posts?categories=${report}` : `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
+  const posts = await (await fetch(str)).json();
 
-  if (report) {
-    str = `${domain}/wp-json/wp/v2/posts?categories=${report}`;
-  } else {
-    str = `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
-  }
+  const post_info = Promise.all(
+    posts.map(async (post, index) => {
+      const url = await (await fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)).json();
+      const category = await (await fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)).json();
+      const post_obj = {
+        category: category.name,
+        excerpt: truncateExcerpt(post.excerpt.rendered),
+        img_url: url.source_url,
+        link: post.link,
+        tags: post.tags,
+        title: post.title.rendered,
+      }
 
-  fetch(str, { credentials: 'same-origin' })
-    .then(response => response.json())
-    .then(posts => {
-      posts.forEach((post, index) => {
-        Promise.all([
-          fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`),
-          fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`),
-        ])
-          .then(responses => {
-            return Promise.all(
-              responses.map(response => response.json())
-            );
-          })
-          .then(response => {
-            let postObject = {
-              category: response[1].name,
-              excerpt: truncateExcerpt(post.excerpt.rendered),
-              img_url: response[0].source_url,
-              link: post.link,
-              tags: post.tags,
-              title: post.title.rendered,
-            };
-
-            buildDOM(postObject);
-
-            if (report && index === response.length - 1 ||
-               !report && index === number_of_posts - 1) {
-              enableDownloadButton();
-              updateDocumentTitle(publication);
-              updateDOM(publication);
-            }
-          })
-          .catch(err => console.warn(err));
-      });
+      return post_obj;
     })
-    .catch(err => console.warn(err));
+  );
+
+  return post_info;
 }
 
-const buildDOM = (obj) => {
-  let layout = document.createElement('layout');
-  layout.setAttribute('label', `${obj.title}`);
+const buildDOM = (post) => {
+  const { category, excerpt, img_url, link, tags, title } = post;
+  const layout = document.createElement('layout');
 
-  let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
+  layout.setAttribute('label', `${title}`);
+
+  const basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                       <tr>
                         <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                       </tr>
@@ -87,7 +68,7 @@ const buildDOM = (obj) => {
                           <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                             <tr>
                               <td width="225" class="mobile" align="center" valign="top">
-                                <a href="${obj.link}"><img src="${obj.img_url}" alt="" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" /></a>
+                                <a href="${link}"><img src="${img_url}" alt="" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" /></a>
                               </td>
                               <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
                                 &nbsp;
@@ -97,7 +78,7 @@ const buildDOM = (obj) => {
 
                                   <tr class="js-category">
                                     <td align="left" valign="top">
-                                      <p class="article__category"><singleline label="Category label">${obj.category}</singleline></p>
+                                      <p class="article__category"><singleline label="Category label">${category}</singleline></p>
                                     </td>
                                   </tr>
                                   <tr class="js-category">
@@ -106,8 +87,8 @@ const buildDOM = (obj) => {
 
                                   <tr>
                                     <td align="left" valign="top">
-                                      <h2 class="article__title"><a href="${obj.link}"><singleline label="Story title">${obj.title}</singleline></a></h2>
-                                      <p class="article__body"><singleline>${obj.excerpt}</singleline></p>
+                                      <h2 class="article__title"><a href="${link}"><singleline label="Story title">${title}</singleline></a></h2>
+                                      <p class="article__body"><singleline>${excerpt}</singleline></p>
                                     </td>
                                   </tr>
 
@@ -122,14 +103,14 @@ const buildDOM = (obj) => {
                         <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                       </tr>
                     </table>`;
-  let cover_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
+  const cover_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                       <tr>
                         <td align="center">
 
                           <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper">
                             <tr>
                               <td width="640" class="wrapper">
-                                <a href="${obj.link}"><img src="${obj.img_url}" width="640" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." /></a>
+                                <a href="${link}"><img src="${img_url}" width="640" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." /></a>
                               </td>
                             </tr>
                           </table>
@@ -167,13 +148,13 @@ const buildDOM = (obj) => {
                           <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                             <tr>
                               <td width="285" class="mobile" align="left" valign="top">
-                                <h2 class="article__title"><a href="${obj.link}}"><singleline label="Cover story title">${obj.title}</singleline></a></h2>
+                                <h2 class="article__title"><a href="${link}}"><singleline label="Cover story title">${title}</singleline></a></h2>
                               </td>
                               <td width="30" class="mobileOff" align="center" valign="top">
                                 &nbsp;
                               </td>
                               <td width="285" class="mobile" align="left" valign="top">
-                                <p class="article__body"><singleline label="Cover story excerpt">${obj.excerpt}</singleline></p>
+                                <p class="article__body"><singleline label="Cover story excerpt">${excerpt}</singleline></p>
                               </td>
                             </tr>
                           </table>
@@ -184,7 +165,7 @@ const buildDOM = (obj) => {
                         <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                       </tr>
                     </table>`;
-  let sponsored_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
+  const sponsored_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                           <tr>
                             <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                           </tr>
@@ -211,7 +192,7 @@ const buildDOM = (obj) => {
                               <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                 <tr>
                                   <td align="center" valign="top">
-                                    <a href="${obj.link}"><img src="${obj.img_url}" width="600" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" /></a>
+                                    <a href="${link}"><img src="${img_url}" width="600" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" /></a>
                                   </td>
                                 </tr>
                               </table>
@@ -258,13 +239,13 @@ const buildDOM = (obj) => {
                               <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                                 <tr>
                                   <td width="285" class="mobile" align="left" valign="top">
-                                    <h2 class="article__title"><a href="${obj.link}"><singleline label="Story title">${obj.title}</singleline></a></h2>
+                                    <h2 class="article__title"><a href="${link}"><singleline label="Story title">${title}</singleline></a></h2>
                                   </td>
                                   <td width="30" class="mobileOff" align="center" valign="top">
                                     &nbsp;
                                   </td>
                                   <td width="285" class="mobile" align="left" valign="top">
-                                    <p class="article__body"><singleline label="Story excerpt">${obj.excerpt}</singleline></p>
+                                    <p class="article__body"><singleline label="Story excerpt">${excerpt}</singleline></p>
                                   </td>
                                 </tr>
                               </table>
@@ -276,15 +257,35 @@ const buildDOM = (obj) => {
                           </tr>
                         </table>`;
 
-  if (obj.tags.indexOf(62) !== -1 || obj.tags.indexOf(82) !== -1) {
+  if (tags.indexOf(62) !== -1 || tags.indexOf(82) !== -1) {
     layout.innerHTML = cover_post;
-  } else if (obj.tags.indexOf(345) !== -1 || obj.tags.indexOf(330) !== -1) {
+  } else if (tags.indexOf(345) !== -1 || tags.indexOf(330) !== -1) {
     layout.innerHTML = sponsored_post;
   } else {
     layout.innerHTML = basic_post;
   }
 
   repeater.appendChild(layout);
+}
+
+const disableCheckbox = (event) => {
+  reports_checkbox.checked = false;
+  reports_dropdown.disabled = true;
+  reports_dropdown.value = '';
+
+  if (event.currentTarget.value === 'energy_ireland_yearbook' || event.currentTarget.value === 'irelands_housing_magazine' || event.currentTarget.value === 'renewable_energy_magazine') {
+    reports_checkbox.disabled = true;
+
+    if (!reports_checkbox.parentNode.classList.contains('disabled')) {
+      reports_checkbox.parentNode.classList.add('disabled');
+    }
+  } else {
+    reports_checkbox.disabled = false;
+
+    if (reports_checkbox.parentNode.classList.contains('disabled')) {
+      reports_checkbox.parentNode.classList.remove('disabled');
+    }
+  }
 }
 
 const enableDownloadButton = () => {
@@ -321,28 +322,18 @@ const updateDOM = (publication) => {
   blocks.forEach((block) => {
     const publications = block.dataset.publication.split(' ');
 
-    if (publications.indexOf(publication) === -1) {
-      block.remove();
-    }
+    if (publications.indexOf(publication) === -1) block.remove();
   });
 
   switch (publication) {
     case 'energy_ireland_yearbook':
     case 'renewable_energy_magazine':
       document.querySelector('.outer-wrapper').setAttribute('bgColor', '#48A6FE'); // top and bottom borders
-
-      document.querySelectorAll('.js-category').forEach((node) => {
-        node.remove(); // remove the category label <table> or <tr> elements
-      });
-
+      document.querySelectorAll('.js-category').forEach((node) => node.remove());
       break;
     case 'irelands_housing_magazine':
       document.querySelector('.outer-wrapper').setAttribute('bgColor', '#401665');
-
-      document.querySelectorAll('.js-category').forEach((node) => {
-        node.remove();
-      });
-
+      document.querySelectorAll('.js-category').forEach((node) => node.remove());
       break;
   }
 }
@@ -355,8 +346,8 @@ const truncate = (str, word_count) => {
 }
 
 const truncateExcerpt = (excerpt) => {
-  let excerpt_trim_start = excerpt.replace('<p>', '');
-  let excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
+  const excerpt_trim_start = excerpt.replace('<p>', '');
+  const excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
   return (excerpt_truncated = truncate(excerpt_trim_end, 20));
 }
 
@@ -396,11 +387,19 @@ const getSettings = () => {
 const applySettings = () => {
   download_button.classList.add('loading');
   apply_button.setAttribute('disabled', '');
-  document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
+  document.querySelectorAll('fieldset').forEach(fieldset => fieldset.setAttribute('disabled', ''));
 
-  let settings = getSettings();
-
-  getPosts(settings);
+  const settings = getSettings();
+  getPosts(settings)
+    .then(posts => {
+      posts.map(post => buildDOM(post));
+    })
+    .finally(() => {
+      enableDownloadButton();
+      updateDocumentTitle(settings.publication);
+      updateDOM(settings.publication);
+    })
+    .catch(err => console.error(err));
 }
 
 const downloadHTML = () => {
@@ -421,46 +420,22 @@ const downloadHTML = () => {
 //
 apply_button.addEventListener('click', applySettings, { once: true });
 download_button.addEventListener('click', downloadHTML, { once: true });
-reports_checkbox.addEventListener(
-  'change',
-  () => {
-    if (reports_checkbox.checked) {
-      form.classList.add('show-reports');
-    } else {
-      form.classList.remove('show-reports');
-      reports_dropdown.value = '';
-    }
-
-    if (reports_dropdown.disabled) {
-      reports_dropdown.disabled = false;
-    } else {
-      reports_dropdown.disabled = true;
-    }
-
-    let settings = getSettings();
-
-    getReportCategories(settings.domain, settings.id);
-  }
-);
-
-const fn = () => {
-  reports_checkbox.checked = false;
-  reports_dropdown.disabled = true;
-  reports_dropdown.value = '';
-
-  if (input.value === 'energy_ireland_yearbook' || input.value === 'irelands_housing_magazine' || input.value === 'renewable_energy_magazine') {
-    reports_checkbox.disabled = true;
-
-    if (!reports_checkbox.parentNode.classList.contains('disabled')) {
-      reports_checkbox.parentNode.classList.add('disabled');
-    }
+reports_checkbox.addEventListener('change', () => {
+  if (reports_checkbox.checked) {
+    form.classList.add('show-reports');
   } else {
-    reports_checkbox.disabled = false;
-
-    if (reports_checkbox.parentNode.classList.contains('disabled')) {
-      reports_checkbox.parentNode.classList.remove('disabled');
-    }
+    form.classList.remove('show-reports');
+    reports_dropdown.value = '';
   }
-}
 
-radio_inputs.forEach(input => input.addEventListener('change', (input) => {fn}));
+  if (reports_dropdown.disabled) {
+    reports_dropdown.disabled = false;
+  } else {
+    reports_dropdown.disabled = true;
+  }
+
+  const settings = getSettings();
+
+  getReportCategories(settings);
+});
+radio_inputs.forEach(input => input.addEventListener('change', () => disableCheckbox(event)));
