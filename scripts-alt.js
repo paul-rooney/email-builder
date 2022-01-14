@@ -12,7 +12,9 @@ const radio_inputs = document.querySelectorAll('input[type="radio"]');
 //
 // FUNCTIONS
 //
-const getReportCategories = (domain, id) => {
+const getReportCategories = (settings) => {
+  const { domain, id } = settings;
+
   fetch(`${domain}/wp-json/wp/v2/categories?parent=${id}`, { credentials: 'same-origin' })
     .then((response) => response.json())
     .then((categories) => {
@@ -22,17 +24,12 @@ const getReportCategories = (domain, id) => {
         reports_dropdown.innerHTML += `<option value="${category.id}">${category.name}</option>`;
       });
     })
-    .catch((err) => console.error(err));
+    .catch(err => console.error(err));
 }
 
-async function getPosts(settings) {
+const getPosts = async (settings) => {
   const { domain, number_of_posts, publication, report } = settings;
   const str = report ? `${domain}/wp-json/wp/v2/posts?categories=${report}` : `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
-
-  // this…
-  // const query = await fetch(str);
-  // const posts = await query.json();
-  // is the same as…
   const posts = await (await fetch(str)).json();
 
   const post_info = Promise.all(
@@ -57,11 +54,11 @@ async function getPosts(settings) {
 
 const buildDOM = (post) => {
   const { category, excerpt, img_url, link, tags, title } = post;
-  let layout = document.createElement('layout');
+  const layout = document.createElement('layout');
 
   layout.setAttribute('label', `${title}`);
 
-  let basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
+  const basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                       <tr>
                         <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                       </tr>
@@ -106,7 +103,7 @@ const buildDOM = (post) => {
                         <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                       </tr>
                     </table>`;
-  let cover_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
+  const cover_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                       <tr>
                         <td align="center">
 
@@ -168,7 +165,7 @@ const buildDOM = (post) => {
                         <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                       </tr>
                     </table>`;
-  let sponsored_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
+  const sponsored_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
                           <tr>
                             <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                           </tr>
@@ -271,11 +268,6 @@ const buildDOM = (post) => {
   repeater.appendChild(layout);
 }
 
-const enableDownloadButton = () => {
-  download_button.classList.remove('loading');
-  download_button.removeAttribute('disabled');
-}
-
 const disableCheckbox = (event) => {
   reports_checkbox.checked = false;
   reports_dropdown.disabled = true;
@@ -294,6 +286,11 @@ const disableCheckbox = (event) => {
       reports_checkbox.parentNode.classList.remove('disabled');
     }
   }
+}
+
+const enableDownloadButton = () => {
+  download_button.classList.remove('loading');
+  download_button.removeAttribute('disabled');
 }
 
 const updateDocumentTitle = (publication) => {
@@ -349,8 +346,8 @@ const truncate = (str, word_count) => {
 }
 
 const truncateExcerpt = (excerpt) => {
-  let excerpt_trim_start = excerpt.replace('<p>', '');
-  let excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
+  const excerpt_trim_start = excerpt.replace('<p>', '');
+  const excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
   return (excerpt_truncated = truncate(excerpt_trim_end, 20));
 }
 
@@ -390,9 +387,9 @@ const getSettings = () => {
 const applySettings = () => {
   download_button.classList.add('loading');
   apply_button.setAttribute('disabled', '');
-  document.querySelectorAll('fieldset').forEach((fieldset) => fieldset.setAttribute('disabled', ''));
+  document.querySelectorAll('fieldset').forEach(fieldset => fieldset.setAttribute('disabled', ''));
 
-  let settings = getSettings();
+  const settings = getSettings();
   getPosts(settings)
     .then(posts => {
       posts.map(post => buildDOM(post));
@@ -402,6 +399,7 @@ const applySettings = () => {
       updateDocumentTitle(settings.publication);
       updateDOM(settings.publication);
     })
+    .catch(err => console.error(err));
 }
 
 const downloadHTML = () => {
@@ -422,28 +420,22 @@ const downloadHTML = () => {
 //
 apply_button.addEventListener('click', applySettings, { once: true });
 download_button.addEventListener('click', downloadHTML, { once: true });
-reports_checkbox.addEventListener(
-  'change',
-  () => {
-    if (reports_checkbox.checked) {
-      form.classList.add('show-reports');
-    } else {
-      form.classList.remove('show-reports');
-      reports_dropdown.value = '';
-    }
-
-    if (reports_dropdown.disabled) {
-      reports_dropdown.disabled = false;
-    } else {
-      reports_dropdown.disabled = true;
-    }
-
-    let settings = getSettings();
-
-    getReportCategories(settings.domain, settings.id);
+reports_checkbox.addEventListener('change', () => {
+  if (reports_checkbox.checked) {
+    form.classList.add('show-reports');
+  } else {
+    form.classList.remove('show-reports');
+    reports_dropdown.value = '';
   }
-);
 
-radio_inputs.forEach(
-  input => input.addEventListener('change', () => disableCheckbox(event))
-);
+  if (reports_dropdown.disabled) {
+    reports_dropdown.disabled = false;
+  } else {
+    reports_dropdown.disabled = true;
+  }
+
+  const settings = getSettings();
+
+  getReportCategories(settings);
+});
+radio_inputs.forEach(input => input.addEventListener('change', () => disableCheckbox(event)));
