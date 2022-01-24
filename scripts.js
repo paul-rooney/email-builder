@@ -33,7 +33,7 @@ const getPosts = async (settings) => {
   const posts = await (await fetch(str)).json();
 
   const post_info = Promise.all(
-    posts.map(async (post, index) => {
+    posts.map(async (post) => {
       const url = await (await fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)).json();
       const category = await (await fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)).json();
       const post_obj = {
