@@ -29,11 +29,11 @@ const getReportCategories = (settings) => {
 
 const getPosts = async (settings) => {
   const { domain, number_of_posts, publication, report } = settings;
-  const str = report ? `${domain}/wp-json/wp/v2/posts?categories=${report}` : `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
+  const str = report ? `${domain}/wp-json/wp/v2/posts?categories=${report}&per_page=50` : `${domain}/wp-json/wp/v2/posts?per_page=${number_of_posts}`;
   const posts = await (await fetch(str)).json();
 
   const post_info = Promise.all(
-    posts.map(async (post, index) => {
+    posts.map(async (post) => {
       const url = await (await fetch(`${domain}/wp-json/wp/v2/media/${post.featured_media}`)).json();
       const category = await (await fetch(`${domain}/wp-json/wp/v2/categories/${post.categories[0]}`)).json();
       const post_obj = {
@@ -58,32 +58,34 @@ const buildDOM = (post) => {
 
   layout.setAttribute('label', `${title}`);
 
-  const basic_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                      <tr>
-                        <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td align="center" valign="top">
+  const basic_post = `<table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <tr>
+                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="center" valign="top">
 
-                          <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
-                            <tr>
-                              <td width="225" class="mobile" align="center" valign="top">
-                                <a href="${link}"><img src="${img_url}" alt="" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" /></a>
+                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                              <tr>
+                              <td width="290" class="mobile w225" align="center" valign="top">
+                                <a href="${link}"><img src="${img_url}" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable /></a>
                               </td>
-                              <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile" align="center" valign="top">
+                              <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
                                 &nbsp;
                               </td>
-                              <td width="345" class="mobile" align="left" valign="top">
+                              <td width="290" class="mobile w375" align="left" valign="top">
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 
-                                  <tr class="js-category">
-                                    <td align="left" valign="top">
-                                      <p class="article__category"><singleline label="Category label">${category}</singleline></p>
-                                    </td>
-                                  </tr>
-                                  <tr class="js-category">
-                                    <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                  </tr>
+
+                                <tr class="js-category">
+                                  <td align="left" valign="top">
+                                    <p class="article__category"><singleline label="Category label">${category}</singleline></p>
+                                  </td>
+                                </tr>
+                                <tr class="js-category">
+                                  <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                </tr>
+
 
                                   <tr>
                                     <td align="left" valign="top">
@@ -91,171 +93,156 @@ const buildDOM = (post) => {
                                       <p class="article__body"><singleline>${excerpt}</singleline></p>
                                     </td>
                                   </tr>
-
                                 </table>
                               </td>
-                            </tr>
-                          </table>
+                              </tr>
+                            </table>
 
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                      </tr>
-                    </table>`;
-  const cover_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                      <tr>
-                        <td align="center">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                        </tr>
+                      </table>`;
+  const cover_post = `<table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <tr>
+                          <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="center" valign="top">
 
-                          <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper">
+                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                              <tr>
+                                <td align="center" valign="top">
+                                  <a href="${link}"><img src="${img_url}" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" editable /></a>
+                                </td>
+                              </tr>
+                            </table>
+
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <tr>
+                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                        </tr>
+                        <tr class="js-category">
+                          <td align="center" valign="top">
+
+                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                              <tr>
+                                <td align="left" valign="top">
+                                  <p class="article__category"><singleline label="Category label">${category}</singleline></p>
+                                </td>
+                              </tr>
+                            </table>
+
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <tr>
+                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="center" valign="top">
+
+                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                              <tr>
+                                <td width="285" class="mobile w285" align="left" valign="top">
+                                  <h2 class="article__title"><a href="${link}"><singleline label="Story title">${title}</singleline></a></h2>
+                                </td>
+                                <td width="30" class="mobileOff w30" align="center" valign="top">
+                                  &nbsp;
+                                </td>
+                                <td width="285" class="mobile w285" align="left" valign="top">
+                                  <p class="article__body"><singleline label="Story excerpt">${excerpt}</singleline></p>
+                                </td>
+                              </tr>
+                            </table>
+
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                        </tr>
+                      </table>`;
+  const sponsored_post = `<table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
                             <tr>
-                              <td width="640" class="wrapper">
-                                <a href="${link}"><img src="${img_url}" width="640" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." /></a>
-                              </td>
+                              <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
                             </tr>
-                          </table>
-
-                        </td>
-                      </tr>
-                    </table>
-
-                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                      <tr>
-                        <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td align="center" valign="top">
-
-                          <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
                             <tr>
-                              <td align="left" valign="top">
-                                <p class="article__category"><singleline label="Category label">Cover story</singleline></p>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td align="center" valign="top">
+                                      <a href="${link}"><img src="${img_url}" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" editable /></a>
+                                    </td>
+                                  </tr>
+                                </table>
+
                               </td>
                             </tr>
                           </table>
 
-                        </td>
-                      </tr>
-                    </table>
-
-                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                      <tr>
-                        <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td align="center" valign="top">
-
-                          <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
-                              <td width="285" class="mobile" align="left" valign="top">
-                                <h2 class="article__title"><a href="${link}}"><singleline label="Cover story title">${title}</singleline></a></h2>
-                              </td>
-                              <td width="30" class="mobileOff" align="center" valign="top">
-                                &nbsp;
-                              </td>
-                              <td width="285" class="mobile" align="left" valign="top">
-                                <p class="article__body"><singleline label="Cover story excerpt">${excerpt}</singleline></p>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td width="370" class="mobile w370" align="left" valign="top">
+                                      <p class="article__category"><singleline label="Category label">Report sponsored by/Round table discussion hosted by</singleline></p>
+                                    </td>
+                                    <td width="30" class="mobile w30" align="center" valign="top">
+                                      &nbsp;
+                                    </td>
+                                    <td width="290" class="mobile w200" align="right" valign="top">
+                                      <img src="https://via.placeholder.com/400x100" width="290" height="" style="margin:0; padding:0; border:none; display:block; max-width:200px;" border="0" class="img" alt="" label="Sponsor logo" editable/>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                  </tr>
+                                </table>
+
                               </td>
                             </tr>
                           </table>
 
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                      </tr>
-                    </table>`;
-  const sponsored_post = `<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                          <tr>
-                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                          </tr>
-                          <tr>
-                            <td align="center" valign="top">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
 
-                              <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ divider ]">
-                                <tr>
-                                  <td align="center" valign="top" height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                </tr>
-                              </table>
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td width="290" class="mobile w285" align="left" valign="top">
+                                      <h2 class="article__title"><a href="${link}"><singleline label="Story title">${title}</singleline></a></h2>
+                                    </td>
+                                    <td width="30" class="mobileOff w30" align="center" valign="top">
+                                      &nbsp;
+                                    </td>
+                                    <td width="290" class="mobile w285" align="left" valign="top">
+                                      <p class="article__body"><singleline label="Story excerpt">${excerpt}</singleline></p>
+                                    </td>
+                                  </tr>
+                                </table>
 
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                          <tr>
-                            <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
-                          </tr>
-                          <tr>
-                            <td align="center" valign="top">
-
-                              <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
-                                <tr>
-                                  <td align="center" valign="top">
-                                    <a href="${link}"><img src="${img_url}" width="600" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" /></a>
-                                  </td>
-                                </tr>
-                              </table>
-
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                          <tr>
-                            <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                          </tr>
-                          <tr>
-                            <td align="center" valign="top">
-
-                              <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
-                                <tr>
-                                  <td width="370" class="mobile" align="left" valign="top">
-                                    <p class="article__category"><singleline label="Category label">Round table discussion hosted by</singleline></p>
-                                  </td>
-                                  <td width="30" class="mobile" align="center" valign="top">
-                                    &nbsp;
-                                  </td>
-                                  <td width="200" class="mobile" align="right" valign="top">
-                                    <img src="https://via.placeholder.com/350x100" width="175" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="" alt="" label="Sponsor logo" editable/>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                </tr>
-                              </table>
-
-                            </td>
-                          </tr>
-                        </table>
-
-                        <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#E8E8E8">
-                          <tr>
-                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                          </tr>
-                          <tr>
-                            <td align="center" valign="top">
-
-                              <table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
-                                <tr>
-                                  <td width="285" class="mobile" align="left" valign="top">
-                                    <h2 class="article__title"><a href="${link}"><singleline label="Story title">${title}</singleline></a></h2>
-                                  </td>
-                                  <td width="30" class="mobileOff" align="center" valign="top">
-                                    &nbsp;
-                                  </td>
-                                  <td width="285" class="mobile" align="left" valign="top">
-                                    <p class="article__body"><singleline label="Story excerpt">${excerpt}</singleline></p>
-                                  </td>
-                                </tr>
-                              </table>
-
-                            </td>
-                          </tr>
-                          <tr>
-                            <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                          </tr>
-                        </table>`;
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                          </table>`;
 
   if (tags.indexOf(62) !== -1 || tags.indexOf(82) !== -1) {
     layout.innerHTML = cover_post;

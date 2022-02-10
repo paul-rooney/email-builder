@@ -57,7 +57,8 @@
 
     /* MEDIA QUERIES */
     @media all and (max-width:639px){
-      /* .container{ width:290px!important;  padding: 0 !important; } */
+      .wrapper{ width:320px!important; padding: 0 !important; }
+      .container{ width:290px!important;  padding: 0 !important; }
       .mobile{ width:290px!important; display:block!important; padding: 0 !important; }
       .img{ width:100% !important; height:auto !important; }
       *[class="mobileOff"] { width: 0px !important; display: none !important; }
@@ -212,8 +213,8 @@
 
     /* MEDIA QUERIES */
     @media all and (max-width:639px){
-      /* .wrapper{ width:320px!important; padding: 0 !important; } */
-      /* .container{ width:290px!important;  padding: 0 !important; } */
+      .wrapper{ width:320px!important; padding: 0 !important; }
+      .container{ width:290px!important;  padding: 0 !important; }
       .mobile{ width:290px!important; display:block!important; padding: 0 !important; }
       .img{ width:100% !important; height:auto !important; }
       *[class="mobileOff"] { width: 0px !important; display: none !important; }
@@ -364,6 +365,7 @@
     /* ANDROID CENTER FIX */
     div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
+    /* MEDIA QUERIES */
     .mobile {
       width: 290px;
       display: block;
@@ -376,7 +378,6 @@
 
     *[class*="mobileOn"] { display: block; max-height: none; }
 
-    /* MEDIA QUERIES */
     @media all and (min-width: 640px) {
       *[class*="mobileOn"] { display: table-row !important; }
       *[class="mobileOff"] { display: table-cell; }
@@ -485,7 +486,7 @@
             <tr>
               <td align="center" valign="top">
 
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="">
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="">
                   <tr>
                     <td align="right" valign="top">
                       <webversion><span style="font-size: 12px; color: #424242; text-decoration: none !important;">View this email in your web browser →</span></webversion>
@@ -502,18 +503,18 @@
               <td align="center" valign="top">
 
                 <!-- INNER TABLE -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="outer-wrapper w640" bgcolor="#72BF44">
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="[ outer-wrapper ] wrapper w640" bgcolor="#72BF44">
                   <tr>
                     <td align="center" valign="top">
 
-                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="">
+                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="">
                         <tr>
                           <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                         </tr>
                       </table>
 
                       <!-- agendaNi HEADER -->
-                      <!-- <table data-publication="agenda_ni" width="320" cellpadding="0" cellspacing="0" border="0" class=" w640" bgcolor="#E8E8E8">
+                      <table data-publication="agenda_ni" width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                         <tr>
                           <td align="center" valign="top">
 
@@ -550,10 +551,10 @@
                         <tr>
                           <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                         </tr>
-                      </table> -->
+                      </table>
 
                       <!-- eolas Magazine HEADER -->
-                      <table data-publication="eolas_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                      <table data-publication="eolas_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                         <tr>
                           <td align="center" valign="top">
 
@@ -593,7 +594,7 @@
                       </table>
 
                       <!-- Renewable Energy Magazine HEADER -->
-                      <!-- <table data-publication="energy_ireland_yearbook renewable_energy_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                      <table data-publication="energy_ireland_yearbook renewable_energy_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                         <tr>
                           <td align="center" valign="top">
 
@@ -630,10 +631,10 @@
                         <tr>
                           <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
                         </tr>
-                      </table> -->
+                      </table>
 
                       <!-- Ireland’s Housing Magazine HEADER -->
-                      <!-- <table data-publication="irelands_housing_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                      <table data-publication="irelands_housing_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                         <tr>
                           <td align="center" valign="top">
 
@@ -670,7 +671,7 @@
                         <tr>
                           <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
                         </tr>
-                      </table> -->
+                      </table>
 
 
 
@@ -678,14 +679,14 @@
 
                       <repeater id="repeater">
                         <!-- COVER STORY -->
-                        <!-- <layout label="Cover story">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <layout label="Cover story">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td align="center">
 
-                                <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640">
+                                <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640">
                                   <tr>
-                                    <td width="320" class="">
+                                    <td width="320" class="wrapper">
                                       <img src="https://via.placeholder.com/1280x800" width="320" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." editable />
                                     </td>
                                   </tr>
@@ -695,7 +696,7 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
@@ -714,7 +715,7 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -722,7 +723,7 @@
                               <td align="center" valign="top">
 
                                 <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
+                                  <tr>
                                     <td width="285" class="mobile w285" align="left" valign="top">
                                       <h2 class="article__title"><singleline label="Cover story title">Cover story heading</singleline></h2>
                                     </td>
@@ -741,7 +742,7 @@
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
                           </table>
-                        </layout> -->
+                        </layout>
                         <!-- END COVER STORY -->
 
 
@@ -749,8 +750,9 @@
 
 
                         <!-- ONE STORY BLOCK -->
-                        <!-- <layout label="One story block">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <layout label="One story block">
+                          <!-- DIVIDER -->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -766,8 +768,9 @@
                               </td>
                             </tr>
                           </table>
+                          <!-- END DIVIDER -->
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
                             </tr>
@@ -786,7 +789,7 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
@@ -805,7 +808,7 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -813,7 +816,7 @@
                               <td align="center" valign="top">
 
                                 <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
+                                  <tr>
                                     <td width="285" class="mobile w285" align="left" valign="top">
                                       <h2 class="article__title"><singleline label="Story title">Article heading</singleline></h2>
                                     </td>
@@ -832,7 +835,7 @@
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
                           </table>
-                        </layout> -->
+                        </layout>
                         <!-- END ONE STORY BLOCK -->
 
 
@@ -840,8 +843,9 @@
 
 
                         <!-- ONE STORY WITH SPONSOR LOGO BLOCK -->
-                        <!-- <layout label="One story w/sponsor logo block">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <layout label="One story w/sponsor logo block">
+                          <!-- DIVIDER -->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -857,8 +861,9 @@
                               </td>
                             </tr>
                           </table>
+                          <!-- END DIVIDER -->
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
                             </tr>
@@ -877,7 +882,7 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
@@ -885,7 +890,7 @@
                               <td align="center" valign="top">
 
                                 <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
+                                  <tr>
                                     <td width="370" class="mobile w370" align="left" valign="top">
                                       <p class="article__category"><singleline label="Category label">Round table discussion hosted by</singleline></p>
                                     </td>
@@ -905,7 +910,7 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -913,7 +918,7 @@
                               <td align="center" valign="top">
 
                                 <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
+                                  <tr>
                                     <td width="290" class="mobile w285" align="left" valign="top">
                                       <h2 class="article__title"><singleline label="Story title">Article heading</singleline></h2>
                                     </td>
@@ -932,16 +937,118 @@
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
                           </table>
-                        </layout> -->
+                        </layout>
                         <!-- END ONE STORY WITH SPONSOR LOGO BLOCK -->
 
 
 
 
 
-                        <!-- ADVERTISEMENT BLOCK -->
-                        <layout label="Advertisement block">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#F2F2F2">
+                        <!-- TWO STORY SECTION -->
+                        <layout label="Two story block">
+                          <!-- DIVIDER -->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ divider ]">
+                                  <tr>
+                                    <td align="center" valign="top" height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                          </table>
+                          <!-- END DIVIDER -->
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td width="290" class="mobile w285" align="center" valign="top">
+
+                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                          <td align="center" valign="top">
+                                            <img src="https://via.placeholder.com/600x300" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td align="left" valign="top">
+                                            <p class="article__category"><singleline label="First category label">Category</singleline></p>
+                                          </td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                          <td align="left" valign="top">
+                                            <h2 class="article__title"><singleline label="First story title">Article heading</singleline></h2>
+                                            <p class="article__body"><singleline label="First story excerpt">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor…</singleline></p>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                    <td width="30" class="mobile w30" align="center" valign="top">
+                                      &nbsp;
+                                    </td>
+                                    <td width="290" class="mobile w285" align="center" valign="top">
+                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                          <td align="center" valign="top">
+                                            <img src="https://via.placeholder.com/600x300" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td align="left" valign="top">
+                                            <p class="article__category"><singleline label="Second category label">Category</singleline></p>
+                                          </td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                          <td align="left" valign="top">
+                                            <h2 class="article__title"><singleline label="Second story title">Article heading</singleline></h2>
+                                            <p class="article__body"><singleline label="Second story excerpt">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure…</singleline></p>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+                        </layout>
+                        <!-- END TWO STORY SECTION -->
+
+
+
+
+
+                        <!-- TWO STORY WITH ADVERTISEMENT BLOCK -->
+                        <layout label="Two story w/advertisement block">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#F2F2F2">
                             <tr>
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
@@ -960,7 +1067,469 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#F2F2F2">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#F2F2F2">
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td align="center" valign="top">
+                                      <img src="https://via.placeholder.com/1200x338" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="1200&times;338 • Advertisement" editable />
+                                    </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td width="290" class="mobile w285" align="center" valign="top">
+
+                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                          <td align="center" valign="top">
+                                            <img src="https://via.placeholder.com/600x300" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td align="left" valign="top">
+                                            <p class="article__category"><singleline label="First category label">Category</singleline></p>
+                                          </td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                          <td align="left" valign="top">
+                                            <h2 class="article__title"><singleline label="First story title">Article heading</singleline></h2>
+                                            <p class="article__body"><singleline label="First story excerpt">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor…</singleline></p>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                    <td width="30" class="mobile w30" align="center" valign="top">
+                                      &nbsp;
+                                    </td>
+                                    <td width="290" class="mobile w285" align="center" valign="top">
+                                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                          <td align="center" valign="top">
+                                            <img src="https://via.placeholder.com/600x300" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td align="left" valign="top">
+                                            <p class="article__category"><singleline label="Second category label">Category</singleline></p>
+                                          </td>
+                                        </tr>
+                                        <tr class="js-category">
+                                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                          <td align="left" valign="top">
+                                            <h2 class="article__title"><singleline label="Second story title">Article heading</singleline></h2>
+                                            <p class="article__body"><singleline label="Second story excerpt">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure…</singleline></p>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+                        </layout>
+                        <!-- END TWO STORY WITH ADVERTISEMENT SECTION -->
+
+
+
+
+
+                        <!-- THREE STORY BLOCK -->
+                        <layout label="Three story block">
+                          <!-- DIVIDER -->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ divider ]">
+                                  <tr>
+                                    <td align="center" valign="top" height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                          </table>
+                          <!-- END DIVIDER -->
+
+                          <!-- THREE STORY SECTION -->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                             <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                      <td width="225" class="mobile w225" align="center" valign="top">
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
+                                      </td>
+                                      <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
+                                        &nbsp;
+                                      </td>
+                                      <td width="375" class="mobile w375" align="left" valign="top">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                          <tr class="js-category">
+                                            <td align="left" valign="top">
+                                              <p class="article__category"><singleline label="First category label">Category</singleline></p>
+                                            </td>
+                                          </tr>
+                                          <tr class="js-category">
+                                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top">
+                                              <h2 class="article__title"><singleline label="First story title">Article heading</singleline></h2>
+                                              <p class="article__body"><singleline label="First story excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                          </table>
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                      <td width="225" class="mobile w225" align="center" valign="top">
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
+                                      </td>
+                                      <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
+                                        &nbsp;
+                                      </td>
+                                      <td width="375" class="mobile w375" align="left" valign="top">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                          <tr class="js-category">
+                                            <td align="left" valign="top">
+                                              <p class="article__category"><singleline label="Second category label">Category</singleline></p>
+                                            </td>
+                                          </tr>
+                                          <tr class="js-category">
+                                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top">
+                                              <h2 class="article__title"><singleline label="Second story title">Article heading</singleline></h2>
+                                              <p class="article__body"><singleline label="Second story excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat…</singleline></p>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                          </table>
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                             <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                      <td width="225" class="mobile w225" align="center" valign="top">
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
+                                      </td>
+                                      <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
+                                        &nbsp;
+                                      </td>
+                                      <td width="375" class="mobile w375" align="left" valign="top">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                          <tr class="js-category">
+                                            <td align="left" valign="top">
+                                              <p class="article__category"><singleline label="Third category label">Category</singleline></p>
+                                            </td>
+                                          </tr>
+                                          <tr class="js-category">
+                                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top">
+                                              <h2 class="article__title"><singleline label="Third story title">Article heading</singleline></h2>
+                                              <p class="article__body"><singleline label="Third story excerpt">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor…</singleline></p>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+                          <!-- END THREE STORY SECTION -->
+                        </layout>
+                        <!-- END THREE STORY BLOCK -->
+
+
+
+
+
+                        <!-- THREE STORY WITH ADVERTISEMENT BLOCK -->
+                        <layout label="Three story w/advertisement block">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#F2F2F2">
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td align="center" valign="top">
+                                      <p class="advertisement__heading">Advertisement</p>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#F2F2F2">
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td align="center" valign="top">
+                                      <img src="https://via.placeholder.com/1200x338" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="1200&times;338 • Advertisement" editable />
+                                    </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+
+                          <!-- THREE STORY SECTION -->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                             <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                      <td width="225" class="mobile w225" align="center" valign="top">
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="First story image" editable />
+                                      </td>
+                                      <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
+                                        &nbsp;
+                                      </td>
+                                      <td width="375" class="mobile w375" align="left" valign="top">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                          <tr class="js-category">
+                                            <td align="left" valign="top">
+                                              <p class="article__category"><singleline label="First category label">Category</singleline></p>
+                                            </td>
+                                          </tr>
+                                          <tr class="js-category">
+                                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top">
+                                              <h2 class="article__title"><singleline label="First story title">Article heading</singleline></h2>
+                                              <p class="article__body"><singleline label="First story excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                          </table>
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                      <td width="225" class="mobile w225" align="center" valign="top">
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Second story image" editable />
+                                      </td>
+                                      <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
+                                        &nbsp;
+                                      </td>
+                                      <td width="375" class="mobile w375" align="left" valign="top">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                          <tr class="js-category">
+                                            <td align="left" valign="top">
+                                              <p class="article__category"><singleline label="Second category label">Category</singleline></p>
+                                            </td>
+                                          </tr>
+                                          <tr class="js-category">
+                                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top">
+                                              <h2 class="article__title"><singleline label="Second story title">Article heading</singleline></h2>
+                                              <p class="article__body"><singleline label="Second story excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat…</singleline></p>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                            </tr>
+                          </table>
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
+                            <tr>
+                             <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                      <td width="225" class="mobile w225" align="center" valign="top">
+                                        <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
+                                      </td>
+                                      <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
+                                        &nbsp;
+                                      </td>
+                                      <td width="375" class="mobile w375" align="left" valign="top">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                          <tr class="js-category">
+                                            <td align="left" valign="top">
+                                              <p class="article__category"><singleline label="Third category label">Category</singleline></p>
+                                            </td>
+                                          </tr>
+                                          <tr class="js-category">
+                                            <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top">
+                                              <h2 class="article__title"><singleline label="Third story title">Article heading</singleline></h2>
+                                              <p class="article__body"><singleline label="Third story excerpt">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor…</singleline></p>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+                          <!-- END THREE STORY WITH ADVERTISEMENT SECTION -->
+                        </layout>
+                        <!-- END THREE STORY WITH ADVERTISEMENT BLOCK -->
+
+
+
+
+
+                        <!-- ADVERTISEMENT BLOCK -->
+                        <layout label="Advertisement block">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#F2F2F2">
+                            <tr>
+                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="center" valign="top">
+
+                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
+                                  <tr>
+                                    <td align="center" valign="top">
+                                      <p class="advertisement__heading">Advertisement</p>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                              </td>
+                            </tr>
+                          </table>
+
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#F2F2F2">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -982,7 +1551,7 @@
                             </tr>
                           </table>
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -995,8 +1564,9 @@
 
 
                         <!-- EDITOR’S COPY -->
-                        <!-- <layout label="Editor&rsquo;s copy">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <layout label="Editor&rsquo;s copy">
+                          <!-- DIVIDER -->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -1012,8 +1582,9 @@
                               </td>
                             </tr>
                           </table>
+                          <!-- END DIVIDER -->
 
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -1021,7 +1592,7 @@
                               <td align="center" valign="top">
 
                                 <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w550">
-                                  <tr class="mobileOn">
+                                  <tr>
                                     <td width="105" class="mobileOff w105" align="center" valign="top">&nbsp;</td>
                                     <td width="290" class="mobile w445" align="left" valign="top">
                                       <multiline>
@@ -1045,7 +1616,7 @@
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
                           </table>
-                        </layout> -->
+                        </layout>
                         <!-- END EDITOR’S COPY -->
 
 
@@ -1053,8 +1624,8 @@
 
 
                         <!-- BLANK SECTION -->
-                        <!-- <layout label="Blank section">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                        <layout label="Blank section">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                             </tr>
@@ -1085,7 +1656,7 @@
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
                           </table>
-                        </layout> -->
+                        </layout>
                         <!-- END BLANK SECTION -->
 
 
@@ -1094,7 +1665,7 @@
 
                         <!-- SINGLE POST -->
                         <layout label="Single post &mdash; only use if image is not linked correctly">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="#E8E8E8">
                             <tr>
                               <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                             </tr>
@@ -1103,13 +1674,13 @@
 
                                 <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
                                   <tr>
-                                  <td width="290" class="mobile w225" align="center" valign="top">
+                                  <td width="225" class="mobile w225" align="center" valign="top">
                                     <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
                                   </td>
                                   <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
                                     &nbsp;
                                   </td>
-                                  <td width="290" class="mobile w375" align="left" valign="top">
+                                  <td width="375" class="mobile w375" align="left" valign="top">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
 
 
@@ -1149,7 +1720,7 @@
 
 
                       <!-- agendaNi FOOTER -->
-                      <!-- <table data-publication="agenda_ni" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] w640" bgcolor="#212121">
+                      <table data-publication="agenda_ni" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] wrapper w640" bgcolor="#212121">
                         <tr>
                          <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
                         </tr>
@@ -1157,7 +1728,7 @@
                           <td align="center" valign="top">
 
                             <table width="290" cellpadding="0" cellspacing="0" border="0" class="[ footer ] container w550">
-                              <tr class="mobileOn">
+                              <tr>
                                   <td width="75" class="mobile w75" align="left" valign="top">
                                     <img src="assets/headshot-dw.png" width="75" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
                                   </td>
@@ -1210,17 +1781,17 @@
                         <tr>
                           <td height="60" style="font-size:60px; line-height:60px;">&nbsp;</td>
                         </tr>
-                      </table> -->
+                      </table>
 
                       <!-- eolas Magazine FOOTER -->
-                      <table data-publication="eolas_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="footer-wrapper w640" bgcolor="#212121">
+                      <table data-publication="eolas_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] wrapper w640" bgcolor="#212121">
                         <tr>
                          <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
                         </tr>
                         <tr>
                           <td align="center" valign="top">
 
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="footer container w550">
+                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="[ footer ] container w550">
                               <tr>
                                   <td width="75" class="mobile w75" align="left" valign="top">
                                     <img src="assets/headshot-cg.png" width="75" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
@@ -1239,7 +1810,7 @@
                                       Dublin, D02 XT91
                                     </address>
 
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="footer">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ footer ]">
                                       <tr>
                                         <td width="50" align="left" valign="top">
                                           <span style="color:#FFFFFF;">Tel:</span>
@@ -1277,7 +1848,7 @@
                       </table>
 
                       <!-- Ireland’s Housing Magazine FOOTER -->
-                      <!-- <table data-publication="irelands_housing_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] w640" bgcolor="#212121">
+                      <table data-publication="irelands_housing_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] wrapper w640" bgcolor="#212121">
                         <tr>
                          <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
                         </tr>
@@ -1338,10 +1909,10 @@
                         <tr>
                           <td height="60" style="font-size:60px; line-height:60px;">&nbsp;</td>
                         </tr>
-                      </table> -->
+                      </table>
 
                       <!-- Renewable Energy Magazine FOOTER -->
-                      <!-- <table data-publication="energy_ireland_yearbook renewable_energy_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] w640" bgcolor="#00172D">
+                      <table data-publication="energy_ireland_yearbook renewable_energy_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] wrapper w640" bgcolor="#00172D">
                         <tr>
                          <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
                         </tr>
@@ -1402,9 +1973,9 @@
                         <tr>
                           <td height="60" style="font-size:60px; line-height:60px;">&nbsp;</td>
                         </tr>
-                      </table>-->
+                      </table>
 
-                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="">
+                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640" bgcolor="">
                         <tr>
                           <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
                         </tr>
@@ -1415,7 +1986,7 @@
                 <!-- END INNER TABLE -->
 
                 <!-- IMPORTANT LINKS -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640">
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="wrapper w640">
                   <tr>
                     <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
                   </tr>
