@@ -57,7 +57,7 @@ const getPosts = async (settings) => {
   return post_info;
 }
 
-const buildDOM = (post) => {
+const buildDOM = (post, index) => {
   const { alt, category, excerpt, img_url, link, tags, title } = post;
   const layout = document.createElement('layout');
   let clone;
@@ -70,13 +70,22 @@ const buildDOM = (post) => {
     clone = basic_post.content.firstElementChild.cloneNode(true);
   }
 
-  clone.querySelectorAll('a').forEach(a => a.href = link);
-  clone.querySelector('.article__img').insertAdjacentHTML('afterBegin', `<a href="${link}">`);
-  clone.querySelector('.article__img').insertAdjacentHTML('beforeEnd', `</a>`);
-  clone.querySelector('.post-img').src = img_url;
-  clone.querySelector('.post-img').alt = alt !== '' ? alt : `Image for ${title}`;
+  clone.id = `post-${index}`;
+
+  const a = document.createElement('a');
+  a.href = link;
+  a.setAttribute('target', '_blank');
+
+  const post_img = clone.querySelector('.post-img');
+  post_img.src = img_url;
+  post_img.alt = alt !== '' ? alt : `Image for ${title}`;
+
+  post_img.parentNode.insertBefore(a, post_img);
+  a.appendChild(post_img);
+
+  // clone.querySelector('.article__img').innerHTML = `<a href="${link}" target="_blank">${post_img}</a>`;
   clone.querySelector('.article__category').innerHTML = `<singleline label="Article category">${category}</singleline>`;
-  clone.querySelector('.article__title').innerHTML = `<a href="${link}"><singleline label="Article title">${title}</singleline></a>`;
+  clone.querySelector('.article__title').innerHTML = `<a href="${link}" target="_blank"><singleline label="Article title">${title}</singleline></a>`;
   clone.querySelector('.article__body').innerHTML = `<singleline label="Article excerpt">${excerpt}</singleline>`;
 
   layout.setAttribute('label', title);
@@ -212,12 +221,13 @@ const applySettings = () => {
   const settings = getSettings();
   getPosts(settings)
     .then(posts => {
-      posts.map(post => buildDOM(post));
+      posts.map((post, index) => buildDOM(post, index));
     })
     .finally(() => {
       enableDownloadButton();
       updateDocumentTitle(settings.publication);
       updateDOM(settings.publication);
+      allowDragging();
     })
     .catch(err => console.error(err));
 }
@@ -259,3 +269,54 @@ reports_checkbox.addEventListener('change', () => {
   getReportCategories(settings);
 });
 radio_inputs.forEach(input => input.addEventListener('change', () => disableCheckbox(event)));
+
+//
+// DRAGGING
+//
+const allowDragging = () => {
+  const draggableRegions = document.querySelectorAll('[draggable="true"]');
+
+  draggableRegions.forEach(region => {
+    region.addEventListener('dragstart', doDragStart);
+    region.addEventListener('dragover', doDragOver);
+    region.addEventListener('drop', doDrop);
+  });
+}
+
+
+const doDragStart = (event) => {
+  event.dataTransfer.effectAllowed = 'move';
+  event.dataTransfer.setData('application/x-moz-node', event.currentTarget.id);
+}
+
+const doDragOver = (event) => {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = 'move';
+}
+
+const doDrop = (event) => {
+  event.preventDefault();
+  const data = event.dataTransfer.getData('application/x-moz-node');
+  console.log(data);
+  let html = document.getElementById(data);
+  // event.currentTarget.appendChild(document.getElementById(data))
+  event.currentTarget.insertBefore(html, event.currentTarget);
+}
+
+
+
+// repeater.addEventListener('dragenter', (event) => {
+//   const isHTML = event.dataTransfer.types.includes('application/x-moz-node');
+//   if (isHTML) event.preventDefault();
+// });
+// repeater.addEventListener('dragover', (event) => {
+//   const isHTML = event.dataTransfer.types.includes('application/x-moz-node');
+//   if (isHTML) event.preventDefault();
+//   event.dataTransfer.dropEffect = 'move';
+// });
+// repeater.addEventListener('drop', (event) => {
+//   event.preventDefault();
+//   const data = event.dataTransfer.getData('application/x-moz-node');
+//   console.log(data);
+//   event.currentTarget.appendChild(document.getElementById(data));
+// });

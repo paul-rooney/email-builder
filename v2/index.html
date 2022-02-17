@@ -140,7 +140,7 @@
 
       .article__title a:focus,
       .article__title a:hover {
-        color: #7AC142;
+        color: #7AC142 !important;
       }
 
     .post-img {
@@ -228,6 +228,7 @@
       .header,
       .basic-post,
       .cover-post,
+      .featured-post,
       .sponsored-post,
       .ad,
       .footer,
@@ -238,6 +239,7 @@
       .header__inner,
       .basic-post__inner,
       .cover-post__inner,
+      .featured-post__inner,
       .sponsored-post__inner,
       .ad__inner {
         width: 580px !important;
@@ -315,8 +317,50 @@
             <tr>
               <td align="center" valign="top">
 
-                <!-- HEADER -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="header w640" bgcolor="#FFFFFF">
+                <!-- AGENDANI HEADER -->
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="header w640" bgcolor="#FFFFFF" data-publication="agenda_ni">
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="280" cellpadding="0" cellspacing="0" border="0" class="header__inner w600">
+                        <tr>
+                          <td align="right" valign="top">
+                            <p class="header__date">
+                              <currentday> <currentmonthname>, <currentyear>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="280" cellpadding="0" cellspacing="0" border="0" class="header__inner w600">
+                        <tr>
+                          <td align="center" valign="top">
+                            <img
+                              src="../assets/agendaNi_master@2x.png"
+                              alt=""
+                              width="175"
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- EOLAS HEADER -->
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="header w640" bgcolor="#FFFFFF" data-publication="eolas_magazine">
                   <tr>
                     <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
                   </tr>
@@ -357,8 +401,12 @@
                   </tr>
                 </table>
 
+
+
+
+
                 <repeater id="repeater">
-                  <!-- COVER STORY -->
+                  <!-- COVER STORY BLOCK -->
                   <layout label="Cover story">
                     <table width="320" cellpadding="0" cellspacing="0" border="0" class="cover-post w640" bgcolor="#FFFFFF">
                       <tr>
@@ -385,7 +433,7 @@
                           <table width="280" cellpadding="0" cellspacing="0" border="0" class="cover-post__inner w600">
                             <tr>
                               <td align="left" valign="top">
-                                <p class="article__category"></p>
+                                <p class="article__category"><singleline label="Article category">Article category</singleline></p>
                               </td>
                             </tr>
                           </table>
@@ -396,12 +444,12 @@
                           <table width="280" cellpadding="0" cellspacing="0" border="0" class="cover-post__inner w600">
                             <tr align="left" valign="top" class="ltr w285">
                               <td class="w285">
-                                <h2 class="article__title"></h2>
+                                <h2 class="article__title"><singleline label="Article title">Article title</singleline></h2>
                               </td>
                             </tr>
                             <tr align="left" valign="top" class="ltr w285">
                               <td class="w285">
-                                <p class="article__body"></p>
+                                <p class="article__body"><singleline label="Article excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
                               </td>
                             </tr>
                           </table>
@@ -413,15 +461,30 @@
                     </table>
                   </layout>
 
-                  <!-- ONE STORY BLOCK -->
-                  <!-- <layout label="One story block">
-                    <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#FFFFFF">
+
+
+
+
+                  <!-- FEATURED POST -->
+                  <layout label="Featured post">
+                    <table width="320" cellpadding="0" cellspacing="0" border="0" class="featured-post w640" bgcolor="#FFFFFF">
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
                       <tr>
                         <td align="center" valign="top">
-                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="w600">
+                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="featured-post__inner w600">
                             <tr>
-                              <td align="left" valign="top">
-                                <img src="https://via.placeholder.com/1280x800" width="600" style="margin: 0; padding: 0; border: none; display: block;" border="0" alt="" label="Image for cover story" editable />
+                              <td align="center" valign="top">
+                                <img
+                                  src="https://via.placeholder.com/640x368"
+                                  width="280"
+                                  class="post-img"
+                                  style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                                  border="0"
+                                  alt=""
+                                  label="Article image"
+                                  editable />
                               </td>
                             </tr>
                           </table>
@@ -432,10 +495,10 @@
                       </tr>
                       <tr>
                         <td align="center" valign="top">
-                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="w600">
+                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="featured-post__inner w600">
                             <tr>
                               <td align="left" valign="top">
-                                <p class="article__category">Category title</p>
+                                <p class="article__category"><singleline label="Article category">Article category</singleline></p>
                               </td>
                             </tr>
                           </table>
@@ -443,84 +506,33 @@
                       </tr>
                       <tr>
                         <td align="center" valign="top">
-                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="w600">
-                            <tr>
-                              <td width="125" align="left" valign="top" class="mobile w285">
-                                <h2 class="article__title">Article title</h2>
+                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="featured-post__inner w600">
+                            <tr align="left" valign="top" class="ltr w285">
+                              <td class="w285">
+                                <h2 class="article__title"><singleline label="Article title">Article title</singleline></h2>
                               </td>
-                              <td width="30" align="center" valign="top" class="mobileOff w30">&nbsp;</td>
-                              <td width="125" align="left" valign="top" class="mobile w285">
-                                <p class="article__body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</p>
+                            </tr>
+                            <tr align="left" valign="top" class="ltr w285">
+                              <td class="w285">
+                                <p class="article__body"><singleline label="Article excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
                               </td>
                             </tr>
                           </table>
                         </td>
                       </tr>
                       <tr>
-                        <td height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
                       </tr>
                     </table>
-                  </layout> -->
+                  </layout>
 
-                  <!-- ONE STORY BLOCK W/SPONSOR LOGO -->
-                  <!-- <layout label="One story block w/sponsor logo">
-                    <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#FFFFFF">
-                      <tr>
-                        <td align="center" valign="top">
-                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="w600">
-                            <tr>
-                              <td align="left" valign="top">
-                                <img src="https://via.placeholder.com/1280x800" width="600" style="margin: 0; padding: 0; border: none; display: block;" border="0" alt="" label="" editable />
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td align="center" valign="top">
-                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="w600">
-                            <tr>
-                              <td width="125" align="left" valign="top" class="mobile w285">
-                                <p class="article__category">Report title sponsored by</p>
-                              </td>
-                              <td width="30" align="center" valign="top" class="mobileOff w30">&nbsp;</td>
-                              <td width="125" align="right" valign="top" class="mobile w285">
-                                <img src="https://via.placeholder.com/400x100" width="200" style="margin: 0; padding: 0; border: none; display: block;" border="0" alt="" label="" editable />
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td align="center" valign="top">
-                          <table width="280" cellpadding="0" cellspacing="0" border="0" class="w600">
-                            <tr>
-                              <td width="125" align="left" valign="top" class="mobile w285">
-                                <h2 class="article__title">Article title</h2>
-                              </td>
-                              <td width="30" align="center" valign="top" class="mobileOff w30">&nbsp;</td>
-                              <td width="125" align="left" valign="top" class="mobile w285">
-                                <p class="article__body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</p>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
-                      </tr>
-                    </table>
-                  </layout> -->
 
-                  <!-- BASIC POST BLOCK -->
-                  <layout label="Basic post block">
-                    <table width="320" cellpadding="0" cellspacing="0" border="0" class="post basic-post w640" bgcolor="#FFFFFF">
+
+
+
+                  <!-- BASIC POST -->
+                  <layout label="Basic post">
+                    <table width="320" cellpadding="0" cellspacing="0" border="0" class="basic-post w640" bgcolor="#FFFFFF">
                       <tr>
                         <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
                       </tr>
@@ -569,8 +581,12 @@
                     </table>
                   </layout>
 
-                  <!-- AD BLOCK -->
-                  <layout label="Advertisement block">
+
+
+
+
+                  <!-- AD -->
+                  <layout label="Advertisement">
                     <table width="320" cellpadding="0" cellspacing="0" border="0" class="ad w640" bgcolor="#FAFAFA">
                       <tr>
                         <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
@@ -623,7 +639,7 @@
 
 
                 <template id="basicPost">
-                  <table width="320" cellpadding="0" cellspacing="0" border="0" class="post basic-post w640" bgcolor="#FFFFFF">
+                  <table width="320" cellpadding="0" cellspacing="0" border="0" class="basic-post w640" bgcolor="#FFFFFF" draggable="true">
                     <tr>
                       <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
                     </tr>
@@ -639,8 +655,7 @@
                                 style="margin: 0; padding: 0; border: none; display: block; background-color: #F2F2F2;"
                                 border="0"
                                 alt=""
-                                label="Article image"
-                                editable />
+                                label="Article image" />
                             </td>
                           </tr>
                           <tr class="ltr w30">
@@ -677,7 +692,7 @@
 
 
                 <template id="coverPost">
-                  <table width="320" cellpadding="0" cellspacing="0" border="0" class="post cover-post w640" bgcolor="#FFFFFF">
+                  <table width="320" cellpadding="0" cellspacing="0" border="0" class="cover-post w640" bgcolor="#FFFFFF">
                     <tr>
                       <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
                     </tr>
@@ -691,8 +706,7 @@
                             style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
                             border="0"
                             alt=""
-                            label="Article image"
-                            editable />
+                            label="Article image" />
                         </a>
                       </td>
                     </tr>
@@ -737,7 +751,7 @@
 
 
                 <template id="sponsoredPost">
-                  <table width="320" cellpadding="0" cellspacing="0" border="0" class="post sponsored-post w640" bgcolor="#FFFFFF">
+                  <table width="320" cellpadding="0" cellspacing="0" border="0" class="sponsored-post w640" bgcolor="#FFFFFF">
                     <tr>
                       <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
                     </tr>
@@ -753,8 +767,7 @@
                                 style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
                                 border="0"
                                 alt=""
-                                label="Article image"
-                                editable />
+                                label="Article image" />
                             </td>
                           </tr>
                         </table>
@@ -815,8 +828,83 @@
 
 
 
-                <!-- FOOTER -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="footer" bgcolor="#212121">
+                <!-- AGENDANI FOOTER -->
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="footer" bgcolor="#212121" data-publication="agenda_ni">
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="280" cellpadding="0" cellspacing="0" border="0" class="footer__inner">
+                        <tr align="left" valign="top" class="ltr w75">
+                          <td class="w75">
+                            <img
+                              src="../assets/headshot-dw.png"
+                              width="75"
+                              height=""
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0"
+                              alt="" />
+                          </td>
+                        </tr>
+                        <tr class="ltr w30">
+                          <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                        </tr>
+                        <tr align="center" valign="top" class="ltr w445">
+                          <td class="w445">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="left" valign="top">
+                                  <p class="footer__signature">
+                                    <strong>David Whelan</strong><br>
+                                    Editor
+                                  </p>
+                                  <address class="footer__address">
+                                    <strong>agendaNi</strong><br>
+                                    19a Maghaberry Road<br>
+                                    Maghaberry, BT67 0JE
+                                  </address>
+                                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Tel:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="tel:+442892619933" target="_blank" class="footer__link">+44 (0)28 9261 9933</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Email:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="mailto:david.whelan@agendani.com" target="_blank" class="footer__link">david.whelan@agendani.com</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Web:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="https://www.agendani.com/" target="_blank" class="footer__link">agendani.com</a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- EOLAS FOOTER -->
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="footer" bgcolor="#212121" data-publication="eolas_magazine">
                   <tr>
                     <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
                   </tr>
