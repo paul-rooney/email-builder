@@ -57,7 +57,7 @@ const getPosts = async (settings) => {
   return post_info;
 }
 
-const buildDOM = (post) => {
+const buildDOM = (post, index) => {
   const { alt, category, excerpt, img_url, link, tags, title } = post;
   const layout = document.createElement('layout');
   let clone;
@@ -220,12 +220,13 @@ const applySettings = () => {
   const settings = getSettings();
   getPosts(settings)
     .then(posts => {
-      posts.map(post => buildDOM(post));
+      posts.map((post, index) => buildDOM(post, index));
     })
     .finally(() => {
       enableDownloadButton();
       updateDocumentTitle(settings.publication);
       updateDOM(settings.publication);
+      allowDragging();
     })
     .catch(err => console.error(err));
 }
