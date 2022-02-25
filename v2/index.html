@@ -257,8 +257,8 @@
         width: 325px !important;
       }
 
-      .w285 {
-        width: 285px !important;
+      .w290 {
+        width: 290px !important;
       }
 
       .w120 {
@@ -345,7 +345,7 @@
                           <td align="center" valign="top">
                             <img
                               src="../assets/agendaNi_master@2x.png"
-                              alt=""
+                              alt="agendaNi logo"
                               width="175"
                               style="margin: 0; padding: 0; border: none; display: block;"
                               border="0" />
@@ -360,7 +360,7 @@
                 </table>
 
                 <!-- EOLAS HEADER -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="header w640" bgcolor="#FFFFFF" data-publication="eolas_magazine">
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="hidden header w640" bgcolor="#FFFFFF" data-publication="eolas_magazine">
                   <tr>
                     <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
                   </tr>
@@ -387,7 +387,7 @@
                           <td align="center" valign="top">
                             <img
                               src="../assets/eolas_master@2x.png"
-                              alt=""
+                              alt="eolas Magazine logo"
                               width="150"
                               style="margin: 0; padding: 0; border: none; display: block;"
                               border="0" />
@@ -565,7 +565,9 @@
                                   </tr>
                                   <tr>
                                     <td align="left" valign="center">
-                                      <h2 class="article__title"><singleline label="Article title">Article title</singleline></h2>
+                                      <h2 class="article__title">
+                                        <a href="#"><singleline label="Article title">Article title</singleline></a>
+                                      </h2>
                                       <p class="article__body"><singleline label="Article excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
                                     </td>
                                   </tr>
@@ -611,7 +613,7 @@
                             <tr>
                               <td align="center" valign="top">
                                 <img
-                                  src="https://via.placeholder.com/1200x338"
+                                  src="https://via.placeholder.com/1200x300"
                                   width="280"
                                   style="margin: 0; padding: 0; border: none; display: block; width: 100%;"
                                   border="0"
@@ -727,13 +729,13 @@
                     <tr>
                       <td align="center" valign="top">
                         <table width="280" cellpadding="0" cellspacing="0" border="0" class="cover-post__inner w600">
-                          <tr align="left" valign="top" class="ltr w285">
-                            <td class="w285">
+                          <tr align="left" valign="top" class="ltr w290">
+                            <td class="w290">
                               <h2 class="article__title"></h2>
                             </td>
                           </tr>
-                          <tr align="left" valign="top" class="ltr w285">
-                            <td class="w285">
+                          <tr align="left" valign="top" class="ltr w290">
+                            <td class="w290">
                               <p class="article__body"></p>
                             </td>
                           </tr>
@@ -805,13 +807,13 @@
                     <tr>
                       <td align="center" valign="top">
                         <table width="280" cellpadding="0" cellspacing="0" border="0" class="sponsored-post__inner w600">
-                          <tr align="left" valign="top" class="ltr w285">
-                            <td class="w285">
+                          <tr align="left" valign="top" class="ltr w290">
+                            <td class="w290">
                               <h2 class="article__title"></h2>
                             </td>
                           </tr>
-                          <tr align="left" valign="top" class="ltr w285">
-                            <td class="w285">
+                          <tr align="left" valign="top" class="ltr w290">
+                            <td class="w290">
                               <p class="article__body"></p>
                             </td>
                           </tr>
@@ -823,6 +825,7 @@
                     </tr>
                   </table>
                 </template>
+
 
 
 
@@ -862,7 +865,8 @@
                                   <address class="footer__address">
                                     <strong>agendaNi</strong><br>
                                     19a Maghaberry Road<br>
-                                    Maghaberry, BT67 0JE
+                                    Maghaberry<br>
+                                    Co Antrim, BT67 0JE
                                   </address>
                                   <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tr>
@@ -904,7 +908,7 @@
                 </table>
 
                 <!-- EOLAS FOOTER -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="footer" bgcolor="#212121" data-publication="eolas_magazine">
+                <table width="320" cellpadding="0" cellspacing="0" border="0" class="hidden footer" bgcolor="#212121" data-publication="eolas_magazine">
                   <tr>
                     <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
                   </tr>
@@ -1035,15 +1039,15 @@
       </label>
 
       <label>Energy Ireland Yearbook
-        <input type="radio" name="publications" value="energy_ireland_yearbook">
+        <input type="radio" name="publications" value="energy_ireland_yearbook" disabled>
       </label>
 
       <label>Ireland’s Housing Magazine
-        <input type="radio" name="publications" value="irelands_housing_magazine">
+        <input type="radio" name="publications" value="irelands_housing_magazine" disabled>
       </label>
 
       <label>Renewable Energy Magazine
-        <input type="radio" name="publications" value="renewable_energy_magazine">
+        <input type="radio" name="publications" value="renewable_energy_magazine" disabled>
       </label>
     </fieldset>
 

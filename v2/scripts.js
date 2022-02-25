@@ -70,20 +70,17 @@ const buildDOM = (post, index) => {
     clone = basic_post.content.firstElementChild.cloneNode(true);
   }
 
-  clone.id = `post-${index}`;
+  const img = clone.querySelector('.post-img');
+  img.src = img_url;
+  img.alt = alt !== '' ? alt : `Image for ${title}`;
 
   const a = document.createElement('a');
   a.href = link;
-  a.setAttribute('target', '_blank');
+  a.target = '_blank';
 
-  const post_img = clone.querySelector('.post-img');
-  post_img.src = img_url;
-  post_img.alt = alt !== '' ? alt : `Image for ${title}`;
+  img.parentNode.insertBefore(a, img);
+  a.appendChild(img);
 
-  post_img.parentNode.insertBefore(a, post_img);
-  a.appendChild(post_img);
-
-  // clone.querySelector('.article__img').innerHTML = `<a href="${link}" target="_blank">${post_img}</a>`;
   clone.querySelector('.article__category').innerHTML = `<singleline label="Article category">${category}</singleline>`;
   clone.querySelector('.article__title').innerHTML = `<a href="${link}" target="_blank"><singleline label="Article title">${title}</singleline></a>`;
   clone.querySelector('.article__body').innerHTML = `<singleline label="Article excerpt">${excerpt}</singleline>`;
@@ -114,9 +111,17 @@ const disableCheckbox = (event) => {
   }
 }
 
-const enableDownloadButton = () => {
-  download_button.classList.remove('loading');
-  download_button.removeAttribute('disabled');
+const updateTheme = (event) => {
+  const blocks = document.querySelectorAll('[data-publication]');
+  let theme = event.currentTarget.value;
+
+  blocks.forEach((block) => {
+    const publications = block.dataset.publication.split(' ');
+
+    if (block.classList.contains('hidden')) block.classList.remove('hidden');
+
+    if (publications.indexOf(theme) === -1) block.classList.add('hidden');
+  });
 }
 
 const updateDocumentTitle = (publication) => {
@@ -167,19 +172,6 @@ const updateDOM = (publication) => {
   }
 }
 
-const truncate = (str, word_count) => {
-  return str.split(' ')
-            .splice(0, word_count)
-            .join(' ')
-            .concat('', '…');
-}
-
-const truncateExcerpt = (excerpt) => {
-  const excerpt_trim_start = excerpt.replace('<p>', '');
-  const excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
-  return (excerpt_truncated = truncate(excerpt_trim_end, 20));
-}
-
 const getSettings = () => {
   const publication = form.publications.value;
   const number_of_posts = form.postCount.value;
@@ -213,7 +205,14 @@ const getSettings = () => {
   return { publication, number_of_posts, domain, id, report };
 }
 
+const enableDownloadButton = () => {
+  document.body.classList.remove('loading');
+  download_button.classList.remove('loading');
+  download_button.removeAttribute('disabled');
+}
+
 const applySettings = () => {
+  document.body.classList.add('loading');
   download_button.classList.add('loading');
   apply_button.setAttribute('disabled', '');
   document.querySelectorAll('fieldset').forEach(fieldset => fieldset.setAttribute('disabled', ''));
@@ -246,10 +245,28 @@ const downloadHTML = () => {
 }
 
 //
+// HELPERS
+//
+const truncate = (str, word_count) => {
+  return str.split(' ')
+            .splice(0, word_count)
+            .join(' ')
+            .concat('', '…');
+}
+
+const truncateExcerpt = (excerpt) => {
+  const excerpt_trim_start = excerpt.replace('<p>', '');
+  const excerpt_trim_end = excerpt_trim_start.replace('</p>', '');
+  return (excerpt_truncated = truncate(excerpt_trim_end, 20));
+}
+
+//
 // EVENT LISTENERS
 //
 apply_button.addEventListener('click', applySettings, { once: true });
+
 download_button.addEventListener('click', downloadHTML, { once: true });
+
 reports_checkbox.addEventListener('change', () => {
   if (reports_checkbox.checked) {
     form.classList.add('show-reports');
@@ -268,55 +285,8 @@ reports_checkbox.addEventListener('change', () => {
 
   getReportCategories(settings);
 });
-radio_inputs.forEach(input => input.addEventListener('change', () => disableCheckbox(event)));
 
-//
-// DRAGGING
-//
-const allowDragging = () => {
-  const draggableRegions = document.querySelectorAll('[draggable="true"]');
-
-  draggableRegions.forEach(region => {
-    region.addEventListener('dragstart', doDragStart);
-    region.addEventListener('dragover', doDragOver);
-    region.addEventListener('drop', doDrop);
-  });
-}
-
-
-const doDragStart = (event) => {
-  event.dataTransfer.effectAllowed = 'move';
-  event.dataTransfer.setData('application/x-moz-node', event.currentTarget.id);
-}
-
-const doDragOver = (event) => {
-  event.preventDefault();
-  event.dataTransfer.dropEffect = 'move';
-}
-
-const doDrop = (event) => {
-  event.preventDefault();
-  const data = event.dataTransfer.getData('application/x-moz-node');
-  console.log(data);
-  let html = document.getElementById(data);
-  // event.currentTarget.appendChild(document.getElementById(data))
-  event.currentTarget.insertBefore(html, event.currentTarget);
-}
-
-
-
-// repeater.addEventListener('dragenter', (event) => {
-//   const isHTML = event.dataTransfer.types.includes('application/x-moz-node');
-//   if (isHTML) event.preventDefault();
-// });
-// repeater.addEventListener('dragover', (event) => {
-//   const isHTML = event.dataTransfer.types.includes('application/x-moz-node');
-//   if (isHTML) event.preventDefault();
-//   event.dataTransfer.dropEffect = 'move';
-// });
-// repeater.addEventListener('drop', (event) => {
-//   event.preventDefault();
-//   const data = event.dataTransfer.getData('application/x-moz-node');
-//   console.log(data);
-//   event.currentTarget.appendChild(document.getElementById(data));
-// });
+radio_inputs.forEach(input => input.addEventListener('change', () => {
+  disableCheckbox(event);
+  updateTheme(event);
+}));
