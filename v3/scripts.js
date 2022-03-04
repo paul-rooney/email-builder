@@ -11,6 +11,7 @@ const radio_inputs = document.querySelectorAll('input[type="radio"]');
 const basic_post = document.querySelector('#basicPost');
 const cover_post = document.querySelector('#coverPost');
 const sponsored_post = document.querySelector('#sponsoredPost');
+const featured_post = document.querySelector('#featuredPost');
 
 
 //
@@ -62,10 +63,12 @@ const buildDOM = (post) => {
   const layout = document.createElement('layout');
   let clone;
 
-  if (tags.indexOf(62) !== -1 || tags.indexOf(82) !== -1) {
+  if (tags.indexOf(62) !== -1 || tags.indexOf(82) !== -1) { // 'Cover story' tag
     clone = cover_post.content.firstElementChild.cloneNode(true);
-  } else if (tags.indexOf(345) !== -1 || tags.indexOf(330) !== -1) {
+  } else if (tags.indexOf(345) !== -1 || tags.indexOf(330) !== -1) { // 'Sponsored' tag
     clone = sponsored_post.content.firstElementChild.cloneNode(true);
+  } else if (tags.indexOf(360) !== -1) { // 'Featured' tag
+    clone = featured_post.content.firstElementChild.cloneNode(true);
   } else {
     clone = basic_post.content.firstElementChild.cloneNode(true);
   }

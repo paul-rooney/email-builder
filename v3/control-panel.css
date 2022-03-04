@@ -10,6 +10,7 @@ body::before {
 }
 
 body.loading::before {
+  content: '';
   display: block;
   opacity: .9;
   transition: opacity 250ms ease;
