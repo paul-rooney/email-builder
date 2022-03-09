@@ -5,1444 +5,1710 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>agendaNi • Read the latest articles from agendaNi</title>
+  <title></title>
 
-  <link rel="stylesheet" href="./control-panel.css">
+  <link rel="stylesheet" href="./control-panel.css" id="stylesheet">
 
-  <!-- Ireland’s Housing Magazine STYLES -->
-  <style data-publication="irelands_housing_magazine" type="text/css">
-    @font-face {
-      font-family: 'Hind';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(https://fonts.gstatic.com/s/hind/v11/5aU69_a8oxmIdGl4BDGwgDI.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  <style type="text/css">
+
+    .cs-button-drop {
+      text-align: left; /* make Campaign Monitor’s list of article easier to scan */
     }
 
-    @font-face {
-      font-family: 'Hind';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url(https://fonts.gstatic.com/s/hind/v11/5aU19_a8oxmIfLZcERySjRhc9V0.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    body,
+    table,
+    td,
+    a {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
     }
 
-    /* Outlines the grids, remove when sending */
-    /* table td { border: 1px solid cyan; } */
-
-    /* CLIENT-SPECIFIC STYLES */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; }
-
-    /* RESET STYLES */
-    img { border: 0; outline: none; text-decoration: none; }
-    table { border-collapse: collapse !important; }
-    body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
-
-    /* iOS BLUE LINKS */
-    a[x-apple-data-detectors] {
-      color: inherit !important;
-      text-decoration: none !important;
-      font-size: inherit !important;
-      font-family: inherit !important;
-      font-weight: inherit !important;
-      line-height: inherit !important;
+    table,
+    td {
+      mso-table-lspace: 0pt !important;
+      mso-table-rspace: 0pt !important;
     }
 
-    /* ANDROID CENTER FIX */
-    div[style*="margin: 16px 0;"] { margin: 0 !important; }
-
-    /* MEDIA QUERIES */
-    @media all and (max-width:639px){
-      /* .container{ width:290px!important;  padding: 0 !important; } */
-      .mobile{ width:290px!important; display:block!important; padding: 0 !important; }
-      .img{ width:100% !important; height:auto !important; }
-      *[class="mobileOff"] { width: 0px !important; display: none !important; }
-      *[class*="mobileOn"] { display: block !important; max-height:none !important; }
+    img {
+      border: 0;
+      height: auto;
+      max-width: 100%;
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
     }
 
-    /* CUSTOM STYLES */
+    table {
+      border-collapse: collapse !important;
+    }
+
     body {
-      color: #424242;
-      font-family: 'Hind', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
       font-size: 14px;
-      line-height: 21px;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Hind';
-      font-weight: 600;
-      margin: 0 0 15px 0;
-      padding: 0;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 1.5;
-      padding: 0;
-    }
-
-    .outer-wrapper {
-      border-radius: 15px;
-      box-shadow:  15px 15px 30px #d1d1d1,
-                  -15px -15px 30px #ffffff;
-    }
-
-    .divider {
-      border-top: 2px outset #FAFAFA;
-    }
-
-    .article__category {
-      color: #8A8A8A;
-      font-family: 'Hind';
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin: 0;
-      text-transform: uppercase;
-    }
-
-    .article__title {
-      font-size: 21px;
-      line-height: 28px;
-      text-shadow: 0 -.5px 0 hsla(0, 0%,   0%, .2),
-                   0  .5px 0 hsla(0, 0%, 100%, .8);
-    }
-
-      .article__title a {
-        color: #48A6FE; /* Fails AA and AAA contrast levels */
-        color: #424242;
-        text-decoration: none !important;
-      }
-
-        .article__title a:focus,
-        .article__title a:hover {
-          color: #401665;
-        }
-
-    .article__body {
-      margin-top: 2px;
-    }
-
-    .advertisement__heading {
-      color: #CCCCCC;
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin: 0;
-      text-transform: uppercase;
-    }
-
-
-
-    .footer-wrapper {
-      border-top: 2px outset #434343;
-    }
-
-    .footer {
-      color: #FFFFFF !important;
-      font-size: 14px;
-    }
-
-    .footer__signature,
-    .footer__address {
-      color: #FFFFFF;
-      margin-top: 0;
-    }
-
-    .footer__address {
-      font-size: 14px;
-      font-style: normal;
-      margin-bottom: 21px;
-    }
-
-
-
-    .important-links {
-      font-size: 12px;
-      margin: 0;
-    }
-  </style>
-
-  <!-- Energy Ireland Yearbook AND Renewable Energy Magazine STYLES -->
-  <style data-publication="energy_ireland_yearbook renewable_energy_magazine" type="text/css">
-    @font-face {
-      font-family: 'Maven Pro';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: local('Maven Pro Regular'), local('MavenPro-Regular'), url(https://fonts.gstatic.com/s/mavenpro/v13/7Au9p_AqnyWWAxW2Wk3GzWQIElsO0w.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Maven Pro';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: local('Maven Pro Medium'), local('MavenPro-Medium'), url(https://fonts.gstatic.com/s/mavenpro/v13/7Au4p_AqnyWWAxW2Wk3OPkcdP3kD-Vs48Q.woff2) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-
-    /* Outlines the grids, remove when sending */
-    /* table td { border: 1px solid cyan; } */
-
-    /* CLIENT-SPECIFIC STYLES */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; }
-
-    /* RESET STYLES */
-    img { border: 0; outline: none; text-decoration: none; }
-    table { border-collapse: collapse !important; }
-    body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
-
-    /* iOS BLUE LINKS */
-    a[x-apple-data-detectors] {
-      color: inherit !important;
-      text-decoration: none !important;
-      font-size: inherit !important;
-      font-family: inherit !important;
-      font-weight: inherit !important;
-      line-height: inherit !important;
-    }
-
-    /* ANDROID CENTER FIX */
-    div[style*="margin: 16px 0;"] { margin: 0 !important; }
-
-    /* MEDIA QUERIES */
-    @media all and (max-width:639px){
-      /* .wrapper{ width:320px!important; padding: 0 !important; } */
-      /* .container{ width:290px!important;  padding: 0 !important; } */
-      .mobile{ width:290px!important; display:block!important; padding: 0 !important; }
-      .img{ width:100% !important; height:auto !important; }
-      *[class="mobileOff"] { width: 0px !important; display: none !important; }
-      *[class*="mobileOn"] { display: block !important; max-height:none !important; }
-    }
-
-    /* CUSTOM STYLES */
-    body {
-      color: #00172D;
-      font-family: 'Maven Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      font-size: 14px;
-      line-height: 21px;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Maven Pro';
-      font-weight: 600;
-      margin: 0 0 15px 0;
-      padding: 0;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 1.5;
-      padding: 0;
-    }
-
-    .outer-wrapper {
-      border-radius: 15px;
-      box-shadow:  15px 15px 30px #d1d1d1,
-                  -15px -15px 30px #ffffff;
-    }
-
-    .divider {
-      border-top: 2px outset #FAFAFA;
-    }
-
-    .article__category {
-      color: #8A8A8A;
-      font-family: 'Maven Pro';
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin: 0;
-      text-transform: uppercase;
-    }
-
-    .article__title {
-      font-size: 21px;
-      line-height: 28px;
-      text-shadow: 0 -.5px 0 hsla(0, 0%,   0%, .2),
-                   0  .5px 0 hsla(0, 0%, 100%, .8);
-    }
-
-      .article__title a {
-        color: #48A6FE; /* Fails AA and AAA contrast levels */
-        color: #01498E;
-        text-decoration: none !important;
-      }
-
-    .article__body {
-      margin-top: 2px;
-    }
-
-    .advertisement__heading {
-      color: #CCCCCC;
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin: 0;
-      text-transform: uppercase;
-    }
-
-
-
-    .footer-wrapper {
-      border-top: 2px outset #434343;
-    }
-
-    .footer {
-      color: #FFFFFF !important;
-      font-size: 14px;
-    }
-
-    .footer__signature,
-    .footer__address {
-      color: #FFFFFF;
-      margin-top: 0;
-    }
-
-    .footer__address {
-      font-size: 14px;
-      font-style: normal;
-      margin-bottom: 21px;
-    }
-
-
-
-    .important-links {
-      font-size: 12px;
-      margin: 0;
-    }
-  </style>
-
-  <!-- agendaNi AND eolas Magazine STYLES -->
-  <style data-publication="agenda_ni eolas_magazine" type="text/css">
-    @font-face {
-      font-family: 'Poppins';
-      font-style: italic;
-      font-weight: 600;
-      src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmr19VF9eOYktMqg.woff2) format('woff2');
-    }
-    @font-face {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 400;
-      src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2) format('woff2');
-    }
-    @font-face {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 600;
-      src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2) format('woff2');
-    }
-
-    /* CLIENT-SPECIFIC STYLES */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; }
-
-    /* RESET STYLES */
-    img { border: 0; outline: none; text-decoration: none; }
-    table { border-collapse: collapse !important; }
-    body {
       margin: 0 !important;
       padding: 0 !important;
       width: 100% !important;
     }
 
-    /* iOS BLUE LINKS */
     a[x-apple-data-detectors] {
       color: inherit !important;
-      text-decoration: none !important;
-      font-size: inherit !important;
       font-family: inherit !important;
+      font-size: inherit !important;
       font-weight: inherit !important;
       line-height: inherit !important;
+      text-decoration: none !important;
     }
 
-    /* ANDROID CENTER FIX */
-    div[style*="margin: 16px 0;"] { margin: 0 !important; }
-
-    .mobile {
-      width: 290px;
-      display: block;
-      padding: 0;
-    }
-
-    .img { width: 100%; height: auto; }
-
-    *[class*="mobileOff"] { display: none; width: 0px; }
-
-    *[class*="mobileOn"] { display: block; max-height: none; }
-
-    /* MEDIA QUERIES */
-    @media all and (min-width: 640px) {
-      *[class*="mobileOn"] { display: table-row !important; }
-      *[class="mobileOff"] { display: table-cell; }
-      .w640 { width: 640px !important; }
-      .w600 { width: 600px !important; }
-      .w550 { display: table-cell; width: 550px !important; }
-      .w445 { display: table-cell; width: 445px !important; }
-      .w375 { display: table-cell; width: 375px !important; }
-      .w370 { display: table-cell; width: 370px !important; }
-      .w285 { display: table-cell; width: 285px !important; }
-      .w225 { display: table-cell; width: 225px !important; }
-      .w200 { display: table-cell; width: 200px !important; }
-      .w135 { display: table-cell; width: 135px !important; }
-      .w105 { display: table-cell; width: 105px !important; }
-      .w75 { display: table-cell; width: 75px !important; }
-      .w30 { display: table-cell; width: 30px !important; }
-    }
-
-    /* CUSTOM STYLES */
-    body {
-      color: #424242;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      font-size: 14px;
-      line-height: 21px;
+    div[style*="margin: 16px 0;"] {
+      margin: 0 !important;
     }
 
     h1, h2, h3, h4 {
-      font-family: 'Poppins';
-      font-weight: 600;
-      margin: 0 0 15px 0;
-      padding: 0;
+      color: #424242;
+      font-weight: 300;
+      margin: 0 0 14px 0;
     }
 
-    p {
+    p, .text-block li {
       font-size: 14px;
-      line-height: 1.5;
-      padding: 0;
+      line-height: 21px;
+      margin-top: 0;
+      margin-bottom: 21px;
     }
 
-    .outer-wrapper { border-radius: 15px; box-shadow:  15px 15px 30px #d1d1d1, -15px -15px 30px #ffffff; }
+    .ad__heading {
+      color: #727272;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin: 0;
+      text-transform: uppercase;
+    }
 
-    .divider { border-top: 2px outset #FAFAFA; }
+    .header__date {
+      color: #757575;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
     .article__category {
-      color: #8A8A8A;
-      font-family: 'Poppins';
+      color: #757575;
       font-size: 12px;
-      letter-spacing: 2px;
-      margin: 0;
+      letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     .article__title {
       font-size: 21px;
       line-height: 28px;
-      text-shadow: 0 -.5px 0 hsla(0, 0%,   0%, .6),
-                   0  .5px 0 hsla(0, 0%, 100%, .8);
     }
 
-    .article__title a { color: #424242; text-decoration: none !important; }
+    .article__title a {
+      color: #424242;
+      text-decoration: none !important;
+    }
 
-    .article__body { margin-top: 2px; }
+      .article__title a:focus,
+      .article__title a:hover {
+        color: #757575 !important;
+      }
 
-    .advertisement__heading {
-      color: #CCCCCC;
-      font-size: 12px;
-      letter-spacing: 2px;
+    .post-img {
+      opacity: 1;
+      transition: all 125ms ease;
       margin: 0;
-      text-transform: uppercase;
+      padding: 0;
+      border: none;
+      display: block;
+      background-color: #F2F2F2;
     }
 
-    .footer-wrapper { border-top: 2px outset #434343; }
 
-    .footer { color: #FFFFFF !important; font-size: 14px; }
+      .post-img:focus,
+      .post-img:hover {
+        opacity: .9;
+        transition: all 125ms ease;
+      }
 
-    .footer__signature,
-    .footer__address { color: #FFFFFF; margin-top: 0; }
+    .footer {
+      border-top: 2px outset #424242;
+    }
+
+    .footer__signature {
+      color: #FFFFFF;
+      font-size: 14px;
+      margin-top: 0;
+    }
 
     .footer__address {
+      color: #FFFFFF;
       font-size: 14px;
       font-style: normal;
       margin-bottom: 21px;
     }
 
-    .important-links { font-size: 12px; margin: 0; }
+    .footer__link-title {
+      color: #FFFFFF;
+      font-size: 14px;
+    }
 
+    .footer__link {
+      color: #7AC142;
+      font-size: 14px;
+    }
+
+    .outer-wrapper {
+      border-radius: 8px;
+      box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2),
+                  0 24px 38px  3px rgba(0, 0, 0, .14),
+                  0  9px 46px  8px rgba(0, 0, 0, .12);
+    }
+
+    .view-in-browser__link,
+    .important-links__link {
+      color: #424242 !important;
+      font-size: 12px;
+      text-decoration: none !important;
+    }
+
+    .cover-post .article__title,
+    .featured-post .article__title,
+    .post-with-logo .article__title {
+      margin-right: 30px;
+    }
+
+    .l-col {
+      padding-left: 30px;
+      padding-right: 0;
+    }
+
+    .r-col {
+      padding-left: 0;
+      padding-right: 30px;
+    }
+
+    .m384 {
+      width: 384px;
+    }
+
+    .m256 {
+      width: 256px;
+    }
+
+    .no-bottom-margin p {
+      margin-bottom: 0 !important;
+    }
+
+    @media screen and (max-width: 639px) {
+      .cover-post .article__title,
+      .featured-post .article__title,
+      .post-with-logo .article__title {
+        margin-right: 0;
+      }
+
+      .m320,
+      .m384, .m256 {
+        width: 320px !important;
+      }
+
+      .m280,
+      .basic-post .post-img {
+        width: 280px !important;
+      }
+
+      .l-col, .r-col {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+
+      .mobileOff {
+        display: none !important;
+        width: 0 !important;
+      }
+    }
   </style>
 </head>
-<body style="margin:0; padding:0; background-color:#F2F2F2;">
-  <div style="position: relative;">
-
-  <div style="left: 0px; position: absolute; top: -200px; height: 20%; width: 100%; transform: skewY(-5deg); background-color: #E8E8E8; z-index: -1;"></div>
-
-  <!-- <span style="display: block; width: 640px !important; max-width: 640px; height: 1px" class="mobileOff"></span> -->
-
+<body style="margin: 0; padding: 0; background-color: #F2F2F2;">
   <center>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F2F2F2">
+      <tr>
+        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+      </tr>
       <tr>
         <td align="center" valign="top">
 
-          <!-- TABLE BODY -->
-          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <table width="640" cellpadding="0" cellspacing="0" border="0" class="view-in-browser m320">
             <tr>
-              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-            </tr>
-            <tr>
-              <td align="center" valign="top">
-
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="">
-                  <tr>
-                    <td align="right" valign="top">
-                      <webversion><span style="font-size: 12px; color: #424242; text-decoration: none !important;">View this email in your web browser →</span></webversion>
-                    </td>
-                  </tr>
-                </table>
-
+              <td align="right" valign="top">
+                <webversion>
+                  <span class="view-in-browser__link" style="font-size: 12px; color: #424242 !important; text-decoration: none !important;">
+                    View this email in your browser →
+                  </span>
+                </webversion>
               </td>
-            </tr>
-            <tr>
-              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-            </tr>
-            <tr>
-              <td align="center" valign="top">
-
-                <!-- INNER TABLE -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="outer-wrapper w640" bgcolor="#72BF44">
-                  <tr>
-                    <td align="center" valign="top">
-
-                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="">
-                        <tr>
-                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                        </tr>
-                      </table>
-
-                      <!-- agendaNi HEADER -->
-                      <!-- <table data-publication="agenda_ni" width="320" cellpadding="0" cellspacing="0" border="0" class=" w640" bgcolor="#E8E8E8">
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                              </tr>
-                              <tr>
-                                <td align="right" valign="top">
-                                  <p style="color: #8A8A8A; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;"><currentday> <currentmonthname>, <currentyear></p>
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td align="center" valign="top">
-                                  <img src="assets/agendaNi_master@2x.png" width="160" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                        </tr>
-                      </table> -->
-
-                      <!-- eolas Magazine HEADER -->
-                      <table data-publication="eolas_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                              </tr>
-                              <tr>
-                                <td align="right" valign="top">
-                                  <p style="color: #8A8A8A; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;"><currentday> <currentmonthname>, <currentyear></p>
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td align="center" valign="top">
-                                  <img src="assets/eolas_master@2x.png" width="150" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                        </tr>
-                      </table>
-
-                      <!-- Renewable Energy Magazine HEADER -->
-                      <!-- <table data-publication="energy_ireland_yearbook renewable_energy_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                              </tr>
-                              <tr>
-                                <td align="right" valign="top">
-                                  <p style="color: #8A8A8A; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;"><currentday> <currentmonthname>, <currentyear></p>
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td align="center" valign="top">
-                                  <img src="assets/energy_ireland_master.png" width="250" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
-                        </tr>
-                      </table> -->
-
-                      <!-- Ireland’s Housing Magazine HEADER -->
-                      <!-- <table data-publication="irelands_housing_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                              </tr>
-                              <tr>
-                                <td align="right" valign="top">
-                                  <p style="color: #8A8A8A; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;"><currentday> <currentmonthname>, <currentyear></p>
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                              <tr>
-                                <td align="center" valign="top">
-                                  <img src="assets/housing_magazine_master.png" width="275" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
-                        </tr>
-                      </table> -->
-
-
-
-
-
-                      <repeater id="repeater">
-                        <!-- COVER STORY -->
-                        <!-- <layout label="Cover story">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td align="center">
-
-                                <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640">
-                                  <tr>
-                                    <td width="320" class="">
-                                      <img src="https://via.placeholder.com/1280x800" width="320" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Image for the cover story only. If this is not the cover story, use the one story block instead." editable />
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr>
-                                    <td align="left" valign="top">
-                                      <p class="article__category"><singleline label="Category label">Cover story</singleline></p>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
-                                    <td width="285" class="mobile w285" align="left" valign="top">
-                                      <h2 class="article__title"><singleline label="Cover story title">Cover story heading</singleline></h2>
-                                    </td>
-                                    <td width="30" class="mobileOff w30" align="center" valign="top">
-                                      &nbsp;
-                                    </td>
-                                    <td width="285" class="mobile 285" align="left" valign="top">
-                                      <p class="article__body"><singleline label="Cover story excerpt. Use the first twenty words from the story, and add an ellipsis at the end if truncated (ALT + ;)">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                          </table>
-                        </layout> -->
-                        <!-- END COVER STORY -->
-
-
-
-
-
-                        <!-- ONE STORY BLOCK -->
-                        <!-- <layout label="One story block">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ divider ]">
-                                  <tr>
-                                    <td align="center" valign="top" height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr>
-                                    <td align="center" valign="top">
-                                      <img src="https://via.placeholder.com/1200x800" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" editable />
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                            <tr class="js-category">
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr>
-                                    <td align="left" valign="top">
-                                      <p class="article__category"><singleline label="Category label">Category</singleline></p>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
-                                    <td width="285" class="mobile w285" align="left" valign="top">
-                                      <h2 class="article__title"><singleline label="Story title">Article heading</singleline></h2>
-                                    </td>
-                                    <td width="30" class="mobileOff w30" align="center" valign="top">
-                                      &nbsp;
-                                    </td>
-                                    <td width="285" class="mobile w285" align="left" valign="top">
-                                      <p class="article__body"><singleline label="Story excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                          </table>
-                        </layout> -->
-                        <!-- END ONE STORY BLOCK -->
-
-
-
-
-
-                        <!-- ONE STORY WITH SPONSOR LOGO BLOCK -->
-                        <!-- <layout label="One story w/sponsor logo block">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ divider ]">
-                                  <tr>
-                                    <td align="center" valign="top" height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr>
-                                    <td align="center" valign="top">
-                                      <img src="https://via.placeholder.com/1200x800" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" editable />
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
-                                    <td width="370" class="mobile w370" align="left" valign="top">
-                                      <p class="article__category"><singleline label="Category label">Round table discussion hosted by</singleline></p>
-                                    </td>
-                                    <td width="30" class="mobileOff w30" align="center" valign="top">
-                                      &nbsp;
-                                    </td>
-                                    <td width="290" class="mobile w200" align="right" valign="top">
-                                      <img src="https://via.placeholder.com/400x100" width="290" height="" style="margin:0; padding:0; border:none; display:block; max-width:200px;" border="0" class="img" alt="" label="Sponsor logo" editable/>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr class="mobileOn">
-                                    <td width="290" class="mobile w285" align="left" valign="top">
-                                      <h2 class="article__title"><singleline label="Story title">Article heading</singleline></h2>
-                                    </td>
-                                    <td width="30" class="mobileOff w30" align="center" valign="top">
-                                      &nbsp;
-                                    </td>
-                                    <td width="290" class="mobile w285" align="left" valign="top">
-                                      <p class="article__body"><singleline label="Story excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut…</singleline></p>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                          </table>
-                        </layout> -->
-                        <!-- END ONE STORY WITH SPONSOR LOGO BLOCK -->
-
-
-
-
-
-                        <!-- ADVERTISEMENT BLOCK -->
-                        <layout label="Advertisement block">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#F2F2F2">
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr>
-                                    <td align="center" valign="top">
-                                      <p class="advertisement__heading">Advertisement</p>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#F2F2F2">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr>
-                                    <td align="center" valign="top">
-                                      <img src="https://via.placeholder.com/1200x338" width="290" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="1200&times;338" editable />
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                          </table>
-                        </layout>
-                        <!-- END ADVERTISEMENT BLOCK -->
-
-
-
-
-
-                        <!-- EDITOR’S COPY -->
-                        <!-- <layout label="Editor&rsquo;s copy">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ divider ]">
-                                  <tr>
-                                    <td align="center" valign="top" height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                          </table>
-
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w550">
-                                  <tr class="mobileOn">
-                                    <td width="105" class="mobileOff w105" align="center" valign="top">&nbsp;</td>
-                                    <td width="290" class="mobile w445" align="left" valign="top">
-                                      <multiline>
-                                        <p>Alongside our usual coverage of politics and public affairs, the latest issue of agendaNi encompasses detailed reports on Brexit; policing and justice; agribusiness; Ards and North Down; and the social economy.</p>
-
-                                        <p>Highlights include a cover story discussion featuring Radius Housing around their future roadmap, PSNI deputy chief constable Stephen Martin discusses the future of policing and we visit Maghaberry Prison to talk with governor David Kennedy about progress in the prison. Additionally, DAERA permanent secretary Denis McMahon outlines the development of the Department around agribusiness and we have a special focus on Ards and North Down and the social economy.</p>
-                                      </multiline>
-
-                                      <p data-publication="agenda_ni">Regards,<br>
-                                        David Whelan</p>
-
-                                      <p data-publication="eolas_magazine">Regards,<br>
-                                        Ciarán Galway</p>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                          </table>
-                        </layout> -->
-                        <!-- END EDITOR’S COPY -->
-
-
-
-
-
-                        <!-- BLANK SECTION -->
-                        <!-- <layout label="Blank section">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w550">
-                                  <tr>
-                                    <td align="left" valign="top">
-                                      <multiline>
-                                        <p>Basic <code>&lt;p&gt;</code> styles:</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                                        <p>Basic <code>&lt;a&gt;</code> styles:</p>
-                                        <a href="#" target="_blank" style="color:#72BF44; text-decoration:underline;">Link for <i>agendaNi</i> and <i>eolas Magazine</i> styles</a><br />
-                                        <a href="#" target="_blank" style="color:#48A6FE; text-decoration:underline;">Link for <i>Energy Ireland Yearbook</i> and <i>Renewable Energy Magazine</i> styles</a>
-
-                                        <p>Basic <code>&lt;img&gt;</code> styles:</p>
-                                        <img class="img" src="https://via.placeholder.com/600x300" width="300" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                      </multiline>
-                                    </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                          </table>
-                        </layout> -->
-                        <!-- END BLANK SECTION -->
-
-
-
-
-
-                        <!-- SINGLE POST -->
-                        <layout label="Single post &mdash; only use if image is not linked correctly">
-                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="#E8E8E8">
-                            <tr>
-                              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td align="center" valign="top">
-
-                                <table width="290" cellpadding="0" cellspacing="0" border="0" class="container w600">
-                                  <tr>
-                                  <td width="290" class="mobile w225" align="center" valign="top">
-                                    <img src="https://via.placeholder.com/450x254" width="225" height="" style="margin:0; padding:0; border:none; display:block;" border="0" class="img" alt="" label="Third story image" editable />
-                                  </td>
-                                  <td width="30" height="30" style="font-size:30px; line-height:30px;" class="mobile w30" align="center" valign="top">
-                                    &nbsp;
-                                  </td>
-                                  <td width="290" class="mobile w375" align="left" valign="top">
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-
-
-                                    <tr class="js-category">
-                                      <td align="left" valign="top">
-                                        <p class="article__category"><singleline label="Category label">Category</singleline></p>
-                                      </td>
-                                    </tr>
-                                    <tr class="js-category">
-                                      <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                                    </tr>
-
-
-                                      <tr>
-                                        <td align="left" valign="top">
-                                          <h2 class="article__title"><a href="#"><singleline label="Story title">Article heading</singleline></a></h2>
-                                          <p class="article__body"><singleline>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat…</singleline></p>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                                  </tr>
-                                </table>
-
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                            </tr>
-                          </table>
-                        </layout>
-                        <!-- END SINGLE POST -->
-                      </repeater>
-
-
-
-
-
-                      <!-- agendaNi FOOTER -->
-                      <!-- <table data-publication="agenda_ni" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] w640" bgcolor="#212121">
-                        <tr>
-                         <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="[ footer ] container w550">
-                              <tr class="mobileOn">
-                                  <td width="75" class="mobile w75" align="left" valign="top">
-                                    <img src="assets/headshot-dw.png" width="75" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                  </td>
-                                  <td width="30" class="mobile w30" align="center" valign="top">
-                                    &nbsp;
-                                  </td>
-                                  <td width="290" class="mobile w445" align="left" valign="top">
-                                    <p class="footer__signature"><strong>David Whelan</strong><br>
-                                    Editor</p>
-
-                                    <address class="footer__address">
-                                      <strong>agendaNi</strong><br>
-                                      19a Maghaberry Road<br>
-                                      Maghaberry, Co Antrim<br>
-                                      BT67 0JE
-                                    </address>
-
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ footer ]">
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Tel:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="tel:+442892619933" target="_blank" style="color:#72BF44; text-decoration:underline;">+44 (0)28 9261 9933</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Email:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="mailto:david.whelan@agendani.com" target="_blank" style="color:#72BF44; text-decoration:underline;">david.whelan@agendani.com</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Web:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="https://www.agendani.com/" target="_blank" style="color:#72BF44; text-decoration:underline;">agendani.com</a>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="60" style="font-size:60px; line-height:60px;">&nbsp;</td>
-                        </tr>
-                      </table> -->
-
-                      <!-- eolas Magazine FOOTER -->
-                      <table data-publication="eolas_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="footer-wrapper w640" bgcolor="#212121">
-                        <tr>
-                         <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="footer container w550">
-                              <tr>
-                                  <td width="75" class="mobile w75" align="left" valign="top">
-                                    <img src="assets/headshot-cg.png" width="75" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                  </td>
-                                  <td width="30" class="mobile w30" align="center" valign="top">
-                                    &nbsp;
-                                  </td>
-                                  <td width="290" class="mobile w445" align="left" valign="top">
-                                    <p class="footer__signature"><strong>Ciarán Galway</strong><br>
-                                    Editor</p>
-
-                                    <address class="footer__address">
-                                      <strong>eolas Magazine</strong><br>
-                                      Clifton House<br>
-                                      Lower Fitzwilliam Street<br>
-                                      Dublin, D02 XT91
-                                    </address>
-
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="footer">
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Tel:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="tel:+35316613755" target="_blank" style="color:#72BF44; text-decoration:underline;">+353 (0)1 661 3755</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Email:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="mailto:ciaran.galway@eolasmagazine.ie" target="_blank" style="color:#72BF44; text-decoration:underline;">ciaran.galway@eolasmagazine.ie</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Web:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="https://www.eolasmagazine.ie/" target="_blank" style="color:#72BF44; text-decoration:underline;">eolasmagazine.ie</a>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="60" style="font-size:60px; line-height:60px;">&nbsp;</td>
-                        </tr>
-                      </table>
-
-                      <!-- Ireland’s Housing Magazine FOOTER -->
-                      <!-- <table data-publication="irelands_housing_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] w640" bgcolor="#212121">
-                        <tr>
-                         <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="[ footer ] container w550">
-                              <tr>
-                                  <td width="75" class="mobile w75" align="left" valign="top">
-                                    <img src="assets/headshot-cg.png" width="75" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                  </td>
-                                  <td width="30" class="mobile w30" align="center" valign="top">
-                                    &nbsp;
-                                  </td>
-                                  <td width="290" class="mobile w445" align="left" valign="top">
-                                    <p class="footer__signature"><strong>Ciarán Galway</strong><br>
-                                    Editor</p>
-
-                                    <address class="footer__address">
-                                      <strong>eolas Magazine</strong><br>
-                                      Clifton House<br>
-                                      Lower Fitzwilliam Street<br>
-                                      Dublin, D02 XT91
-                                    </address>
-
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ footer ]">
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Tel:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="tel:+35316613755" target="_blank" style="color:#cd94ff; text-decoration:underline;">+353 (0)1 661 3755</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Email:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="mailto:ciaran.galway@eolasmagazine.ie" target="_blank" style="color:#cd94ff; text-decoration:underline;">ciaran.galway@eolasmagazine.ie</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Web:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="https://www.housing.eolasmagazine.ie/" target="_blank" style="color:#cd94ff; text-decoration:underline;">housing.eolasmagazine.ie</a>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="60" style="font-size:60px; line-height:60px;">&nbsp;</td>
-                        </tr>
-                      </table> -->
-
-                      <!-- Renewable Energy Magazine FOOTER -->
-                      <!-- <table data-publication="energy_ireland_yearbook renewable_energy_magazine" width="320" cellpadding="0" cellspacing="0" border="0" class="[ footer-wrapper ] w640" bgcolor="#00172D">
-                        <tr>
-                         <td height="45" style="font-size:45px; line-height:45px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td align="center" valign="top">
-
-                            <table width="290" cellpadding="0" cellspacing="0" border="0" class="[ footer ] container w550">
-                              <tr>
-                                  <td width="75" class="mobile w75" align="left" valign="top">
-                                    <img src="assets/headshot-dw.png" width="75" height="" style="margin:0; padding:0; border:none; display:block;" border="0" alt="" />
-                                  </td>
-                                  <td width="30" class="mobile w30" align="center" valign="top">
-                                    &nbsp;
-                                  </td>
-                                  <td width="290" class="mobile w445" align="left" valign="top">
-                                    <p class="footer__signature"><strong>David Whelan</strong><br>
-                                    Editor</p>
-
-                                    <address class="footer__address">
-                                      <strong>Energy Ireland</strong><br>
-                                      Clifton House<br>
-                                      Lower Fitzwilliam Street<br>
-                                      Dublin, D02 XT91
-                                    </address>
-
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="[ footer ]">
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Tel:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="tel:+35316613755" target="_blank" style="color:#48A6FE; text-decoration:underline;">+353 (0)1 661 3755</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Email:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="mailto:david.whelan@energyireland.ie" target="_blank" style="color:#48A6FE; text-decoration:underline;">david.whelan@energyireland.ie</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="50" align="left" valign="top">
-                                          <span style="color:#FFFFFF;">Web:</span>
-                                        </td>
-                                        <td align="left" valign="top">
-                                          <a href="https://www.energyireland.ie/" target="_blank" style="color:#48A6FE; text-decoration:underline;">energyireland.ie</a>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height="60" style="font-size:60px; line-height:60px;">&nbsp;</td>
-                        </tr>
-                      </table>-->
-
-                      <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640" bgcolor="">
-                        <tr>
-                          <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-                <!-- END INNER TABLE -->
-
-                <!-- IMPORTANT LINKS -->
-                <table width="320" cellpadding="0" cellspacing="0" border="0" class="w640">
-                  <tr>
-                    <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">
-                      <p class="important-links">
-                        <unsubscribe><span style="color: #424242; text-decoration: none !important;">Unsubscribe</span></unsubscribe>&ensp;•&ensp;<preferences lang=""><span style="color: #424242; text-decoration: none !important;">Update preferences</span></preferences>
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-                <!-- END IMPORTANT LINKS -->
-
-              </td>
-            </tr>
-            <tr>
-              <td height="30" style="font-size:30px; line-height:30px;">&nbsp;</td>
             </tr>
           </table>
-          <!-- END TABLE BODY -->
 
         </td>
       </tr>
+      <tr>
+        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" valign="top">
+
+          <table width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#000000" class="outer-wrapper m320">
+            <tr>
+              <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+
+                <!-- AGENDANI HEADER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="header m320" bgcolor="#FFFFFF" data-publication="agenda_ni">
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="right" valign="top">
+                            <p class="header__date" style="color: #757575; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">
+                              <currentday> <currentmonthname>, <currentyear>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="center" valign="top">
+                            <img
+                              src="./assets/agendaNi_master@2x.png"
+                              alt="agendaNi logo"
+                              width="175"
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- EOLAS HEADER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="hidden header m320" bgcolor="#FFFFFF" data-publication="eolas_magazine">
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="right" valign="top">
+                            <p class="header__date">
+                              <currentday> <currentmonthname>, <currentyear>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="center" valign="top">
+                            <img
+                              src="./assets/eolas_master@2x.png"
+                              alt="eolas Magazine logo"
+                              width="150"
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- ENERGY IRELAND / RENEWABLE ENERGY MAGAZINE HEADER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="hidden header m320" bgcolor="#FFFFFF" data-publication="energy_ireland_yearbook renewable_energy_magazine">
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="right" valign="top">
+                            <p class="header__date">
+                              <currentday> <currentmonthname>, <currentyear>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="center" valign="top">
+                            <img
+                              src="./assets/energy_ireland_master.png"
+                              alt="Energy Ireland logo"
+                              width="225"
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- IRELAND’S HOUSING MAGAZINE HEADER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="hidden header m320" bgcolor="#FFFFFF" data-publication="irelands_housing_magazine">
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="right" valign="top">
+                            <p class="header__date">
+                              <currentday> <currentmonthname>, <currentyear>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                        <tr>
+                          <td align="center" valign="top">
+                            <img
+                              src="./assets/housing_magazine_master.png"
+                              alt="Ireland’s Housing Magazine logo"
+                              width="250"
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+
+
+
+
+                <repeater id="repeater">
+                  <!-- COVER STORY BLOCK -->
+                  <layout label="Cover story">
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="cover-post m320" bgcolor="#FFFFFF">
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <img
+                            src="https://via.placeholder.com/640x368"
+                            width="640"
+                            class="post-img"
+                            style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                            border="0"
+                            alt=""
+                            label="Article image"
+                            editable />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                      <tr data-category>
+                        <td align="center" valign="top">
+                          <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                            <tr>
+                              <td align="left" valign="top">
+                                <p class="article__category"><singleline label="Article category">Article category</singleline></p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <!--[if (gte mso 9)|(IE)]>
+                          <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important">
+                          <tr>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                            <tr>
+                              <td align="left" valign="top" class="l-col">
+                                <h2 class="article__title"><singleline label="Article title">Cover story block</singleline></h2>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                            <tr>
+                              <td align="left" valign="top" class="r-col">
+                                <p class="article__body"><singleline label="Article excerpt">This is the cover story block and can be used by tagging an article with <strong>Cover story</strong> on the WordPress site. There should only be one of these on the page, and this must be the first article in the email unless using the sponsored post block instead. The image bleeds edge-to-edge which make it stand out among the rest, including on mobile. <em>Do not</em> use this when you mean to use the featured post block.</singleline></p>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          </tr>
+                          </table>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </layout>
+
+
+
+
+
+                  <!-- FEATURED POST -->
+                  <layout label="Featured post">
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="featured-post m320" bgcolor="#FFFFFF">
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                            <tr>
+                              <td align="center" valign="top">
+                                <img
+                                  src="https://via.placeholder.com/640x368"
+                                  width="580"
+                                  class="post-img"
+                                  style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                                  border="0"
+                                  alt=""
+                                  label="Article image"
+                                  editable />
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                      <tr data-category>
+                        <td align="center" valign="top">
+                          <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                            <tr>
+                              <td align="left" valign="top">
+                                <p class="article__category"><singleline label="Article category">Article category</singleline></p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <!--[if (gte mso 9)|(IE)]>
+                          <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                          <tr>
+                          <td width="318">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                            <tr>
+                              <td align="left" valign="top" class="l-col">
+                                <h2 class="article__title"><singleline label="Article title">Featured post block</singleline></h2>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          <td width="318">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                            <tr>
+                              <td align="left" valign="top" class="r-col">
+                                <p class="article__body"><singleline label="Article excerpt">This is a featured post block and can be used by tagging an article with <strong>Featured</strong> on the WordPress site. Use it to call out an article and give it more prominence, or to add some variety. <em>Do not</em> use it in place of the cover story block.</singleline></p>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          </tr>
+                          </table>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </layout>
+
+
+
+
+
+                  <!-- SPONSORED POST -->
+                  <layout label="Sponsored post">
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="post-with-logo m320" bgcolor="#FFFFFF">
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                            <tr>
+                              <td align="center" valign="top">
+                                <img
+                                  src="https://via.placeholder.com/640x368"
+                                  width="580"
+                                  class="post-img"
+                                  style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                                  border="0"
+                                  alt=""
+                                  label="Article image"
+                                  editable />
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <!--[if (gte mso 9)|(IE)]>
+                          <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                          <tr>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m384" align="left">
+                            <tr>
+                              <td align="left" valign="top" class="l-col">
+                                <p class="article__category"><singleline label="Article category">Article category / round table discussion sponsored by</singleline></p>
+                              </td>
+                              <td width="30" class="mobileOff">&nbsp;</td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m256" align="right">
+                            <tr>
+                              <td align="right" valign="top" class="r-col">
+                                <multiline label="Sponsor logo: use width attribute to resize as needed">
+                                  <img
+                                  src="https://via.placeholder.com/240x120"
+                                  width="120"
+                                  style="margin: 0; padding: 0; border: none; display: block;"
+                                  border="0"
+                                  alt=""
+                                  label="Sponsor logo" />
+                                </multiline>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          </tr>
+                          </table>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <!--[if (gte mso 9)|(IE)]>
+                          <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                          <tr>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                            <tr>
+                              <td align="left" valign="top" class="l-col">
+                                <h2 class="article__title"><singleline label="Article title">Sponsored post block</singleline></h2>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                            <tr>
+                              <td align="left" valign="top" class="r-col">
+                                <p class="article__body"><singleline label="Article excerpt">This block is for the main story in a sponsored report, or for a round table discussion. Use this block by tagging an article with <strong>Sponsored</strong> on the WordPress site. It has space for a logo which can be edited to the desired size.</singleline></p>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          </tr>
+                          </table>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </layout>
+
+
+
+
+
+                  <!-- DOUBLE POST -->
+                  <layout label="Double post">
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="m320" bgcolor="#FFFFFF">
+                      <tr>
+                        <td>
+                          <!--[if (gte mso 9)|(IE)]>
+                          <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                          <tr>
+                          <td width="305">
+                          <![endif]-->
+                          <table width="305" align="left" valign="top" cellpadding="0" cellspacing="0" border="0" class="m320">
+                            <tr>
+                              <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="left" valign="center" class="l-col">
+                                <img
+                                  src="https://via.placeholder.com/640x368"
+                                  width="280"
+                                  class="post-img"
+                                  style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                                  border="0"
+                                  alt=""
+                                  label=""
+                                  editable />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                            </tr>
+                            <tr data-category>
+                              <td align="left" valign="center" class="l-col">
+                                <p class="article__category"><singleline label="Article category">Article category</singleline></p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" valign="center" class="l-col">
+                                <h2 class="article__title"><singleline label="Article title">Double post block</singleline></h2>
+                                <p class="article__body"><singleline label="Article excerpt">Use this block to add some variety, if needed. This block will never appear by default, and has to be added manually. Stacks on mobile.</singleline></p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          <td width="305">
+                          <![endif]-->
+                          <table width="305" align="right" valign="top" cellpadding="0" cellspacing="0" border="0" class="m320">
+                            <tr>
+                              <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="left" valign="center" class="r-col">
+                                <img
+                                  src="https://via.placeholder.com/640x368"
+                                  width="280"
+                                  class="post-img"
+                                  style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                                  border="0"
+                                  alt=""
+                                  label=""
+                                  editable />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                            </tr>
+                            <tr data-category>
+                              <td align="left" valign="center" class="r-col">
+                                <p class="article__category"><singleline label="Article category">Double post block</singleline></p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" valign="center" class="r-col">
+                                <h2 class="article__title"><singleline label="Article title">Double post block</singleline></h2>
+                                <p class="article__body"><singleline label="Article excerpt">Use this block to add some variety, if needed. This block will never appear by default, and has to be added manually. Stacks on mobile.</singleline></p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          </tr>
+                          </table>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                    </table>
+                  </layout>
+
+
+
+
+
+                  <!-- BASIC POST -->
+                  <layout label="Basic post">
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="basic-post m320" bgcolor="#FFFFFF">
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <!--[if (gte mso 9)|(IE)]>
+                          <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                          <tr>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m256" align="left">
+                            <tr>
+                              <td align="center" valign="top" class="l-col">
+                                <img
+                                  src="https://via.placeholder.com/640x368"
+                                  class="post-img"
+                                  width="226"
+                                  style="margin: 0; padding: 0; border: none; display: block; background-color: #F2F2F2;"
+                                  border="0"
+                                  alt=""
+                                  label="Article image"
+                                  editable />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          <td width="320">
+                          <![endif]-->
+                          <table width="320" cellpadding="0" cellspacing="0" border="0" class="m384" align="right">
+                            <tr>
+                              <td width="30" class="mobileOff">&nbsp;</td>
+                              <td align="center" valign="top" class="r-col">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                  <tr data-category>
+                                    <td align="left" valign="center">
+                                      <p class="article__category"><singleline label="Article category">Article category</singleline></p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="left" valign="center">
+                                      <h2 class="article__title">
+                                        <singleline label="Article title">Basic post block</singleline>
+                                      </h2>
+                                      <p class="article__body"><singleline label="Article excerpt">The default block that posts will be added to. Use this block to add a missing/broken post or to make a featured post into a smaller one if needed. Remember to link the title and the image to the article.</singleline></p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                          </tr>
+                          </table>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </layout>
+
+
+
+
+
+                  <!-- TEXT BLOCK -->
+                  <layout label="Text block">
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="text-block m320" bgcolor="#FFFFFF">
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                            <tr>
+                              <td align="left" valign="top">
+                                <multiline>
+                                  <h2>Use this block to add custom text or images to emails that can't be done with an existing block</h2>
+                                  <p>Make sure to add <code>style="margin: 0; padding: 0; border: none; display: block;"</code> to any images, and specify a <code>width=""</code> to ensure the image scales correctly.</p>
+                                  <p>Apply <code>text-align: left | center | right</code> to the containing <code>&lt;p&gt;</code> to align images as needed.</p>
+                                  <p><img src="https://via.placeholder.com/500x250" width="250" alt="" style="margin: 0; padding: 0; border: none; display: block; height: auto;"></p>
+                                </multiline>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </layout>
+
+
+
+
+
+                  <!-- AD -->
+                  <layout label="Advertisement">
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="ad m320" bgcolor="#FAFAFA">
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                            <tr>
+                              <td align="center" valign="top">
+                                <p class="ad__heading">Advertisement</p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top">
+                          <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                            <tr>
+                              <td align="center" valign="top">
+                                <img
+                                  src="https://via.placeholder.com/1200x300"
+                                  width="580"
+                                  style="margin: 0; padding: 0; border: none; display: block; width: 100%;"
+                                  border="0"
+                                  alt=""
+                                  editable />
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                    <table width="640" cellpadding="0" cellspacing="0" border="0" class="m320" bgcolor="#FFFFFF">
+                      <tr>
+                        <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </layout>
+                </repeater>
+
+
+
+
+
+                <template id="coverPost">
+                  <table width="640" cellpadding="0" cellspacing="0" border="0" class="cover-post m320" bgcolor="#FFFFFF">
+                    <tr>
+                      <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <img
+                          src="https://via.placeholder.com/640x368"
+                          width="640"
+                          class="post-img"
+                          style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                          border="0"
+                          alt=""
+                          label="Article image" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                    <tr data-category>
+                      <td align="center" valign="top">
+                        <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                          <tr>
+                            <td align="left" valign="top">
+                              <p class="article__category"></p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <!--[if (gte mso 9)|(IE)]>
+                        <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                        <tr>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                          <tr>
+                            <td align="left" valign="top" class="l-col">
+                              <h2 class="article__title"></h2>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        <td width="320">
+                        <![endif]-->
+                        <table  width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                          <tr>
+                            <td align="left" valign="top" class="r-col">
+                              <p class="article__body"></p>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                  </table>
+                </template>
+
+
+
+
+
+                <template id="sponsoredPost">
+                  <table width="640" cellpadding="0" cellspacing="0" border="0" class="post-with-logo m320" bgcolor="#FFFFFF">
+                    <tr>
+                      <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                          <tr>
+                            <td align="center" valign="top">
+                              <img
+                                src="https://via.placeholder.com/640x368"
+                                width="580"
+                                class="post-img"
+                                style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                                border="0"
+                                alt=""
+                                label="Article image" />
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <!--[if (gte mso 9)|(IE)]>
+                        <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                        <tr>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m384" align="left">
+                          <tr>
+                            <td align="left" valign="top" class="l-col">
+                              <p class="article__category"></p>
+                            </td>
+                            <td width="30" class="mobileOff">&nbsp;</td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m256" align="right">
+                          <tr>
+                            <td align="right" valign="top" class="r-col no-bottom-margin">
+                              <multiline label="Sponsor logo: use width attribute to resize as needed">
+                                <img
+                                  src="https://via.placeholder.com/240x120"
+                                  width="120"
+                                  style="margin: 0; padding: 0; border: none; display: block;"
+                                  border="0"
+                                  alt=""
+                                  label="" />
+                              </multiline>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <!--[if (gte mso 9)|(IE)]>
+                        <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                        <tr>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                          <tr>
+                            <td align="left" valign="top" class="l-col">
+                              <h2 class="article__title"></h2>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                          <tr>
+                            <td align="left" valign="top" class="r-col">
+                              <p class="article__body"></p>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                  </table>
+                </template>
+
+
+
+
+
+                <!-- FEATURED POST -->
+                <template id="featuredPost">
+                  <table width="640" cellpadding="0" cellspacing="0" border="0" class="featured-post m320" bgcolor="#FFFFFF">
+                    <tr>
+                      <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                          <tr>
+                            <td align="center" valign="top">
+                              <img
+                                src="https://via.placeholder.com/640x368"
+                                width="580"
+                                class="post-img"
+                                style="margin: 0; padding: 0; border: none; display: block; width: 100%; background-color: #F2F2F2;"
+                                border="0"
+                                alt=""
+                                label="Article image" />
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                    <tr data-category>
+                      <td align="center" valign="top">
+                        <table width="580" cellpadding="0" cellspacing="0" border="0" class="m280">
+                          <tr>
+                            <td align="left" valign="top">
+                              <p class="article__category"></p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <!--[if (gte mso 9)|(IE)]>
+                        <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                        <tr>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                          <tr>
+                            <td align="left" valign="top" class="l-col">
+                              <h2 class="article__title"></h2>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                          <tr>
+                            <td align="left" valign="top" class="r-col">
+                              <p class="article__body"></p>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                  </table>
+                </template>
+
+
+
+
+
+                <template id="basicPost">
+                  <table width="640" cellpadding="0" cellspacing="0" border="0" class="basic-post m320" bgcolor="#FFFFFF">
+                    <tr>
+                      <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top">
+                        <!--[if (gte mso 9)|(IE)]>
+                        <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                        <tr>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m256" align="left">
+                          <tr>
+                            <td align="center" valign="top" class="l-col">
+                              <img
+                                src="https://via.placeholder.com/640x368"
+                                width="226"
+                                class="post-img"
+                                style="margin: 0; padding: 0; border: none; display: block; background-color: #F2F2F2;"
+                                border="0"
+                                alt=""
+                                label="Article image" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        <td width="320">
+                        <![endif]-->
+                        <table width="320" cellpadding="0" cellspacing="0" border="0" class="m384" align="right">
+                          <tr>
+                            <td width="30" class="mobileOff">&nbsp;</td>
+                            <td align="center" valign="top" class="r-col">
+                              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr data-category>
+                                  <td align="left" valign="center">
+                                    <p class="article__category"></p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="left" valign="center">
+                                    <h2 class="article__title"></h2>
+                                    <p class="article__body"></p>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                    </tr>
+                  </table>
+                </template>
+
+
+
+
+
+                <!-- AGENDANI FOOTER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="footer m320" bgcolor="#212121" data-publication="agenda_ni">
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <!--[if (gte mso 9)|(IE)]>
+                      <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                      <tr>
+                      <td width="105">
+                      <![endif]-->
+                      <table width="105" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                        <tr>
+                          <td align="left" valign="top" class="l-col">
+                            <img
+                              src="./assets/headshot-dw.png"
+                              width="75"
+                              height=""
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0"
+                              alt="" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      <td width="535">
+                      <![endif]-->
+                      <table width="535" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                        <tr>
+                          <td align="center" valign="top" width="30" class="mobileOff">&nbsp;</td>
+                          <td align="left" valign="top" class="r-col">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="left" valign="top">
+                                  <p class="footer__signature">
+                                    <strong>David Whelan</strong><br>
+                                    Editor
+                                  </p>
+                                  <address class="footer__address">
+                                    <strong>agendaNi</strong><br>
+                                    19a Maghaberry Road<br>
+                                    Maghaberry<br>
+                                    Co Antrim, BT67 0JE
+                                  </address>
+                                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Tel:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="tel:+442892619933" target="_blank" class="footer__link">+44 (0)28 9261 9933</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Email:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="mailto:david.whelan@agendani.com" target="_blank" class="footer__link">david.whelan@agendani.com</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Web:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="https://www.agendani.com/" target="_blank" class="footer__link">agendani.com</a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      </tr>
+                      </table>
+                      <![endif]-->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- EOLAS FOOTER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="hidden footer m320" bgcolor="#212121" data-publication="eolas_magazine">
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <!--[if (gte mso 9)|(IE)]>
+                      <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                      <tr>
+                      <td width="105">
+                      <![endif]-->
+                      <table width="105" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                        <tr>
+                          <td align="left" valign="top" class="l-col">
+                            <img
+                              src="./assets/headshot-cg.png"
+                              width="75"
+                              height=""
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0"
+                              alt="" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      <td width="535">
+                      <![endif]-->
+                      <table width="535" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                        <tr>
+                          <td align="center" valign="top" width="30" class="mobileOff">&nbsp;</td>
+                          <td class="r-col">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="left" valign="top">
+                                  <p class="footer__signature">
+                                    <strong>Ciarán Galway</strong><br>
+                                    Editor
+                                  </p>
+                                  <address class="footer__address">
+                                    <strong>Energy Ireland</strong><br>
+                                    Clifton House<br>
+                                    Lower Fitzwilliam Street<br>
+                                    Dublin, D02 XT91
+                                  </address>
+                                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Tel:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="tel:+35316613755" target="_blank" class="footer__link">+353 (0)1 661 3755</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Email:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="mailto:ciaran.galway@eolasmagazine.ie" target="_blank" class="footer__link">ciaran.galway@eolasmagazine.ie</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Web:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="https://www.eolasmagazine.ie/" target="_blank" class="footer__link">eolasmagazine.ie</a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      </tr>
+                      </table>
+                      <![endif]-->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- ENERGY IRELAND / RENEWABLE ENERGY MAGAZINE FOOTER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="hidden footer m320" bgcolor="#00172D" data-publication="energy_ireland_yearbook renewable_energy_magazine">
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <!--[if (gte mso 9)|(IE)]>
+                      <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                      <tr>
+                      <td width="105">
+                      <![endif]-->
+                      <table width="105" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                        <tr>
+                          <td align="left" valign="top" class="l-col">
+                            <img
+                              src="./assets/headshot-cg.png"
+                              width="75"
+                              height=""
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0"
+                              alt="" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      <td width="535">
+                      <![endif]-->
+                      <table width="535" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                        <tr>
+                          <td align="center" valign="top" width="30" class="mobileOff">&nbsp;</td>
+                          <td class="r-col">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="left" valign="top">
+                                  <p class="footer__signature">
+                                    <strong>Ciarán Galway</strong><br>
+                                    Editor
+                                  </p>
+                                  <address class="footer__address">
+                                    <strong>Energy Ireland®</strong><br>
+                                    Clifton House<br>
+                                    Lower Fitzwilliam Street<br>
+                                    Dublin, D02 XT91
+                                  </address>
+                                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Tel:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="tel:+35316613755" target="_blank" class="footer__link" style="color: #48A6FE !important;">+353 (0)1 661 3755</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Email:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="mailto:ciaran.galway@energyireland.ie" target="_blank" class="footer__link" style="color: #48A6FE !important;">ciaran.galway@energyireland.ie</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Web:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="https://www.energyireland.ie/" target="_blank" class="footer__link" style="color: #48A6FE !important;">energyireland.ie</a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      </tr>
+                      </table>
+                      <![endif]-->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+                <!-- IRELAND’S HOUSING MAGAZINE FOOTER -->
+                <table width="640" cellpadding="0" cellspacing="0" border="0" class="hidden footer m320" bgcolor="#212121" data-publication="irelands_housing_magazine">
+                  <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <!--[if (gte mso 9)|(IE)]>
+                      <table width="640" align="center" valign="top" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse !important;">
+                      <tr>
+                      <td width="105">
+                      <![endif]-->
+                      <table width="105" cellpadding="0" cellspacing="0" border="0" class="m320" align="left">
+                        <tr>
+                          <td align="left" valign="top" class="l-col">
+                            <img
+                              src="./assets/headshot-cg.png"
+                              width="75"
+                              height=""
+                              style="margin: 0; padding: 0; border: none; display: block;"
+                              border="0"
+                              alt="" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      <td width="535">
+                      <![endif]-->
+                      <table width="535" cellpadding="0" cellspacing="0" border="0" class="m320" align="right">
+                        <tr>
+                          <td align="center" valign="top" width="30" class="mobileOff">&nbsp;</td>
+                          <td class="r-col">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="left" valign="top">
+                                  <p class="footer__signature">
+                                    <strong>Ciarán Galway</strong><br>
+                                    Editor
+                                  </p>
+                                  <address class="footer__address">
+                                    <strong>Ireland’s Housing Magazine</strong><br>
+                                    Clifton House<br>
+                                    Lower Fitzwilliam Street<br>
+                                    Dublin, D02 XT91
+                                  </address>
+                                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Tel:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="tel:+35316613755" target="_blank" class="footer__link" style="color: #CD94FF !important;">+353 (0)1 661 3755</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Email:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="mailto:ciaran.galway@eolasmagazine.ie" target="_blank" class="footer__link" style="color: #CD94FF !important;">ciaran.galway@eolasmagazine.ie</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td width="50" align="left" valign="top">
+                                        <span class="footer__link-title">Web:</span>
+                                      </td>
+                                      <td align="left" valign="top">
+                                        <a href="https://www.housing.eolasmagazine.ie/" target="_blank" class="footer__link" style="color: #CD94FF !important;">housing.eolasmagazine.ie</a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                      </tr>
+                      </table>
+                      <![endif]-->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+            <tr>
+              <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+      <tr>
+        <td height="15" style="font-size:15px; line-height:15px;">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" valign="top">
+
+          <!-- IMPORTANT LINKS -->
+          <table width="640" cellpadding="0" cellspacing="0" border="0" class="important-links m320">
+            <tr>
+              <td align="left" valign="top">
+                <unsubscribe>
+                  <span class="important-links__link" style="font-size: 12px; color: #424242 !important; text-decoration: none !important;">Unsubscribe</span>
+                </unsubscribe>
+                &ensp;•&ensp;
+                <preferences lang="">
+                  <span class="important-links__link" style="font-size: 12px; color: #424242 !important; text-decoration: none !important;">Update preferences</span>
+                </preferences>
+              </td>
+            </tr>
+          </table>
+          <!-- END IMPORTANT LINKS -->
+
+        </td>
+      </tr>
+      <tr>
+        <td height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td>
+      </tr>
     </table>
   </center>
-
-  </div>
 
   <form id="control-panel">
     <fieldset class="form__publications">
@@ -1487,36 +1753,16 @@
 
     <div class="form__buttons">
       <button type="button" name="reset" onclick="location.reload()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 1 10 7 10"></polyline>
-          <polyline points="23 20 23 14 17 14"></polyline>
-          <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-        </svg>
+        <img src="./svg/reset.svg" role="presentation">
         Reset
       </button>
       <button type="button" name="apply">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-        </svg>
+        <img src="./svg/reset.svg" role="presentation">
         Apply
       </button>
       <button type="button" name="download" disabled >
-        <svg id="icon--loaded" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        <svg id="icon--loading" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="12" y1="2" x2="12" y2="6"></line>
-          <line x1="12" y1="18" x2="12" y2="22"></line>
-          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-          <line x1="2" y1="12" x2="6" y2="12"></line>
-          <line x1="18" y1="12" x2="22" y2="12"></line>
-          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-          <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-        </svg>
+        <img id="icon--loaded" src="./svg/loaded.svg" role="presentation">
+        <img id="icon--loading" src="./svg/loading.svg" role="presentation">
         Download
       </button>
     </div>
